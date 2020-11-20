@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java 集合框架">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合框架">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/Java集合框架/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="Java 集合框架">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Java集合框架/image/2.png">
+<meta property="og:updated_time" content="2020-02-29T13:23:55.077Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合框架">
+<meta name="twitter:description" content="Java 集合框架">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/Java集合框架/image/2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/25/Java集合框架/">
+
+
+
+
+
+  <title>Java集合框架 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/Java集合框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java集合框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-25T19:40:10+08:00">
+                2020-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Java 集合框架</p>
+<p><img src="image/2.png"><br><a id="more"></a></p>
+<h1 id="三大集合接口"><a href="#三大集合接口" class="headerlink" title="三大集合接口"></a>三大集合接口</h1><p>对于集合框架来说，上层接口有两个Collection和Map<br>Collection下层又有两个子接口分别是List和Set<br>这样就构成了Java的三大集合 Map,List,Set<br>然后往下细分就有很多了。</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>首先是Map，Map中主要存储的是键值对信息。</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>首先要了解HashMap的结构，在jdk1.8以前HashMap的主要通过数组+链表的结构，而之后是以数组+链表+红黑树的结构。<br>当链表长度大于8时，链表会转换成红黑树，而长度降为6时，会退化成链表<br>(这里有一个很奇葩的问题是为什么要选择8作为链表转红黑树：因为TreeNode的空间是普通Node的两倍，所以尽量不希望转换成红黑树，而根据理想情况下随机hashCode算法下所有bin中节点的分布频率会遵循泊松分布，当链表长度为8的时候，可能性已经很小很小了，基本上是不可能事件，所以选择了8)<br>(对于为什么选择红黑树而不是AVL树：因为红黑树具有良好的稳定性和完整的功能，便于维护，在插入和删除的时候效率高于AVL树)</p>
+<p>当然对于hashMap来说，是线程不安全的，而如何体现出线程不安全的呢。有两种例子，一是在扩容的时候，hashMap在JDK1.8之前要根据新长度进行重新hash分配。但是在JDK1.8之后就简化了这一步骤，就是因为长度是原长度的两倍，对(长度-1)取模之后，这个位置只可能在原位置不变或者是出现在2次幂*原位置的地方。而依据则是转换成二进制之后，新增那一位的取值，如果为0则在原位置不变，反之出现在原索引+原长度的位置上。在jdk1.7的时候，在扩容的时候会将链表置换，导致死循环，但是到了jdk1.8之后优化了，也不会了。但是在进行一些操作的时候，还是会出现数据丢失的情况。二就是fast-fail机制 即快速失败机制 是基于底层集合做拷贝的，当多线程对Collection 进行操作的时候，若一个线程要用迭代器对内容遍历集合的时候，该集合的内容被其他线程进行修改，会抛出 ConcurrentModificationException。</p>
+<p>解决hash冲突的方法<br>1.链式法，就是在hash数组后面将hash值相同的链在一起（hashmap所用的）<br>2.再散列法 其中有三种形式，分别是线性探测再散列（即在数组后面+1+2+3…判断是否有空位） 二次探测再散列法 （去探测当前位置+1 -1 +2 -2 +4 -4 +$k^2$ - $k^2$是否有空位) 还有伪随机再散列法（建立一个伪随机生成器）<br>3.再Hash法 构造多个hash函数，在冲突的时候使用，直到不冲突，增大计算时间</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>线程安全：因为对put，get等操作都加了sync函数，但是在操作的时候，将整个集合都锁住了，导致效率不高<br>但是在进行复合操作的时候（比如迭代，导航，一个put，一个remove）还是存在数据丢失等情况。</p>
+<h3 id="ConCurrentHashMap"><a href="#ConCurrentHashMap" class="headerlink" title="ConCurrentHashMap"></a>ConCurrentHashMap</h3><p>集合了HashTable和HashMap 的 优势的一个 线程安全容器</p>
+<p>但是ConCurrentHashMap 不能插入一个Null值<br>而HashMap 能插入一个唯一的Null值.<br>使用分段锁，也不会像HashTable一样锁住整个表结构。<br>对于分段锁<br>可以理解将整个Hash数组分为16（初始值,并发度为16)个桶，然后要访问桶内的数据，必须获取这个桶的锁。<br>在JDK1.7版本 结构还是一个HashEntry[] 一个Segment[] Segment是可重入锁ReenTrantLock结构时类似数组+链表的形式。一个Segment 里面包含一个HashEntry数组，如果要访问里面的元素就必须获取当前Segment的锁<br>在JDK1.8之后改成了sync和CAS进行Node锁，主要是避免ReenTrantLock 继承AQS机制，同步，消耗内存，在1.8之后只有头结点需要同步。</p>
+<h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>底层结构:红黑树<br>特点:可以通过键值进行排序的Map </p>
+<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>元素继承于HashMap中的 Node 但是 新增了两个属性，即 before和after 双向链表，确定插入顺序和访问顺序</p>
+<p>可以使用LinkedHashMap 实现LRU 页面置换算法（最近最久未访问）<br>操作为 首先将LinkedHashMap 的accessOrder 置为true （表示使用访问顺序，false默认为插入顺序）<br>然后重写removeEldestEntry函数即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static  int size = 5;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">	// write your code here</span><br><span class="line">        LinkedHashMap&lt;String, String&gt; stringStringLinkedHashMap = new LinkedHashMap&lt;String, String&gt;(size,0.75f,true)&#123;</span><br><span class="line">            @Override</span><br><span class="line">            protected boolean removeEldestEntry(Map.Entry&lt;String, String&gt; eldest) &#123;</span><br><span class="line">                return size()&gt;size;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;1&quot;,&quot;1&quot;);</span><br><span class="line">        //System.out.println(stringStringLinkedHashMap.keySet().toString());</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;2&quot;,&quot;2&quot;);</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;3&quot;,&quot;3&quot;);</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;4&quot;,&quot;4&quot;);</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;5&quot;,&quot;5&quot;);</span><br><span class="line">        System.out.println(stringStringLinkedHashMap.keySet().toString());</span><br><span class="line"></span><br><span class="line">        stringStringLinkedHashMap.put(&quot;6&quot;,&quot;6&quot;);</span><br><span class="line">        System.out.println(stringStringLinkedHashMap.keySet().toString());</span><br><span class="line">        stringStringLinkedHashMap.get(&quot;2&quot;);</span><br><span class="line">        System.out.println(stringStringLinkedHashMap.keySet().toString());</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;7&quot;,&quot;7&quot;);</span><br><span class="line">        System.out.println(stringStringLinkedHashMap.keySet().toString());</span><br><span class="line">        stringStringLinkedHashMap.get(&quot;5&quot;);</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;8&quot;,&quot;8&quot;);</span><br><span class="line">        stringStringLinkedHashMap.put(&quot;9&quot;,&quot;9&quot;);</span><br><span class="line">        System.out.println(stringStringLinkedHashMap.keySet().toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><h3 id="Collections和Collection的区别"><a href="#Collections和Collection的区别" class="headerlink" title="Collections和Collection的区别"></a>Collections和Collection的区别</h3><p>Collections 是 集合的最上层集合接口<br>而Collection 是 集合的工具类 其中包括sort，binraySearch,reverse,min(max) 等方法</p>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><p>基于动态数组的集合，随机存取效率高。<br>默认容量为10，每次扩容为当前容量*3/2+1.<br>需要在创建的时候预留一些空间扩容。</p>
+<h4 id="Array和Arrays-的区别"><a href="#Array和Arrays-的区别" class="headerlink" title="Array和Arrays 的区别"></a>Array和Arrays 的区别</h4><p>Array是一个基本的存储结构<br>Arrays 是一个静态类，其中保存了一些数组方法，包括sort，binarySearch，equals(判断两个集合是否类型一致，以及内容是否一致，与== 和 .equals 是判断引用是否一样)。</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>基于双向链表的集合，插入删除效率高<br>空间方面对于每个元素都需要额外的空间去保存信息以及指针信息。</p>
+<h3 id="CopyOnWriteArraylist"><a href="#CopyOnWriteArraylist" class="headerlink" title="CopyOnWriteArraylist"></a>CopyOnWriteArraylist</h3><p>是基于COW（Copy-On-Write) 思想的一个并发容器，首先是CopyOnWrite是当有线程想往容器中添加数据的时候，会先将当前容器进行Copy，复制出一个新的容器，然后再往新的容器里添加元素，在添加元素完成后，在将旧容器的引用改成新容器的引用，这样做的好处是可以实现并发的读，而不需要加锁，因为读写分离。<br>但是在写的过程中还是需要加锁的，不然会复制出n个副本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    synchronized (lock) &#123;</span><br><span class="line">        Object[] es = getArray();</span><br><span class="line">        int len = es.length;</span><br><span class="line">        es = Arrays.copyOf(es, len + 1);</span><br><span class="line">        es[len] = e;</span><br><span class="line">        setArray(es);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看源码可以看出来，在写操作的时候用来sync锁住写操作。<br>当然对于CopyOnWriteArrayList 来说有两个要注意的问题<br>1.内存占用的问题，因为写复制机制，内存中里存在两个对象的内存，而如果这些对象占用的内存比较大的时候，会造成频繁的YONG GC和FULL GC。<br>2.数据一致性问题，因为CopyOnWriteArrayList只保证数据的最终一致性，而没有保证数据的实时一致性。</p>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h3 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h3><p>底层还是使用的LinkedHashMap实现</p>
+<h3 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h3><p>使用的是hash表实现<br>底层还是使用的HashMap，但是只使用了Key值 value = PRSENT ，当重复数据进来的时候，只是覆盖value，保证了数据不重复。<br>保证数据的唯一性：先判断hashcode，当hashcode相同的时候再判断equals</p>
+<h3 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h3><p>使用了红黑树实现，保证数据唯一性，通过比较器。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/20/JavaWeb入门-二/" rel="next" title="JavaWeb入门(二)">
+                <i class="fa fa-chevron-left"></i> JavaWeb入门(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/29/并发多线程-1/" rel="prev" title="并发多线程(1)">
+                并发多线程(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三大集合接口"><span class="nav-number">1.</span> <span class="nav-text">三大集合接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">1.1.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">1.1.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">1.1.2.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConCurrentHashMap"><span class="nav-number">1.1.3.</span> <span class="nav-text">ConCurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeMap"><span class="nav-number">1.1.4.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">1.1.5.</span> <span class="nav-text">LinkedHashMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">1.2.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Collections和Collection的区别"><span class="nav-number">1.2.1.</span> <span class="nav-text">Collections和Collection的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.2.2.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Array和Arrays-的区别"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Array和Arrays 的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList"><span class="nav-number">1.2.3.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CopyOnWriteArraylist"><span class="nav-number">1.2.4.</span> <span class="nav-text">CopyOnWriteArraylist</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">1.3.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">1.3.1.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet"><span class="nav-number">1.3.2.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeSet"><span class="nav-number">1.3.3.</span> <span class="nav-text">TreeSet</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

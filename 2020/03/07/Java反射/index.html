@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="反射">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java反射">
+<meta property="og:url" content="http://yoursite.com/2020/03/07/Java反射/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="反射">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-07T03:47:37.277Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java反射">
+<meta name="twitter:description" content="反射">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/07/Java反射/">
+
+
+
+
+
+  <title>Java反射 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/07/Java反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java反射</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-07T10:32:18+08:00">
+                2020-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><a id="more"></a>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>首先反射的基石 Class 类<br>Java 中每个类都属于同一个事务，而描述这一事务的Java类就是Class，当编译一个新类的时候，会产生一个.class文件，而这个文件里存的就是Class对象。<br>Class 包含了描述类的信息，比如</p>
+<ul>
+<li>类的名字</li>
+<li>类的访问属性</li>
+<li>类的字段</li>
+<li>类的成员方法</li>
+<li>……</li>
+</ul>
+<p>而反射就是在运行阶段，动态的通过Class 类去访问和调用类的属性和方法。</p>
+<ul>
+<li>静态编译：在编译的时候绑定对象，确定类型</li>
+<li>动态编译：在运行的时候绑定对象，确定类型<br>动态编译可以最大程度的支持多态，而多态的最大意义在于解耦，因此反射的重要性也就体现出来了，主要是用于降低程序的耦合度，提高代码的灵活性。<br>但是动态编译因为是在运行是才绑定对象，这也导致了性能比直接调用对象慢很多。</li>
+</ul>
+<p>一般获取Class对象有三种方法</p>
+<ul>
+<li><code>Class class = student.class</code> 通过类名直接获取</li>
+<li><code>Class class = new student().getClass()</code> Object类中的getClass()方法获取</li>
+<li><code>Class class = Class.forName(&quot;student&quot;)</code> 通过静态方法去获取该字符串对应的类的字节码。(最主要的一种方式)<br>通过这三种方式获得的字节码都是相同的(通过$==$ 表示相同)，一个Class对象实际上表示的是一种类型，也有可能是基本类型比如int.class。</li>
+</ul>
+<p>一般来说有三大类是比较重要的</p>
+<ul>
+<li>Field 字段，可以通过get(),set() 方法读取和修改对象关联的字段</li>
+<li>Method 方法，可以通过invoke() 方法调用对象的方法</li>
+<li>Constructor 通过new instance() 方法创建新的对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line">public class Father &#123;</span><br><span class="line">    private int fatherAge;</span><br><span class="line">    private int fatherBrithday;</span><br><span class="line">    public String fatherName;</span><br><span class="line">    public int getFatherAge() &#123;</span><br><span class="line">        return fatherAge;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getFatherBrithday() &#123;</span><br><span class="line">        return fatherBrithday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setFatherName(String fatherName) &#123;</span><br><span class="line">        this.fatherName = fatherName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setFatherBrithday(int fatherBrithday) &#123;</span><br><span class="line">        this.fatherBrithday = fatherBrithday;</span><br><span class="line">    &#125;</span><br><span class="line">    private void setFather(int s)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public void setFatherAge(int fatherAge) &#123;</span><br><span class="line">        this.fatherAge = fatherAge;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Son extends Father&#123;</span><br><span class="line">    private int sonAge;</span><br><span class="line">    private int sonBirthday;</span><br><span class="line">    private String PST = &quot;private&quot;;</span><br><span class="line">    public String sonName;</span><br><span class="line"></span><br><span class="line">    public int getSonAge() &#123;</span><br><span class="line">        return sonAge;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getSonBirthday() &#123;</span><br><span class="line">        return sonBirthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSonAge(int sonAge) &#123;</span><br><span class="line">        this.sonAge = sonAge;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSonName(String sonName) &#123;</span><br><span class="line">        this.sonName = sonName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private int sonThrows(int a,int b,String c)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return a/b;</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            System.out.println(c+&quot; &quot;+e.getMessage());</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setSonBirthday(int sonBirthday) &#123;</span><br><span class="line">        this.sonBirthday = sonBirthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPST() &#123;</span><br><span class="line">        return PST;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException &#123;</span><br><span class="line"></span><br><span class="line">        //先获取son这个类</span><br><span class="line">        Class mclass = Son.class;</span><br><span class="line"></span><br><span class="line">        //getField 是获取这个类中的公有变量（包括继承过来的)</span><br><span class="line">        Field[] mField = mclass.getFields();</span><br><span class="line"></span><br><span class="line">        for (Field field:</span><br><span class="line">             mField) &#123;</span><br><span class="line">            //mod 表示获取的特定字节码，表示这个变量的访问类型</span><br><span class="line">            int mod = field.getModifiers();</span><br><span class="line">            //Modifier 里面 有一个 enum 将所有访问类型都设置了一个二进制 ，通过tostring 的方法 去 &amp; 这些类型的二进制 从而 判断 这个 变量 的 范围类型</span><br><span class="line">            System.out.println(Modifier.toString(mod) +&quot; &quot;+field.getType()+&quot; &quot;+field.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //getdeclareFields 是获取 这个类的所有成员变量。</span><br><span class="line">        System.out.println(&quot;----------------------分割线-----------------------&quot;);</span><br><span class="line">        mField = mclass.getDeclaredFields();</span><br><span class="line">        for (Field field : mField) &#123;</span><br><span class="line">            int mod = field.getModifiers();</span><br><span class="line">            System.out.println(Modifier.toString(mod) +&quot; &quot;+field.getType()+&quot; &quot;+field.getName());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;----------------------分割线-----------------------&quot;);</span><br><span class="line">        //Methods 方法 即获取所有公有方法（包括继承)</span><br><span class="line">        Method[] methods = mclass.getMethods();</span><br><span class="line">        for (Method method : methods) &#123;</span><br><span class="line">            //这里还是同理的获取访问类型</span><br><span class="line">            int mod = method.getModifiers();</span><br><span class="line">            //获取返回值类型 但是getreturntype 返回值是一个Class 所以应该输出的时候tostring()</span><br><span class="line">            Class returntype = method.getReturnType();</span><br><span class="line">            System.out.print(Modifier.toString(mod)+&quot; &quot;+returntype.getName()+&quot; &quot;+method.getName()+&quot;(&quot;);</span><br><span class="line">            // 获取所有参数 parameters 参数</span><br><span class="line">            Parameter[] parameters = method.getParameters();</span><br><span class="line">            for (Parameter parameter : parameters) &#123;</span><br><span class="line">                System.out.print(parameter.getType()+&quot; &quot;+parameter.getName()+&apos;,&apos;);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&apos;)&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;----------------------分割线-----------------------&quot;);</span><br><span class="line">        //getDeclaredMethods 获取所有成员方法</span><br><span class="line">        methods = mclass.getDeclaredMethods();</span><br><span class="line">        for (Method method : methods) &#123;</span><br><span class="line">            int mod = method.getModifiers();</span><br><span class="line">            Class returntype = method.getReturnType();</span><br><span class="line">            System.out.print(Modifier.toString(mod)+&quot; &quot;+returntype.getName()+&quot; &quot;+method.getName()+&quot;(&quot;);</span><br><span class="line">            Parameter[] parameters = method.getParameters();</span><br><span class="line">            for (Parameter parameter : parameters) &#123;</span><br><span class="line">                System.out.print(parameter.getType()+&quot; &quot;+parameter.getName()+&apos;,&apos;);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.print(&apos;)&apos;);</span><br><span class="line">            Class&lt;?&gt;[] exceptionTypes = method.getExceptionTypes();</span><br><span class="line">            for (Class&lt;?&gt; exceptionType : exceptionTypes) &#123;</span><br><span class="line">                System.out.print(exceptionType.getName());</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;----------------------分割线-----------------------&quot;);</span><br><span class="line"></span><br><span class="line">        Son son = new Son();</span><br><span class="line">        Class sclass = son.getClass();</span><br><span class="line">        /*</span><br><span class="line">        System.out.println(sclass.equals(mclass));</span><br><span class="line">        */</span><br><span class="line">        //获取私有方法</span><br><span class="line">        Method sonThrows = sclass.getDeclaredMethod(&quot;sonThrows&quot;, int.class, int.class, String.class);</span><br><span class="line">        if (sonThrows != null) &#123;</span><br><span class="line">            //获取私有方法的访问权限，不是控制权</span><br><span class="line"></span><br><span class="line">            sonThrows.setAccessible(true);</span><br><span class="line"></span><br><span class="line">            //sonThrows.invoke(son, 2, 1, &quot;error&quot;);</span><br><span class="line">            //通过invoke函数 进行访问 私有方法</span><br><span class="line">            Object invoke = sonThrows.invoke(son, 2, 1, &quot;error&quot;);</span><br><span class="line">            System.out.println(invoke.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;----------------------分割线-----------------------&quot;);</span><br><span class="line">        //这里通过getDeclaredField 寻找PST这个成员变量</span><br><span class="line">        Field pst = sclass.getDeclaredField(&quot;PST&quot;);</span><br><span class="line"></span><br><span class="line">        if (pst != null) &#123;</span><br><span class="line">            //设置可访问权</span><br><span class="line">            pst.setAccessible(true);</span><br><span class="line"></span><br><span class="line">            System.out.println(son.getPST());</span><br><span class="line"></span><br><span class="line">            //通过set修改私有成员变量</span><br><span class="line">            pst.set(son,&quot;public&quot;);</span><br><span class="line"></span><br><span class="line">            System.out.println(son.getPST());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="反射的应用场景"><a href="#反射的应用场景" class="headerlink" title="反射的应用场景"></a>反射的应用场景</h2><ul>
+<li><h3 id="通过反射运行配置文件的内容"><a href="#通过反射运行配置文件的内容" class="headerlink" title="通过反射运行配置文件的内容"></a>通过反射运行配置文件的内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">pro.txt</span><br><span class="line">className = cn.fanshe.Student</span><br><span class="line">methodName = show</span><br><span class="line">*/</span><br><span class="line">public class Student &#123;</span><br><span class="line">	public void show()&#123;</span><br><span class="line">		System.out.println(&quot;is show()&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line">import java.io.FileReader;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"> </span><br><span class="line">/*</span><br><span class="line"> * 我们利用反射和配置文件，可以使：应用程序更新时，对源码无需进行任何修改</span><br><span class="line"> * 我们只需要将新类发送给客户端，并修改配置文件即可</span><br><span class="line"> */</span><br><span class="line">public class Demo &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		//通过反射获取Class对象</span><br><span class="line">		Class stuClass = Class.forName(getValue(&quot;className&quot;));//&quot;cn.fanshe.Student&quot;</span><br><span class="line">		//2获取show()方法</span><br><span class="line">		Method m = stuClass.getMethod(getValue(&quot;methodName&quot;));//show</span><br><span class="line">		//3.调用show()方法</span><br><span class="line">		m.invoke(stuClass.getConstructor().newInstance());</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//此方法接收一个key，在配置文件中获取相应的value</span><br><span class="line">	public static String getValue(String key) throws IOException&#123;</span><br><span class="line">		Properties pro = new Properties();//获取配置文件的对象</span><br><span class="line">		FileReader in = new FileReader(&quot;pro.txt&quot;);//获取输入流</span><br><span class="line">		pro.load(in);//将流加载到配置文件对象中</span><br><span class="line">		in.close();</span><br><span class="line">		return pro.getProperty(key);//返回根据key获取的value值</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="JDBC-的数据库的连接"><a href="#JDBC-的数据库的连接" class="headerlink" title="JDBC 的数据库的连接"></a>JDBC 的数据库的连接</h3></li>
+</ul>
+<p>在JDBC 数据连接的时候，需要先用Class.forName() 去加载驱动，然后通过DriverManager类进行数据库连接，然后connect接口进行接收drivermanager.getConnection()。</p>
+<ul>
+<li><h3 id="Spring框架的使用"><a href="#Spring框架的使用" class="headerlink" title="Spring框架的使用"></a>Spring框架的使用</h3>反射是Java框架的基石<br>在Sprng中比较典型的就是xml的配置模式<br>Spring通过XML配置模式装载Bean的过程</li>
+</ul>
+<ol>
+<li>将配置文件或者是XML文件装载到内存中</li>
+<li>读取并解析配置文件，获得所需对象的字节码字符串以及相关属性信息</li>
+<li>通过反射机制，获取到所需对象的Class实例</li>
+<li>动态配置实例的属性</li>
+</ol>
+<p>这样做如果需要修改的话，直接修改配置文件即可，不用每次在代码中new。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://segmentfault.com/a/1190000010162647?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">Reflection：Java反射机制的应用场景</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/04/Java-虚拟机/" rel="next" title="Java 虚拟机">
+                <i class="fa fa-chevron-left"></i> Java 虚拟机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/08/计网知识点重回顾/" rel="prev" title="计网知识点重回顾">
+                计网知识点重回顾 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反射"><span class="nav-number">1.</span> <span class="nav-text">反射</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Class"><span class="nav-number">1.1.</span> <span class="nav-text">Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的应用场景"><span class="nav-number">1.2.</span> <span class="nav-text">反射的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过反射运行配置文件的内容"><span class="nav-number">1.2.1.</span> <span class="nav-text">通过反射运行配置文件的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC-的数据库的连接"><span class="nav-number">1.2.2.</span> <span class="nav-text">JDBC 的数据库的连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring框架的使用"><span class="nav-number">1.2.3.</span> <span class="nav-text">Spring框架的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

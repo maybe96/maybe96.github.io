@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaWeb,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaWeb入门(一)">
+<meta name="keywords" content="JavaWeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb入门(一)">
+<meta property="og:url" content="http://yoursite.com/2020/02/18/JavaWeb入门-一/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="JavaWeb入门(一)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/18/JavaWeb入门-一/image/1.png">
+<meta property="og:updated_time" content="2020-02-25T11:44:09.410Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaWeb入门(一)">
+<meta name="twitter:description" content="JavaWeb入门(一)">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/18/JavaWeb入门-一/image/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/18/JavaWeb入门-一/">
+
+
+
+
+
+  <title>JavaWeb入门(一) | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/18/JavaWeb入门-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaWeb入门(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-18T11:14:06+08:00">
+                2020-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JavaWeb入门(一)<br><a id="more"></a></p>
+<p>对于html的学习。<br>首先是基本的html格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;&lt;!--这是HTML5的文档声明--&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;&lt;!--这是html的开始标签--&gt;</span><br><span class="line">    &lt;head&gt;&lt;!--这是设置网页标签,html的编码设置,以及标题和链接资源都写在这里--&gt;</span><br><span class="line">        &lt;!--这是设置移动端观看时,网页不缩放--&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">        &lt;!--设置网页在ie上观看时,按照浏览器的最高版本的IE观看--&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt; &lt;!--这是设置网页编码--&gt;</span><br><span class="line">        &lt;title&gt;我的主页&lt;/title&gt;&lt;!--这是设置网页标题--&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;&lt;!--这是网页内容--&gt;</span><br><span class="line">        你好! 欢迎访问我的主页</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">  &lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后对于一些基本元素的总结<br>标题 从h1——h6 由大到下<br>段落 p  在段落中的文本会自动换行<br><strong>粗体</strong> strong b 推荐使用strong<br><em>斜体</em> i em<br>还有一个 font 但是不推荐使用，使用样式对字体的颜色大小等进行修改是主流<br><del>删除线</del> del<br><ins>下划线</ins> ins</p>
+<p>然后是一个简单的使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;英雄联盟&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;英雄联盟   （电子竞技游戏）&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;&lt;strong&gt;《英雄联盟》&lt;/strong&gt;(简称lol)是由美国&lt;i&gt;Riot Games&lt;/i&gt;开发，中国大陆地区由腾讯游戏运营的网络游戏。&lt;/p&gt;</span><br><span class="line">        &lt;P&gt;&lt;strong&gt;《英雄联盟》&lt;/strong&gt;除了即时战略，团队作战外，还有用一百多为特色各异的英雄，丰富的地图即玩法，自动匹配的战网平台，包括天赋书，召唤师系统，符文等系统。[&lt;ins&gt;1&lt;/ins&gt;]&lt;/P&gt;</span><br><span class="line">        &lt;p&gt;2016年1月，根据官方数据显示，LOL全球最高同时在线已突破&lt;del&gt;750&lt;/del&gt;900万，全球日活跃高达2700万，全球月活跃已达6700万，注册用户亿计，LOL已经成为当今世界最具人气和影响力的网络游戏之一[&lt;ins&gt;2&lt;/ins&gt;]</span><br><span class="line">        &lt;/p&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>接下来是进阶一点元素介绍</p>
+<p>对于图像的调用 img src = “文件目录” alt = “当图片不可用时，显示的话”<br>文件目录分几种情况<br>1.同级直接使用文件名即可<br>2.上级需要加../<br>3.使用绝对路径时，使用file://</p>
+<p>超链接<br>a href=”跳转到的页面地址” target=”_blank” (表示在新的页面显示超链) title = “显示提示文字”<br>a 表示显示超链</p>
+<p>表格 table<br>tr表示一行 td表示一行中的一列<br>格式一般如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;table border=&quot;1&quot; //可选是否有边框&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td align = &quot;center&quot; //表示水平对齐方式&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">        &lt;td valign = &quot;center&quot; //表示垂直对齐方式&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">colspan 表示水平合并</span><br><span class="line">rowspan 表示垂直合并</span><br><span class="line">bgcolor 表示表格颜色 但是已经不推荐使用</span><br></pre></td></tr></table></figure></p>
+<p>列表<br>ui 无序列表 ol 有序列表<br>li 表示列表中的元素</p>
+<p>iframe 表示 内联框架 内嵌一个页面</p>
+<p>进阶练习<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;英雄联盟&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;&lt;strong&gt;英雄技能&lt;/strong&gt;&lt;/h1&gt;</span><br><span class="line">        &lt;table border=&quot;1&quot; width=&quot;1280px&quot;&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;gray&quot;&gt;&lt;strong&gt;技能名&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;gray&quot; width = &quot;5%&quot;&gt;&lt;strong&gt;触发&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;gray&quot;&gt;&lt;strong&gt;技能属性&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;gray&quot;&gt;&lt;strong&gt;技能效果&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;gray&quot;&gt;&lt;strong&gt;图标&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;坚韧&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;被动&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td colspan=&quot;2&quot; valign=&quot;center&quot;&gt;盖伦如果在9秒内不受到任何伤害，之后的每秒都会回复自己最大生命值的0.4%。小兵的伤害不会中断坚韧效果&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;img src= &quot;skill1.png&quot; alt = &quot;被动&quot;&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;致命打击&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;冷却时间: 8&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;p&gt;盖伦移除身上的所有减速效果，并获得30%移动速度加成，持续1.5/2/2.5/3.5秒&lt;br/&gt;</span><br><span class="line">                    在接下来的4.5秒内，他的下次普通攻击会造成30/55/80/105/130(+1.4AD）物理伤害，并沉默目标1.5秒。&lt;/p&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;img src = &quot;skill2.png&quot; alt = &quot;Q&quot;&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;勇气&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;W&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;冷却: 24/23/22/21/20&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;p&gt;&lt;strong&gt;被动:&lt;/strong&gt;击杀一个单位会永久提供0.25护甲和魔法抗性加成，最大值:30&lt;br/&gt;</span><br><span class="line">                    &lt;strong&gt;主动:&lt;/strong&gt;盖伦获得一个持续2/3/4/5/6秒的防御护盾，减少即将带来的30%伤害。&lt;/&lt;strong&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;img src = &quot;skill3.png&quot; alt = &quot;W&quot;&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;审判&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;E&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;冷却: 9&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;p&gt;盖伦快速地旋转大剑，持续3秒，在持续期间对周围敌人总共造成物理伤害————14/18/22/26/30加上他总攻击力的34/35/36/37/38%，5次(英雄每升3级加1次)。&lt;br/&gt;</span><br><span class="line">                    E【审判】会攻击单个敌人时造成33%额外伤害&lt;br/&gt;</span><br><span class="line">                    取消E【审判】会返还相当于剩余持续时长的冷却时间。&lt;br/&gt;</span><br><span class="line">                    E【审判】可以暴击，并造成额外伤害。&lt;/p&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;img src = &quot;skill4.png&quot; alt = &quot;E&quot;&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;德玛西亚正义&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;&lt;strong&gt;R&lt;/strong&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td valign=&quot;center&quot;&gt;冷却: 120/100/80&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;p&gt;&lt;strong&gt;被动:&lt;/strong&gt;最近获得最多击杀数的敌人会成为&lt;strong&gt;大反派&lt;/strong&gt;。盖伦的E【审判】和普攻会对&lt;strong&gt;大反派&lt;/strong&gt;造成额外的真实伤害，</span><br><span class="line">                        伤害值为&lt;strong&gt;大反派&lt;/strong&gt;1%的最大生命值。</span><br><span class="line">                    &lt;/p&gt;</span><br><span class="line">                    &lt;p&gt;</span><br><span class="line">                        &lt;strong&gt;主动:&lt;/strong&gt;盖伦召唤德玛西亚之力，试图斩杀一位敌方英雄，目标损失的生命越多，则此技能能造成的伤害越高。造成175/350/525魔法伤害</span><br><span class="line">                        加上目标已损失生命值的28/33/40%。对&lt;strong&gt;大反派&lt;/strong&gt;造成真实伤害。</span><br><span class="line">                    &lt;/p&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;img src = &quot;skill5.png&quot; alt = &quot;R&quot;&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>实际成品<br><img src="image/1.png"></p>
+<p>在进阶一点，进阶到表单<br>表单里比较重要的就是form<br>form就是创建一个html表单，在表单里面可以创建文本框，复选框，提交按钮等，主要就是用于向服务器传输数据<br>属性一般有<br>action 是将数据传送到jsp中，提交到jsp页面的地址<br>method 传送数据的形式 1.get 在地址栏能看到传送的参数<br>2.post 看不到上传的参数，可以上传文件</p>
+<p>然后表单里的一些元素根据input中的属性type进行区分<br>比较常用的<br>text 文本框 placeholder 为 背景文字 value 为 默认值<br>password 密码框 输入显示为星号<br>radio 单选框 check = “checked”为默认选中 name 为命名分组<br>checkbox 复选框 与单选框属性类似<br>select 下拉列表 option 是列表中的元素 multiple=”multiple” 为多选 selected=”selected” 默认选中。<br>textarea 文本域 row cols 长宽<br>button 按钮 不具备form 的功能<br>submit 提交按钮<br>reset 重置按钮 将同一个表单中的文本清空</p>
+<p>一个进阶的练习<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;table&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt; *&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;用户名:&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type=&quot;text&quot; width=&quot;300px&quot;&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;用户名不得小于3个字符&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;*&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;密码:&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type=&quot;password&quot; width=&quot;300px&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;*&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;确认密码:&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type=&quot;password&quot; width=&quot;300px&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt; *&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;Email&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type=&quot;red&quot; width=&quot;300px&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;  *&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;性别:&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;select&gt;</span><br><span class="line">                        &lt;option&gt;男&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;女&lt;/option&gt;</span><br><span class="line">                    &lt;/select&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;  *&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;生日:&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;</span><br><span class="line">                    &lt;select&gt;</span><br><span class="line">                        &lt;option selected=&quot;selected&quot;&gt;1999&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;2001&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;2002&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;2003&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;2004&lt;/option&gt;</span><br><span class="line">                    &lt;!--这里可以使用js做一个简化--&gt;</span><br><span class="line">                    &lt;/select&gt;</span><br><span class="line">                    &lt;select&gt;</span><br><span class="line">                        &lt;option selected=&quot;selected&quot;&gt;09&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;10&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;11&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;12&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;01&lt;/option&gt;</span><br><span class="line">                    &lt;!--这里可以使用js做一个简化--&gt;</span><br><span class="line">                    &lt;/select&gt;</span><br><span class="line">                    &lt;select&gt;</span><br><span class="line">                        &lt;option selected=&quot;selected&quot;&gt;11&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;12&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;13&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;14&lt;/option&gt;</span><br><span class="line">                        &lt;option&gt;15&lt;/option&gt;</span><br><span class="line">                    &lt;!--这里可以使用js做一个简化--&gt;</span><br><span class="line">                    &lt;/select&gt;</span><br><span class="line">                &lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;  *&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;手机&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type=&quot;text&quot; width = &quot;300px&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td bgcolor=&quot;red&quot;&gt;  *&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;QQ&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input type=&quot;text&quot; width=&quot;300px&quot;&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;button&gt;设置我的QQ在线状态&lt;/button&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/10/java-swing/" rel="next" title="java swing">
+                <i class="fa fa-chevron-left"></i> java swing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/20/JavaWeb入门-二/" rel="prev" title="JavaWeb入门(二)">
+                JavaWeb入门(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

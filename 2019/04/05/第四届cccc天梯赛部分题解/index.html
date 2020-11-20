@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="比赛,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="又参加了一届，上届主要是去水一水的，然后这届就成了主力 ？ ？ ？">
+<meta name="keywords" content="比赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四届cccc天梯赛部分题解">
+<meta property="og:url" content="http://yoursite.com/2019/04/05/第四届cccc天梯赛部分题解/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="又参加了一届，上届主要是去水一水的，然后这届就成了主力 ？ ？ ？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-09T10:27:31.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四届cccc天梯赛部分题解">
+<meta name="twitter:description" content="又参加了一届，上届主要是去水一水的，然后这届就成了主力 ？ ？ ？">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/第四届cccc天梯赛部分题解/">
+
+
+
+
+
+  <title>第四届cccc天梯赛部分题解 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/第四届cccc天梯赛部分题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第四届cccc天梯赛部分题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T21:30:08+08:00">
+                2019-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>又参加了一届，上届主要是去水一水的，然后这届就成了主力 ？ ？ ？<br><a id="more"></a></p>
+<p>　　题目写起来还是比较顺手的，水题都是一遍过，没有被坑到。然后最后还是卡在了L2-2…L3本来还是想看一看的，但是队伍一直没有过线，所以后期一直在怼L2-2</p>
+<p>　　这届感觉变成了模拟和字符串大赛了，哈哈哈。。。</p>
+<h2 id="L1就简单过一遍吧"><a href="#L1就简单过一遍吧" class="headerlink" title="L1就简单过一遍吧"></a>L1就简单过一遍吧</h2><h3 id="1-PTA使我精神焕发-妥妥的签到题，输出就对了"><a href="#1-PTA使我精神焕发-妥妥的签到题，输出就对了" class="headerlink" title="1 PTA使我精神焕发　　妥妥的签到题，输出就对了"></a>1 PTA使我精神焕发　　妥妥的签到题，输出就对了</h3><h3 id="2-6翻了"><a href="#2-6翻了" class="headerlink" title="2 6翻了　　"></a>2 6翻了　　</h3><p>　　也是感觉签到题啊，就按条件模拟一下呗 记录下6每次出现的次数呗 注意每次6的最后清空下次数就行了。有些队友挂了，不知道什么原因，所以简单写下代码</p>
+<p>　　<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s;</span><br><span class="line">    getline(cin,s);</span><br><span class="line">    int vis=0;</span><br><span class="line">    for(int i=0;i&lt;s.length();i++)&#123;</span><br><span class="line">        if(vis&amp;&amp;s[i]!=&apos;6&apos;)&#123;</span><br><span class="line">            if(vis&lt;=3)</span><br><span class="line">                for(int i=0;i&lt;vis;i++) cout&lt;&lt;6;</span><br><span class="line">            else if(vis&lt;=9) cout&lt;&lt;9;</span><br><span class="line">            else cout&lt;&lt;27;</span><br><span class="line">            cout&lt;&lt;s[i];</span><br><span class="line">            vis=0;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(s[i]==&apos;6&apos;) vis++;</span><br><span class="line">        else cout&lt;&lt;s[i];</span><br><span class="line">    &#125;</span><br><span class="line">    if(vis)&#123;</span><br><span class="line">        if(vis&lt;=3)</span><br><span class="line">                for(int i=0;i&lt;vis;i++) cout&lt;&lt;6;</span><br><span class="line">            else if(vis&lt;=9) cout&lt;&lt;9;</span><br><span class="line">            else cout&lt;&lt;27;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-敲笨钟"><a href="#3-敲笨钟" class="headerlink" title="3 敲笨钟"></a>3 敲笨钟</h3><p>　　模拟，首先找逗号的位置，然后判断一下逗号前面的三个字符是不是ong，以及最后四个字符串是否为ong.</p>
+<p>　　然后从后往前判断空格的数量，找到倒数第三个空格，将之后的字符改成敲笨钟就行了。</p>
+<h3 id="4-心理阴影面积"><a href="#4-心理阴影面积" class="headerlink" title="4 心理阴影面积"></a>4 心理阴影面积</h3><p>　　哈哈哈，一开始想了下叉积，然后看题目描述就是减法，就直接根据样例蒙了一下，就过了。。。还是签到题</p>
+<h3 id="5-新胖子公式"><a href="#5-新胖子公式" class="headerlink" title="5 新胖子公式"></a>5 新胖子公式</h3><p>　　用double 进行下除法。。简单判断一下</p>
+<h3 id="6-幸运彩票"><a href="#6-幸运彩票" class="headerlink" title="6 幸运彩票"></a>6 幸运彩票</h3><p>　　字符串遍历下前三个和后三个相加判断一下就可以了</p>
+<h3 id="7-吃鱼还是吃肉"><a href="#7-吃鱼还是吃肉" class="headerlink" title="7 吃鱼还是吃肉"></a>7 吃鱼还是吃肉</h3><p>　　一些if过了。。。就判断就行了</p>
+<h3 id="8-AI-核心代码"><a href="#8-AI-核心代码" class="headerlink" title="8 AI 核心代码"></a>8 AI 核心代码</h3><p>　　哈哈哈，这题看起来就很难受，判断太多了。。。。做到一半老师过来提醒了线降到600分</p>
+<p>　　但是做的做了，就继续做下去呗。。。总归就是大模拟，加挺多判断。</p>
+<p>　　我的做法就是先将空格去了，以及将除了I以外的大写转换成小写。。</p>
+<p>　　然后就去判断一些独立的修改啥的。。。不知道为什么只拿了17分</p>
+<p>　　所以赛后，就不想在去做这种题了。。也不贴代码了</p>
+<h2 id="L2"><a href="#L2" class="headerlink" title="L2　　"></a>L2　　</h2><h3 id="1-特立独行的幸福"><a href="#1-特立独行的幸福" class="headerlink" title="1 特立独行的幸福"></a>1 特立独行的幸福</h3><p>　　这题思路挺简单的，暴力递归就行了</p>
+<p>　　但是唯一要注意的点在于依附性。</p>
+<p>　　即我们在递归的过程中，将出现的数都标记上。在输出数据的时候有标记的数都不放进去就行了。</p>
+<p>　　对了，我还线性筛了下素数，不知道这里会不会卡暴力的时间。</p>
+<h3 id="2-冰岛人"><a href="#2-冰岛人" class="headerlink" title="2 冰岛人"></a>2 冰岛人</h3><p>这题真的挺难的，主要是以前没怎么太做过LCA 最近公共祖先的题目，所以写起来还是挺难受的。大体思路就是用map存一下姓名的联系，然后直接LCA就行了</p>
+<p>　　还有需要注意的坑大概就是女爸爸的出现吧。具体可以去看看<a href="https://blog.csdn.net/weixin_43272781/article/details/88919787" target="_blank" rel="noopener">大佬的博客</a></p>
+<h3 id="3-深入虎穴"><a href="#3-深入虎穴" class="headerlink" title="3 深入虎穴"></a>3 深入虎穴</h3><p>　　这题真的太自闭了。。。</p>
+<p>　　一开始默认1为入口，然后就去dfs，然后好像18分</p>
+<p>　　然后仔细读了一遍题，发现题目中没有说1位入口，然后就去暴力所有起点　然后t了两个样例　，应该是20分好像</p>
+<p>　　最后dfs+剪枝 最后还是wa了一个点 只拿了23分</p>
+<p>　　听群里一些大佬什么过法的都有，有双向边过的，有默认1为入口过的，有并查集过的，有枚举入度为0的门为入口。。反正千奇百怪的过法都有，数据是不是有点水。。</p>
+<h3 id="4-彩虹瓶"><a href="#4-彩虹瓶" class="headerlink" title="4 彩虹瓶"></a>4 彩虹瓶</h3><p>　　直接用栈模拟题意就行了，但是唯一要注意的地方在于因为是多组样例，注意每组样例要清下栈，其他应该没什么坑吧。。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>　　在考场上只做了这些题，拿了170分，应该满足了，但是心里还是感觉自己挺菜的。希望明年还能参加吧，明年都大三了，争取拿个省一吧。</p>
+<p>　　最后膜一膜jls jls tql 最后又绝杀了，但是明年就看不到jls了，有点小遗憾呀。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/比赛/" rel="tag"># 比赛</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/05/linux-vi-vim-基本命令/" rel="prev" title="linux vi / vim 基本命令">
+                linux vi / vim 基本命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#L1就简单过一遍吧"><span class="nav-number">1.</span> <span class="nav-text">L1就简单过一遍吧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-PTA使我精神焕发-妥妥的签到题，输出就对了"><span class="nav-number">1.1.</span> <span class="nav-text">1 PTA使我精神焕发　　妥妥的签到题，输出就对了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6翻了"><span class="nav-number">1.2.</span> <span class="nav-text">2 6翻了　　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-敲笨钟"><span class="nav-number">1.3.</span> <span class="nav-text">3 敲笨钟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-心理阴影面积"><span class="nav-number">1.4.</span> <span class="nav-text">4 心理阴影面积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-新胖子公式"><span class="nav-number">1.5.</span> <span class="nav-text">5 新胖子公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-幸运彩票"><span class="nav-number">1.6.</span> <span class="nav-text">6 幸运彩票</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-吃鱼还是吃肉"><span class="nav-number">1.7.</span> <span class="nav-text">7 吃鱼还是吃肉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-AI-核心代码"><span class="nav-number">1.8.</span> <span class="nav-text">8 AI 核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L2"><span class="nav-number">2.</span> <span class="nav-text">L2　　</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-特立独行的幸福"><span class="nav-number">2.1.</span> <span class="nav-text">1 特立独行的幸福</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-冰岛人"><span class="nav-number">2.2.</span> <span class="nav-text">2 冰岛人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-深入虎穴"><span class="nav-number">2.3.</span> <span class="nav-text">3 深入虎穴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-彩虹瓶"><span class="nav-number">2.4.</span> <span class="nav-text">4 彩虹瓶</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

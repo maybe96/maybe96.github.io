@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="比赛,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于比赛难度彩蛋: I签到: B Eeasy: A C Dmedium:F H K Mhard: G J L">
+<meta name="keywords" content="比赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICNU ACM 校赛">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/SICNU-ACM-校赛/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="关于比赛难度彩蛋: I签到: B Eeasy: A C Dmedium:F H K Mhard: G J L">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-21T11:43:02.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SICNU ACM 校赛">
+<meta name="twitter:description" content="关于比赛难度彩蛋: I签到: B Eeasy: A C Dmedium:F H K Mhard: G J L">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/SICNU-ACM-校赛/">
+
+
+
+
+
+  <title>SICNU ACM 校赛 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/SICNU-ACM-校赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SICNU ACM 校赛</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T18:10:17+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于比赛难度<br>彩蛋: I<br>签到: B E<br>easy: A C D<br>medium:F H K M<br>hard: G J L<br><a id="more"></a></p>
+<h2 id="A题-火星旅行"><a href="#A题-火星旅行" class="headerlink" title="A题 火星旅行"></a>A题 火星旅行</h2><p>根据题意是一个11进制问题，但是这个进制的数字是一串特殊的编码。<br>我们可以用数组存储出进制的编码，然后先将给出的数字转化成十进制然后进行计算然后再进行编码。<br>但是要注意到的坑点在样例三中出现了，即计算结果可以是两位的，所以当我们十进制计算结果出来之后，分两种情况进行判断即可，小于11正常输出，否则我们应该按两位进行计算，即模11.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    map&lt;char,int&gt; num;</span><br><span class="line">    string s=&quot;qwertyuiopa&quot;;</span><br><span class="line">    for(int i=0;i&lt;=10;i++) num[s[i]]=i;</span><br><span class="line">    char a,b,c;</span><br><span class="line">    cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">    int ans;</span><br><span class="line">    switch(b)&#123;</span><br><span class="line">        case &apos;+&apos;:ans=num[a]+num[c];break;</span><br><span class="line">        case &apos;-&apos;:ans=num[a]-num[c];break;</span><br><span class="line">    &#125;</span><br><span class="line">    if(ans&lt;11) cout&lt;&lt;s[ans]&lt;&lt;endl;</span><br><span class="line">    else &#123;</span><br><span class="line">        char n=s[ans%11];</span><br><span class="line">        ans/=11;</span><br><span class="line">        char m=s[ans];</span><br><span class="line">        cout&lt;&lt;m&lt;&lt;n&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="B-富婆的生日宴"><a href="#B-富婆的生日宴" class="headerlink" title="B 富婆的生日宴"></a>B 富婆的生日宴</h2><p>签到题<br>问题化简为能否将一个长宽分别为a,b的矩形放在一个半径为r的圆形中并完全覆盖。<br>所以我们只需要去判断矩形中最长的一条边，是否小于或等于直径即可，而矩形中最长的边显然是对角线</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,r;</span><br><span class="line">    cin&gt;&gt;r&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    double s=sqrt(a*a+b*b);</span><br><span class="line">    if(2.0*r&gt;=s) cout&lt;&lt;&quot;yes&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;no&quot;&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C-握手"><a href="#C-握手" class="headerlink" title="C 握手"></a>C 握手</h2><p>有n个人去握手，即产生$(n-1)*n/2$个地位值，然后将这些地位值进行排序，然后就可以算出第s小的值。<br>这里不需要去重。</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m,k;</span><br><span class="line">    int num[105];</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i=0;i&lt;n;i++) cin&gt;&gt;num[i];</span><br><span class="line">    int s[100005];</span><br><span class="line">    int t=0;</span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        for(int j=i+1;j&lt;n;j++)&#123;</span><br><span class="line">            s[t++]=num[i]+num[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(s,s+t);</span><br><span class="line">    cin&gt;&gt;k;</span><br><span class="line">    cout&lt;&lt;s[k-1]&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="D-买西瓜"><a href="#D-买西瓜" class="headerlink" title="D 买西瓜"></a>D 买西瓜</h2><p>首先这题根据题目范围可以得知$O(n^2)$的复杂度应该是过不去的。但是降低难度，可以让这种复杂度可以水过去。<br>这里只提 复杂度为$O(n)$的解法，即动态规划。<br>递推方程为$dp[i]=1+dp[i-2]+dp[i-3]-dp[i-5]$<br>$dp[i]$表示买i个西瓜的方案数<br>我们可以这样理解，如果我们买i个水果，可以有一种全为1的取法，以及在i-2个西瓜的所有方案加一个2个西瓜，以及在i-3西瓜的所有方案加一个3个西瓜，但是这里有一个问题就是在这两种方案中是否会存在相同的方案数，即有一个2，一个3，只是顺序不同的问题，这里我们用到容斥的思想，即减去i-5个西瓜的方案数。这个就可以避免”2+3”的局面出现。</p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    ll dp[30005];</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i=0;i&lt;=5;i++) dp[i]=i;</span><br><span class="line">    for(int i=6;i&lt;=n;i++)&#123;</span><br><span class="line">        dp[i]=dp[i-2]+dp[i-3]-dp[i-5]+1;</span><br><span class="line">    &#125;</span><br><span class="line">    //for(int i=0;i&lt;n;i++) cout&lt;&lt;dp[i]&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;dp[n]&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="E-富婆的生日宴2"><a href="#E-富婆的生日宴2" class="headerlink" title="E 富婆的生日宴2"></a>E 富婆的生日宴2</h2><p>签到题<br>找规律，首先先对n进行加1即现在$n=n+1$，方便计算。<br>然后判断n如果是奇数，则需要切n刀，输出n。<br>如果是偶数，则需要切n/2刀。<br>这里的规律可以画图模拟一下。<br>但是这题有一个坑点，即输入的n可以为0，如果输入0，则输出0.</p>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    n++;</span><br><span class="line">    if(n==1)&#123;</span><br><span class="line">        cout&lt;&lt;0&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        if(n%2==0) cout&lt;&lt;n/2&lt;&lt;endl;</span><br><span class="line">        else cout&lt;&lt;n&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="F-涂骰子"><a href="#F-涂骰子" class="headerlink" title="F 涂骰子"></a>F 涂骰子</h2><p>给你两个颜色序列，分别表示骰子的各个面的颜色，问是否能存在至少一种旋转方案使得两个骰子的各个面颜色相同。<br>这里我们需要对骰子的各个面进行分析。<br>即我们这里只对第一个骰子进行分析，只旋转第一个骰子。<br>我们可以先确定两个面，我这里确定的是上下面，然后判断<br>其他四个面的旋转方式。坑点是没有，主要是需要一个立体的思维以及成熟的码风，不然容易写崩。<br>具体写法可以有很多，这里仅提供参考。</p>
+<h3 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string a,b;</span><br><span class="line">    cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    swap(b[3],b[4]);</span><br><span class="line">    int vis=0;</span><br><span class="line">    swap(a[3],a[4]);</span><br><span class="line">    for(int k=0;k&lt;4;k++)&#123;</span><br><span class="line">        int flag=0;</span><br><span class="line">        for(int i=0;i&lt;=3;i++)&#123;</span><br><span class="line">            if(b[i+1]!=a[(i+1+k)%4+1]) flag=1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(flag==0&amp;&amp;((a[0]==b[0]&amp;&amp;a[5]==b[5])||(a[0]==b[5]&amp;&amp;a[5]==b[0]))) vis=1;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(a[3],a[4]);</span><br><span class="line">    string c;</span><br><span class="line">    c+=a[0];c+=a[2];c+=a[5];c+=a[3];</span><br><span class="line">    for(int k=0;k&lt;4;k++)&#123;</span><br><span class="line">        int flag=0;</span><br><span class="line">        for(int i=0;i&lt;=3;i++)&#123;</span><br><span class="line">            if(b[i+1]!=c[(i+k)%4]) flag=1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(flag==0&amp;&amp;((a[1]==b[0]&amp;&amp;a[4]==b[5])||(a[1]==b[5]&amp;&amp;a[4]==b[0]))) vis=1;</span><br><span class="line">    &#125;</span><br><span class="line">    string d;</span><br><span class="line">    d+=a[0];d+=a[1];d+=a[5];d+=a[4];</span><br><span class="line">    for(int k=0;k&lt;4;k++)&#123;</span><br><span class="line">        int flag=0;</span><br><span class="line">        for(int i=0;i&lt;=3;i++)&#123;</span><br><span class="line">            if(b[i+1]!=d[(i+k)%4]) flag=1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(flag==0&amp;&amp;((a[2]==b[0]&amp;&amp;a[3]==b[5])||(a[2]==b[5]&amp;&amp;a[3]==b[0]))) vis=1;</span><br><span class="line">    &#125;</span><br><span class="line">    if(vis) cout&lt;&lt;&quot;True&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;False&quot;&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="G-有趣的汇编语言"><a href="#G-有趣的汇编语言" class="headerlink" title="G 有趣的汇编语言"></a>G 有趣的汇编语言</h2><p>大模拟<br>即模拟基础的汇编指令，这里需要的只是仔细认真的模拟就行，存在的坑点即数据范围会爆int 注意要用long long。<br>这里每个人的代码风格不同，就不提供参考代码。</p>
+<h2 id="H-幸运时刻"><a href="#H-幸运时刻" class="headerlink" title="H 幸运时刻"></a>H 幸运时刻</h2><p>计算一天中时针与分针的相遇次数，在给定的两个时刻间。<br>这里需要注意的是11-12以及23-24是不存在相遇的。<br>其他就细细琢磨一下。</p>
+<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    vector&lt;double&gt; num;</span><br><span class="line">    for(int i=1;i&lt;=10;i++)&#123;</span><br><span class="line">        num.push_back(i+0.5);</span><br><span class="line">        num.push_back(i+12+0.5);</span><br><span class="line">    &#125;</span><br><span class="line">    int ans=0;</span><br><span class="line">    for(int i=0;i&lt;num.size();i++)</span><br><span class="line">        if(n&lt;num[i]&amp;&amp;m&gt;num[i]) ans++;</span><br><span class="line">    if(n&lt;=12&amp;&amp;m&gt;12) ans++;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="I-丢硬币"><a href="#I-丢硬币" class="headerlink" title="I 丢硬币"></a>I 丢硬币</h2><p>本场唯一的一道彩蛋题，题意也很明显。<br>但是这里需要注意的是我们给予的输入信息完全没用。<br>因为我们需要求的是概率而不是频率。<br>代码就不发了，只需要输出”0.500”即可。<br>但是要注意保留三位小数。</p>
+<h2 id="J-富婆的生日宴3"><a href="#J-富婆的生日宴3" class="headerlink" title="J 富婆的生日宴3"></a>J 富婆的生日宴3</h2><p>博弈论+斐波拉契数列<br>这里我们需要去推导一下，具体证明可以看<a href="https://blog.csdn.net/acm_cxlove/article/details/7835016" target="_blank" rel="noopener">证明</a><br>尽管我们不一定能推出这个博弈论的规律，但是我们可以进行打表判断，即判断出所有先手必败的情况，细看一下，就可以看出斐波拉契数列的规律了。</p>
+<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    int num[10005];</span><br><span class="line">    num[1]=1;</span><br><span class="line">    num[0]=1;</span><br><span class="line">    int vis=0;</span><br><span class="line">    for(int i=2;num[i-1]&lt;=1e9;i++)&#123;</span><br><span class="line">        num[i]=num[i-1]+num[i-2];</span><br><span class="line">        if(num[i]==n)&#123;</span><br><span class="line">            vis=1;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(vis) cout&lt;&lt;&quot;rgg&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;whn&quot;&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="K-完美序列"><a href="#K-完美序列" class="headerlink" title="K 完美序列"></a>K 完美序列</h2><p>我们需要对一个序列进行去重，但是这个去重方式规定好了，可以选择任意两个数进行相加，把相加的数加入序列，然后去除这两个数的任意一个。<br>这里我们一开始应该会想，如果我们找到两个相同的数，就把他们相加，然后去掉他们中的一个，这个方法可行吗？<br>显然是不可行的，因为我们无法保证他们相加的数是否出现在这个序列中，所以这里我们可以使用贪心的思想，即每次找到相同的数，我们就将他和最大的那个数进行相加，然后将这个数删去，这样我们就可以保证去重，也可以保证相加的数必然不可能存在在这个序列中。<br>所以理解了贪心的思想，我们就可以进行判断，这个序列中重复的数，遍历一遍数组即可 $O(n)$复杂度。</p>
+<h3 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">#define ll long long</span><br><span class="line">ll num[100005];</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    ll n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    for(int i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    	cin &gt;&gt; num[i];</span><br><span class="line">	&#125;</span><br><span class="line">	ll ans=0;</span><br><span class="line">	for(int i=1;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(num[i]==num[i-1]) ans++;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="L-ACMER"><a href="#L-ACMER" class="headerlink" title="L ACMER"></a>L ACMER</h2><p>对一个有向图，存储每个点的年龄，然后进行两个指令。<br>一个指令是将两个点的位置互换，另一个是查询某个点的最年轻的直接或间接领导者。<br>这里有两种方式，一种是dfs，每次查询就进行搜索，另一种是并查集。这里用到的dfs的方式，关于另一种方式可以自己通过学习了解并查集来掌握。<br>使用dfs，需要注意的是我们不应该记录下当前边，而是应该记录反向边，然后在互换位置，就互换两个点的权值即可。</p>
+<h3 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">const int maxn=99999999;</span><br><span class="line">using namespace std;</span><br><span class="line">int a[505],f[505],g[505],vis[505],ans;</span><br><span class="line">vector&lt;int&gt;v[505];</span><br><span class="line">void dfs(int p)</span><br><span class="line">&#123;</span><br><span class="line">    vis[p]=1;</span><br><span class="line">    for(int i=0;i&lt;v[p].size();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int k=v[p][i];</span><br><span class="line">        if(!vis[k])</span><br><span class="line">        &#123;</span><br><span class="line">            ans=min(ans,a[f[k]]);</span><br><span class="line">            dfs(k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m,q,i,x,y,w,z,p;</span><br><span class="line">    char c;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;q;</span><br><span class="line">    for(i=1;i&lt;=n;i++)</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">        for(i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">            v[y].push_back(x);</span><br><span class="line">        &#125;</span><br><span class="line">        for(i=1;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i]=i;</span><br><span class="line">            g[i]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        for(i=0;i&lt;q;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;c;</span><br><span class="line">            if(c==&apos;T&apos;)</span><br><span class="line">            &#123;</span><br><span class="line">                cin&gt;&gt;w&gt;&gt;z;</span><br><span class="line">                swap(f[g[w]],f[g[z]]);</span><br><span class="line">                swap(g[w],g[z]);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">              cin&gt;&gt;p;</span><br><span class="line">              p=g[p];</span><br><span class="line">              memset(vis,0,sizeof(vis));</span><br><span class="line">               ans=maxn;</span><br><span class="line">               dfs(p);</span><br><span class="line">               if(ans==maxn)</span><br><span class="line">                cout&lt;&lt;&quot;*&quot;&lt;&lt;endl;</span><br><span class="line">               else</span><br><span class="line">                cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="M-游戏币"><a href="#M-游戏币" class="headerlink" title="M 游戏币"></a>M 游戏币</h2><p>给你x个一元游戏币以及y个3元游戏币<br>问可以组合成多少种价值。<br>这里我们应该对x进行分析。首先如果x为0，我们就应该只能用y去凑，所以只有y种，每种游戏币组合都能被3整除。<br>然后如果x为1，即我们可以每次可以使用一枚一元或者不使用这枚硬币，所以我们可以得出每次可以获得的游戏币组合要么能被3整除，要么被3整除余1。<br>然后就是x大于等于2，我们就可以凑出所有在最大面值和的里的所有价值组合。这里可以进行分析一下，因为我们如果只用3元游戏币，只能凑出3，6，9。。。<br>然后用一个游戏币就可以在3元游戏币的基础上凑出1，4，7，10。。。然后再用一枚一元的游戏币就可以凑出2，5，8，11。。。</p>
+<h3 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    ll ans=0;</span><br><span class="line">    for(int i=0;i&lt;m;i++)&#123;</span><br><span class="line">        if(n&gt;=2) ans+=2;</span><br><span class="line">        else ans+=n;</span><br><span class="line">        ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans+=n;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/比赛/" rel="tag"># 比赛</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/14/牛客小白赛1313/" rel="next" title="牛客小白赛13">
+                <i class="fa fa-chevron-left"></i> 牛客小白赛13
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/24/web服务器配置/" rel="prev" title="web服务器配置">
+                web服务器配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A题-火星旅行"><span class="nav-number">1.</span> <span class="nav-text">A题 火星旅行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-富婆的生日宴"><span class="nav-number">2.</span> <span class="nav-text">B 富婆的生日宴</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-握手"><span class="nav-number">3.</span> <span class="nav-text">C 握手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-买西瓜"><span class="nav-number">4.</span> <span class="nav-text">D 买西瓜</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">4.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-富婆的生日宴2"><span class="nav-number">5.</span> <span class="nav-text">E 富婆的生日宴2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-4"><span class="nav-number">5.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-涂骰子"><span class="nav-number">6.</span> <span class="nav-text">F 涂骰子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-5"><span class="nav-number">6.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-有趣的汇编语言"><span class="nav-number">7.</span> <span class="nav-text">G 有趣的汇编语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-幸运时刻"><span class="nav-number">8.</span> <span class="nav-text">H 幸运时刻</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-6"><span class="nav-number">8.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-丢硬币"><span class="nav-number">9.</span> <span class="nav-text">I 丢硬币</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-富婆的生日宴3"><span class="nav-number">10.</span> <span class="nav-text">J 富婆的生日宴3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-7"><span class="nav-number">10.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-完美序列"><span class="nav-number">11.</span> <span class="nav-text">K 完美序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-8"><span class="nav-number">11.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L-ACMER"><span class="nav-number">12.</span> <span class="nav-text">L ACMER</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-9"><span class="nav-number">12.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-游戏币"><span class="nav-number">13.</span> <span class="nav-text">M 游戏币</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-10"><span class="nav-number">13.1.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

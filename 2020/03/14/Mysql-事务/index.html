@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Mysql,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MySQL 事务管理">
+<meta name="keywords" content="Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql 事务">
+<meta property="og:url" content="http://yoursite.com/2020/03/14/Mysql-事务/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="MySQL 事务管理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-17T03:36:06.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql 事务">
+<meta name="twitter:description" content="MySQL 事务管理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/14/Mysql-事务/">
+
+
+
+
+
+  <title>Mysql 事务 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Mysql-事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql 事务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T16:27:23+08:00">
+                2020-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MySQL-事务管理"><a href="#MySQL-事务管理" class="headerlink" title="MySQL 事务管理"></a>MySQL 事务管理</h1><a id="more"></a>
+<h2 id="MySQL-事务特性（ACID"><a href="#MySQL-事务特性（ACID" class="headerlink" title="MySQL 事务特性（ACID)"></a>MySQL 事务特性（ACID)</h2><ul>
+<li><h3 id="原子性-Atomicity-一个事务看做一个整体，要么一起被执行，要么一起不被执行或被回滚"><a href="#原子性-Atomicity-一个事务看做一个整体，要么一起被执行，要么一起不被执行或被回滚" class="headerlink" title="原子性(Atomicity): 一个事务看做一个整体，要么一起被执行，要么一起不被执行或被回滚"></a>原子性(Atomicity): 一个事务看做一个整体，要么一起被执行，要么一起不被执行或被回滚</h3></li>
+<li><h3 id="一致性-Consistency-数据库总是从一个一致状态转变到另一个一致状态。"><a href="#一致性-Consistency-数据库总是从一个一致状态转变到另一个一致状态。" class="headerlink" title="一致性(Consistency):数据库总是从一个一致状态转变到另一个一致状态。"></a>一致性(Consistency):数据库总是从一个一致状态转变到另一个一致状态。</h3></li>
+<li><h3 id="隔离性-Isolation-多个事务并发执行的时候，一个事务的操作并不会影响另一个事务的操作。"><a href="#隔离性-Isolation-多个事务并发执行的时候，一个事务的操作并不会影响另一个事务的操作。" class="headerlink" title="隔离性(Isolation):多个事务并发执行的时候，一个事务的操作并不会影响另一个事务的操作。"></a>隔离性(Isolation):多个事务并发执行的时候，一个事务的操作并不会影响另一个事务的操作。</h3></li>
+<li><h3 id="持久性-Durability-一个事务如果被提交，那么这个事务的操作将被永久保存。"><a href="#持久性-Durability-一个事务如果被提交，那么这个事务的操作将被永久保存。" class="headerlink" title="持久性(Durability):一个事务如果被提交，那么这个事务的操作将被永久保存。"></a>持久性(Durability):一个事务如果被提交，那么这个事务的操作将被永久保存。</h3></li>
+</ul>
+<h3 id="区分原子性和一致性。"><a href="#区分原子性和一致性。" class="headerlink" title="区分原子性和一致性。"></a>区分原子性和一致性。</h3><ul>
+<li>原子性更注重的是事务的成功与否，即要么全部成功，要么全部失败</li>
+<li>而一致性更注重的时候事务执行过程中的数据可见性，只有执行前和结束后的数据状态可见，而中间阶段数据保持不可见状态。</li>
+</ul>
+<h3 id="一致性非锁定读-快照读"><a href="#一致性非锁定读-快照读" class="headerlink" title="一致性非锁定读 (快照读)"></a>一致性非锁定读 (快照读)</h3><p>即为了满足事务的一致性，通常会在$select$操作的时候，生成一个快照。读取快照中的数据。<br>而根据隔离级别 ，快照生成的时机也不相同，在读已提交（RC）状态中事务中的每次$select$都会去读取最新的表数据，即每次都能看的最新的已$commit$事务的操作，而可重复读(RR)级别中，只会记录事务中第一次select的快照，即无法读取到其他事务对表的操作。</p>
+<h2 id="MySQL-并发的四个问题"><a href="#MySQL-并发的四个问题" class="headerlink" title="MySQL 并发的四个问题"></a>MySQL 并发的四个问题</h2><h3 id="丢失更新"><a href="#丢失更新" class="headerlink" title="丢失更新"></a>丢失更新</h3><p>即两个事务同时进行写操作，而后面的事务将前面的事务进行覆盖。</p>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>一个事务读取了另一个事务正在写的操作，而另一个事务正好回滚了，那就是读到了脏数据</p>
+<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>就一个事务中两次读取数据不一致，即在两次读取中操作中，有其他事务进行了写操作并提交了。</p>
+<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>即一个事务两次读取中数据结构不一致(比如条数发生了变化)。</p>
+<h3 id="幻读和不可重复读的区别"><a href="#幻读和不可重复读的区别" class="headerlink" title="幻读和不可重复读的区别"></a>幻读和不可重复读的区别</h3><p>幻读的侧重点并不是读取的数据集不同，而是某一次的select操作是否能支持后续的业务操作。举个例子就是当我们要插入数据的时候，会先判断这个数据是否存在，如果不存在则插入，但是当我们判断不存在之后，进行插入操作，但是发现该数据存在，导致插入失败。这就是发生了幻读<br>不可重复读 侧重的是 读-读，而幻读侧重的是读-写。</p>
+<h3 id="在RR阶段避免幻读"><a href="#在RR阶段避免幻读" class="headerlink" title="在RR阶段避免幻读"></a>在RR阶段避免幻读</h3><p>通过对select操作手动加X锁(这也就是序列化级别隐式为我们做的一些事)。不管select查询的数据是否存在(因为行锁锁住的是索引，所以和是否存在数据实体并无关系) 如果存在就加上X锁，而不存在则加上GAP间隙锁。其他事务无法插入该索引的记录，避免幻读。</p>
+<h2 id="MySQL-隔离级别"><a href="#MySQL-隔离级别" class="headerlink" title="MySQL 隔离级别"></a>MySQL 隔离级别</h2><p>针对这四种并发问题，设置了四种隔离级别</p>
+<h3 id="读未提交-Read-Uncommited-RU"><a href="#读未提交-Read-Uncommited-RU" class="headerlink" title="读未提交(Read Uncommited RU)"></a>读未提交(Read Uncommited RU)</h3><p>即在写的操作时候，不允许其他事务进行写操作，避免了丢失更新</p>
+<h3 id="读已提交-Read-Commmited-RC"><a href="#读已提交-Read-Commmited-RC" class="headerlink" title="读已提交(Read Commmited RC)"></a>读已提交(Read Commmited RC)</h3><p>即在写操作的时候，不允许其他事务进行读写操作，避免了脏读和丢失更新</p>
+<h3 id="可重复读-Repeatable-Read-RR-默认隔离级别"><a href="#可重复读-Repeatable-Read-RR-默认隔离级别" class="headerlink" title="可重复读(Repeatable Read RR) (默认隔离级别)"></a>可重复读(Repeatable Read RR) (默认隔离级别)</h3><p>在写操作的时候，不允许其他事务读写，而在读操作的时候，不允许写操作，即避免了丢失更新，脏读，不可重复读</p>
+<h3 id="序列化-Serializable"><a href="#序列化-Serializable" class="headerlink" title="序列化(Serializable)"></a>序列化(Serializable)</h3><p>事务只能序列化执行，即一个一个执行，不允许并发执行</p>
+<h2 id="MySQL-锁机制"><a href="#MySQL-锁机制" class="headerlink" title="MySQL 锁机制"></a>MySQL 锁机制</h2><h3 id="锁的分类"><a href="#锁的分类" class="headerlink" title="锁的分类"></a>锁的分类</h3><p>首先按照锁的位置可以分为 表锁 和 行锁</p>
+<p>按照锁的操作类型可以分为 读锁(共享锁 S锁) 和 写锁(独占锁 X锁)</p>
+<h3 id="表锁-偏读"><a href="#表锁-偏读" class="headerlink" title="表锁(偏读)"></a>表锁(偏读)</h3><p>表锁偏向MyISAM引擎，开销小，开锁快，但并发低</p>
+<p>加锁方式: lock table [表名称] read(write);<br>解锁方式: unlock tables;<br>查询表锁: show open tables;</p>
+<p>读锁只会阻塞写操作，而写锁会阻塞读写操作。</p>
+<h3 id="行锁-偏写"><a href="#行锁-偏写" class="headerlink" title="行锁(偏写)"></a>行锁(偏写)</h3><p>主要用于InnoDB，开销大，加锁慢，会出现死锁，并发度高。<br>有两种锁类型</p>
+<ul>
+<li>独占锁 （X锁） 只允许加锁程序使用，其他任何操作都不会接受<br>NSERT、UPDATE 或DELETE 命令时，MySQL会自动使用独占锁<br>select…for update</li>
+<li>共享锁 （S锁） 允许其他程序进行读取，但不能修改<br>select..lock in share mode</li>
+</ul>
+<h3 id="间隙锁-GAP锁-Next-Key锁"><a href="#间隙锁-GAP锁-Next-Key锁" class="headerlink" title="间隙锁(GAP锁 Next-Key锁)"></a>间隙锁(GAP锁 Next-Key锁)</h3><p>首先是基于InnoDB引擎下，RR隔离级别select * from table where index = xx for update,又或者删除某条不存在的记录等会触发GAP锁<br>对于键值在条件范围内但并不存在的记录加锁，使得在锁定的时候无法插入范围内的任何数据。</p>
+<h3 id="MVCC-多版本并发控制"><a href="#MVCC-多版本并发控制" class="headerlink" title="MVCC(多版本并发控制)"></a>MVCC(多版本并发控制)</h3><p>为了解决读写冲突，保证数据库在高并发的情况下的吞吐量性能</p>
+<h4 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h4><p>首先是InnoDB引擎，隔离级别在RC或者是RR.<br>MVCC比单纯加行锁，开销小，效率高，即可以基于乐观锁也可以基于悲观锁。</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>首先是在InnoDB中基本行中会包含一些额外的信息，DATA_TRX_ID 表示当前更新这行的事务id，DATA_ROLL_PTR 表示一个指针，指向回滚数据的位置(undolog中)   DB_ROW_ID 隐藏单调递增id。</p>
+<p>每次数据更新的时候，Copy出当前版本随意修改，各个事务之间无干扰。<br>但是保存的时候，会比较版本号，如果成功就提交，失败则通过undolog 回滚。</p>
+<p>Innodb的MVCC实现方式如下：</p>
+<ol>
+<li><p>事务以排他锁的形式修改原始数据，</p>
+</li>
+<li><p>把修改前的数据存放于undo log，通过回滚指针与主数据关联</p>
+</li>
+<li><p>修改成功（commit）啥都不做，失败则恢复undo log中的数据（rollback）</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/13/生产者消费者模型-读者写者问题/" rel="next" title="生产者消费者模型+读者写者问题">
+                <i class="fa fa-chevron-left"></i> 生产者消费者模型+读者写者问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/14/Mysql-索引/" rel="prev" title="Mysql 索引">
+                Mysql 索引 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-事务管理"><span class="nav-number">1.</span> <span class="nav-text">MySQL 事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-事务特性（ACID"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL 事务特性（ACID)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性-Atomicity-一个事务看做一个整体，要么一起被执行，要么一起不被执行或被回滚"><span class="nav-number">1.1.1.</span> <span class="nav-text">原子性(Atomicity): 一个事务看做一个整体，要么一起被执行，要么一起不被执行或被回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性-Consistency-数据库总是从一个一致状态转变到另一个一致状态。"><span class="nav-number">1.1.2.</span> <span class="nav-text">一致性(Consistency):数据库总是从一个一致状态转变到另一个一致状态。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离性-Isolation-多个事务并发执行的时候，一个事务的操作并不会影响另一个事务的操作。"><span class="nav-number">1.1.3.</span> <span class="nav-text">隔离性(Isolation):多个事务并发执行的时候，一个事务的操作并不会影响另一个事务的操作。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久性-Durability-一个事务如果被提交，那么这个事务的操作将被永久保存。"><span class="nav-number">1.1.4.</span> <span class="nav-text">持久性(Durability):一个事务如果被提交，那么这个事务的操作将被永久保存。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区分原子性和一致性。"><span class="nav-number">1.1.5.</span> <span class="nav-text">区分原子性和一致性。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性非锁定读-快照读"><span class="nav-number">1.1.6.</span> <span class="nav-text">一致性非锁定读 (快照读)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-并发的四个问题"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL 并发的四个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#丢失更新"><span class="nav-number">1.2.1.</span> <span class="nav-text">丢失更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">1.2.2.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读"><span class="nav-number">1.2.3.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读"><span class="nav-number">1.2.4.</span> <span class="nav-text">幻读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读和不可重复读的区别"><span class="nav-number">1.2.5.</span> <span class="nav-text">幻读和不可重复读的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在RR阶段避免幻读"><span class="nav-number">1.2.6.</span> <span class="nav-text">在RR阶段避免幻读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-隔离级别"><span class="nav-number">1.3.</span> <span class="nav-text">MySQL 隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读未提交-Read-Uncommited-RU"><span class="nav-number">1.3.1.</span> <span class="nav-text">读未提交(Read Uncommited RU)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读已提交-Read-Commmited-RC"><span class="nav-number">1.3.2.</span> <span class="nav-text">读已提交(Read Commmited RC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可重复读-Repeatable-Read-RR-默认隔离级别"><span class="nav-number">1.3.3.</span> <span class="nav-text">可重复读(Repeatable Read RR) (默认隔离级别)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化-Serializable"><span class="nav-number">1.3.4.</span> <span class="nav-text">序列化(Serializable)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-锁机制"><span class="nav-number">1.4.</span> <span class="nav-text">MySQL 锁机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的分类"><span class="nav-number">1.4.1.</span> <span class="nav-text">锁的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁-偏读"><span class="nav-number">1.4.2.</span> <span class="nav-text">表锁(偏读)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行锁-偏写"><span class="nav-number">1.4.3.</span> <span class="nav-text">行锁(偏写)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#间隙锁-GAP锁-Next-Key锁"><span class="nav-number">1.4.4.</span> <span class="nav-text">间隙锁(GAP锁 Next-Key锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC-多版本并发控制"><span class="nav-number">1.4.5.</span> <span class="nav-text">MVCC(多版本并发控制)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作用范围"><span class="nav-number">1.4.5.1.</span> <span class="nav-text">作用范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">1.4.5.2.</span> <span class="nav-text">特点</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

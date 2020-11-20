@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多线程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="并发多线程 (1)">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发多线程(1)">
+<meta property="og:url" content="http://yoursite.com/2020/02/29/并发多线程-1/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="并发多线程 (1)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-13T03:33:32.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并发多线程(1)">
+<meta name="twitter:description" content="并发多线程 (1)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/29/并发多线程-1/">
+
+
+
+
+
+  <title>并发多线程(1) | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/29/并发多线程-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">并发多线程(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-29T20:59:35+08:00">
+                2020-02-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="并发多线程-1"><a href="#并发多线程-1" class="headerlink" title="并发多线程 (1)"></a>并发多线程 (1)</h1><a id="more"></a>
+<h2 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h2><ul>
+<li>进程是资源分配的基本单位，而线程是资源调度的基本单位。</li>
+<li>线程是进程的一个实体，同一个进程下的线程共享本进程的资源，比如地址空间，内存，I/O。。。</li>
+<li>线程的执行开销小，上下文切换快，原因是上下文切换只需要保存和设置少量的寄存器内容，而导致的缺点也是不利于资源的管理。</li>
+<li>线程一般不拥有系统资源，但是还是有一些自己独有的资源（ThreadLocal)</li>
+</ul>
+<h2 id="线程的四种新建方式"><a href="#线程的四种新建方式" class="headerlink" title="线程的四种新建方式"></a>线程的四种新建方式</h2><ul>
+<li>实现 Runable 接口</li>
+<li>继承 Thread 类</li>
+<li>实现 callable<t> 接口</t></li>
+<li>通过线程池 （Execute框架)</li>
+</ul>
+<h3 id="Runable-和-Thread-的比较"><a href="#Runable-和-Thread-的比较" class="headerlink" title="Runable 和 Thread 的比较"></a>Runable 和 Thread 的比较</h3><p>使用Runable 接口 更符合面向对象的基本思想，而且由于java不支持多继承 所以 实现接口比较便捷，而且Runable更容易实现资源的共享，多个线程去处理同一个资源。<br>Thread实现了Runnable接口并进行了扩展。</p>
+<h3 id="Runable-和-Callable-的比较"><a href="#Runable-和-Callable-的比较" class="headerlink" title="Runable 和 Callable 的比较"></a>Runable 和 Callable 的比较</h3><ul>
+<li>callable的方法是call() 有返回值，Runable 是 run(),无返回值</li>
+<li>call() 可以抛异常 而 run() 不能抛出异常</li>
+<li>执行Callable任务会返回一个Futher，Futher 能异步计算结果。</li>
+</ul>
+<h4 id="Futher接口"><a href="#Futher接口" class="headerlink" title="Futher接口"></a>Futher接口</h4><p>主要有五个方法</p>
+<ul>
+<li>get() 返回执行结果，如果未完成则阻塞.</li>
+<li>get(long,TIMEUNIT) 表示等待多少时间，就返回结果。</li>
+<li>isdone() 判断是否完成</li>
+<li>isCancel() 判断是否已经取消</li>
+<li>Cancel(boolean) 取消任务 返回true表示已经完成或者停止，false 表示无法停止。</li>
+</ul>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>将线程复用，将CPU 主要放在执行任务上，而不是新建销毁线程。</p>
+<h3 id="四种线程池的种类"><a href="#四种线程池的种类" class="headerlink" title="四种线程池的种类"></a>四种线程池的种类</h3><ul>
+<li>newFixedThreadPool 新建一个固定大小的线程池</li>
+<li>newCacheThreadPool 新建一个核心线程为0，最大线程数无限制的缓冲线程池，适合用于大量频率高时间短的任务</li>
+<li>newSingleThreadExecutor 新建一个单线程线程池</li>
+<li>newScheduledThreadPool 新建一个计划线程池<ul>
+<li>scheduleWithFixedDelay(runable,time1,time2,TIMEUNIT) 启动time1后执行，每隔time2执行一次<h3 id="线程池的参数"><a href="#线程池的参数" class="headerlink" title="线程池的参数"></a>线程池的参数</h3></li>
+</ul>
+</li>
+<li>corePoolSize 核心线程数</li>
+<li>maximumPoolSize 最大线程数</li>
+<li>keepAliveTime 当线程数大于核心线程数时，超过keepAliveTime时间后将会冻结</li>
+<li>unit 时间单位</li>
+<li>workQueue 阻塞队列<ul>
+<li>ArrayBlockingQueue 使用一个数组作为存储空间 但是put和take 使用同一把锁。</li>
+<li>LinkedBlockingQueue 动态分配链表 put和take 使用两把显示锁，但是增加了GC的负担。</li>
+<li>synchronousQueue 一种无缓冲的等待队列，容量为0，不存储任务,可以设置fair。</li>
+</ul>
+</li>
+<li>handle 拒绝策略<ul>
+<li>AbortPolicy 抛出RejectedExecutionException异常</li>
+<li>CallerRunsPolicy 让调用的线程去完成</li>
+<li>DiscardOldsetPolicy 丢弃队列中最老的一个任务 ，通过队列维护</li>
+<li>DiscardPolicy 直接丢弃任务<h3 id="线程池的五种状态"><a href="#线程池的五种状态" class="headerlink" title="线程池的五种状态"></a>线程池的五种状态</h3>线程池的状态 通过AtomicInteger ctl变量进行定义。高三位表示状态，29位表示线程池中的任务数量</li>
+</ul>
+</li>
+<li>RUNING 表示 线程池可以接受任务,并对已接受的任务进行处理</li>
+<li>SHUTDOWN 表示 执行了shutdown() 函数，停止接受任务，但是对还是对已接受的任务进行处理，并将闲置的线程进行中断，异步操作。</li>
+<li>STOP 表示 执行了 shutdownNow() 函数，停止接受任务，对于正在执行的任务进行中断，并对workqueue 进行清空</li>
+<li>TIDYING 所有任务终止，而且ctl中的任务数量为0</li>
+<li>TERMINATED  线程池彻底终止，TIDYING状态执行完teminated()函数变成teminated状态<br><b>这里特别点出在执行完shutdown() 的命令后使用awaitTeminated(time,timeunit)或者isTeminated() 判断是否全部线程已经完成</b></li>
+</ul>
+<h3 id="线程池的两种提交方法"><a href="#线程池的两种提交方法" class="headerlink" title="线程池的两种提交方法"></a>线程池的两种提交方法</h3><ul>
+<li>submit 既能提交Runable也能提交Callable，不会抛出异常，异常通过返回的futher 的get() 抛出异常 顶层接口为ExecutorServer</li>
+<li>execute 只能提交Runable，会抛出异常 顶层接口Executor</li>
+</ul>
+<h3 id="线程池-常见的监控API"><a href="#线程池-常见的监控API" class="headerlink" title="线程池 常见的监控API"></a>线程池 常见的监控API</h3><ul>
+<li>getQueue().size() 查看在排队的线程数</li>
+<li>getActiveCount() 获得当前活动线程数</li>
+<li>getCompiledTaskCount() 已经完成的线程数</li>
+<li>getTaskCount() 全部线程数</li>
+</ul>
+<h2 id="线程的基本操作"><a href="#线程的基本操作" class="headerlink" title="线程的基本操作"></a>线程的基本操作</h2><h3 id="新建线程"><a href="#新建线程" class="headerlink" title="新建线程"></a>新建线程</h3><p>通过new新建一个线程，但是线程并没有工作，只是创造了一个实体。<br>如果不使用start(),直接使用run(),只是在当前线程上调用这个函数，执行操作。</p>
+<h4 id="设置线程的优先级-setPriority-默认5-范围1-10"><a href="#设置线程的优先级-setPriority-默认5-范围1-10" class="headerlink" title="设置线程的优先级 setPriority() 默认5 范围1-10"></a>设置线程的优先级 setPriority() 默认5 范围1-10</h4><h4 id="设置守护线程-setDemon-true"><a href="#设置守护线程-setDemon-true" class="headerlink" title="设置守护线程 setDemon(true)"></a>设置守护线程 setDemon(true)</h4><h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><p>在线程中使用interrupt()函数 将线程的中断状态设置成true，对于可取消的阻塞线程，在线程中断后，使用wait(),join(),sleep()后会InterruptedException异常。<br>Java 中断是一种协作机制，他要求线程在合适的时机中断自己的操作，而不是强制中断操作。<br>还有两种方式，isInterrupt() 判断线程是否中断，interrupted() 先执行isInterrupt(),返回是否中断，然后执行interrupt(),修改中断状态。</p>
+<h3 id="线程阻塞"><a href="#线程阻塞" class="headerlink" title="线程阻塞"></a>线程阻塞</h3><p>线程阻塞不等于线程中断，线程阻塞才能够让线程真正的停止不动。<br>juc提供了LockSupport 并发工具类，里面有两个方法 park(),unpark(),进行阻塞和唤醒线程。</p>
+<h3 id="join和yeild"><a href="#join和yeild" class="headerlink" title="join和yeild"></a>join和yeild</h3><p>yeild 是一个静态的native方法(非Java实现的方法) 是让自己获得的cpu使用时间释放掉，然后大家一起竞争这个时间，当然自己也可能再次抢到。<br>而join 是等待其他方法结束，在执行我的代码，是在执行过程中指定一个线程比自己先完成，然后自己再完成(abc顺序执行问题)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/25/Java集合框架/" rel="next" title="Java集合框架">
+                <i class="fa fa-chevron-left"></i> Java集合框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/02/设计模式入门/" rel="prev" title="设计模式入门">
+                设计模式入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发多线程-1"><span class="nav-number">1.</span> <span class="nav-text">并发多线程 (1)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程和进程的区别"><span class="nav-number">1.1.</span> <span class="nav-text">线程和进程的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的四种新建方式"><span class="nav-number">1.2.</span> <span class="nav-text">线程的四种新建方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Runable-和-Thread-的比较"><span class="nav-number">1.2.1.</span> <span class="nav-text">Runable 和 Thread 的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runable-和-Callable-的比较"><span class="nav-number">1.2.2.</span> <span class="nav-text">Runable 和 Callable 的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Futher接口"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Futher接口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">1.3.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#四种线程池的种类"><span class="nav-number">1.3.1.</span> <span class="nav-text">四种线程池的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的参数"><span class="nav-number">1.3.2.</span> <span class="nav-text">线程池的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的五种状态"><span class="nav-number">1.3.3.</span> <span class="nav-text">线程池的五种状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的两种提交方法"><span class="nav-number">1.3.4.</span> <span class="nav-text">线程池的两种提交方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池-常见的监控API"><span class="nav-number">1.3.5.</span> <span class="nav-text">线程池 常见的监控API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的基本操作"><span class="nav-number">1.4.</span> <span class="nav-text">线程的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建线程"><span class="nav-number">1.4.1.</span> <span class="nav-text">新建线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置线程的优先级-setPriority-默认5-范围1-10"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">设置线程的优先级 setPriority() 默认5 范围1-10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置守护线程-setDemon-true"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">设置守护线程 setDemon(true)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程中断"><span class="nav-number">1.4.2.</span> <span class="nav-text">线程中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程阻塞"><span class="nav-number">1.4.3.</span> <span class="nav-text">线程阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join和yeild"><span class="nav-number">1.4.4.</span> <span class="nav-text">join和yeild</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

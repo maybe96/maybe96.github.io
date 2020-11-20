@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="比赛,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="又水了一场，太菜了">
+<meta name="keywords" content="比赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛客练习赛43">
+<meta property="og:url" content="http://yoursite.com/2019/04/06/牛客练习赛43/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="又水了一场，太菜了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-09T10:27:25.997Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="牛客练习赛43">
+<meta name="twitter:description" content="又水了一场，太菜了">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/06/牛客练习赛43/">
+
+
+
+
+
+  <title>牛客练习赛43 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/牛客练习赛43/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">牛客练习赛43</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-06T11:42:53+08:00">
+                2019-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>又水了一场，太菜了<br><a id="more"></a></p>
+<h2 id="A题-Tachibana-Kanade-Loves-School"><a href="#A题-Tachibana-Kanade-Loves-School" class="headerlink" title="A题  Tachibana Kanade Loves School"></a>A题  Tachibana Kanade Loves School</h2><p><a href="https://ac.nowcoder.com/acm/contest/548/A" target="_blank" rel="noopener">链接</a></p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>这次 Tachibana Kanade 来到了一个神奇的学校参观，她发现了一些有趣的事情。<br>这个学校的所有人脾气都十分的古怪：每个人都有两个属性$a_i$和$b_i$每个人都想和除他以外所有 j 满足$a_i+b_i=a_j$的人搞好关系。我们定义一对人的关系是好的，当且仅当这两个人互相想与对方搞好关系。<br>现在给出这 n 个人的属性，Tachibana Kanade 想知道，这些人会不会有至少一对人的关系是好的。 </p>
+<h3 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h3><p>第一行输入一个整数 n ，表示人的个数。<br>接下来 n 行，每行两个整数 $ a_i b_i $，意义如「题目描述」所述。</p>
+<h3 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h3><p>如果存在至少一对人的关系是好的，那么输出 <code>YE5</code>，否则输出 <code>N0</code>。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这题本来非常简单，非常签到，就$ O(n^2) $复杂度搞下就可以了<br>但是坑点在于输出，电子竞技不需要视力。<br>N0 wa了一发，然后YE5 也wa了一发</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct node&#123;</span><br><span class="line">    int a,b;</span><br><span class="line">    int sum;</span><br><span class="line">&#125;num[105];</span><br><span class="line">int n;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        cin&gt;&gt;num[i].a&gt;&gt;num[i].b;</span><br><span class="line">        num[i].sum=num[i].a+num[i].b;</span><br><span class="line">    &#125;</span><br><span class="line">    int flag=0;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        for(int j=1;j&lt;=n;j++)&#123;</span><br><span class="line">            if(i!=j)&#123;</span><br><span class="line">                if(num[i].sum==num[j].a&amp;&amp;num[i].a==num[j].sum)&#123;</span><br><span class="line">                    flag=1;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(flag) break;</span><br><span class="line">    &#125;</span><br><span class="line">    if(flag) cout&lt;&lt;&quot;YE5&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;N0&quot;&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="B题-Tachibana-Kanade-Loves-Probability"><a href="#B题-Tachibana-Kanade-Loves-Probability" class="headerlink" title="B题 Tachibana Kanade Loves Probability"></a>B题 Tachibana Kanade Loves Probability</h2><p><a href="https://ac.nowcoder.com/acm/contest/548/B" target="_blank" rel="noopener">链接</a></p>
+<h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>立华奏在学习初中数学的时候遇到了这样一道大水题：<br>“设箱子内有 n 个球，其中给 m 个球打上标记，设一次摸球摸到每一个球的概率均等，求一次摸球摸到打标记的球的概率”<br>“emmm…语言入门题”<br>但是她改了一下询问方式：设最终的答案为 p ,请输出 p 小数点后 $ K_1 $到$ K_2 $位的所有数字（若不足则用 0 补齐）</p>
+<h3 id="输入描述-1"><a href="#输入描述-1" class="headerlink" title="输入描述"></a>输入描述</h3><p>第一行一个整数 T,表示有 T 组数据。<br>接下来每行包含四个整数 $ n,m,K_1,K_2 $，意义如「题目描述」所示。</p>
+<h3 id="输出描述-1"><a href="#输出描述-1" class="headerlink" title="输出描述"></a>输出描述</h3><p>输出 T 行，每行输出$ K_2-K_1+1 $个数，表示答案。<br>注意同行的数字中间不需要用空格隔开。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>一开始我是直接模拟的手算竖式除法，但是由于$K_2$的范围最大是$10^9$，所以铁定超时了。<br>然后就必须取把，$ K_1 $之前的余数快速求出来，然后再模拟才行，那就在之前用快速幂取模迅速求出第$ K_1 $的余数。</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll quick_mod(ll a,ll b,ll mod)&#123;</span><br><span class="line">    ll ans=1;</span><br><span class="line">    while(b)&#123;</span><br><span class="line">        if(b&amp;1) ans=ans*a%mod;</span><br><span class="line">        a=a*a%mod;</span><br><span class="line">        b&gt;&gt;=1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans%mod;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    ll n,m,a,b;</span><br><span class="line">    ios::sync_with_stdio(false);</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    while(t--)&#123;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;m&gt;&gt;a&gt;&gt;b;</span><br><span class="line">        ll ans=quick_mod(10,a-1,m);</span><br><span class="line">        ans=ans*n%m;</span><br><span class="line">        for(int i=0;i&lt;b-a+1;i++)&#123;</span><br><span class="line">            ans*=10;</span><br><span class="line">            cout&lt;&lt;ans/m;</span><br><span class="line">            ans=ans%m;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C题-Tachibana-Kanade-Loves-Review"><a href="#C题-Tachibana-Kanade-Loves-Review" class="headerlink" title="C题 Tachibana Kanade Loves Review"></a>C题 Tachibana Kanade Loves Review</h2><p><a href="https://ac.nowcoder.com/acm/contest/548/C" target="_blank" rel="noopener">链接</a></p>
+<h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>立华奏是一个刚刚开始学习 OI 的萌新。<br>最近，实力强大的Qingyu 当选了 IODS 9102 的出题人。众所周知， IODS 是一场极其毒瘤的比赛。为了在这次比赛中取得好的成绩，立华奏决定学习可能考到的每一个知识点。<br>在Qingyu 的博客中，立华奏得知这场比赛总共会考察选手 n 个知识点。此前，立华奏已经依靠自学学习了其中 k 个知识点。接下来，立华奏需要学习其他的知识点，每学习一个单独的知识点，需要消耗的时间为 $ T_i $<br>Ti 天。同时，某些知识点之间存在联系，可以加速学习的过程。经过计算，立华奏一共发现了其中 m 种联系，第 i 种联系可以表示为$ (X_i,Y_i,H_i) $，其含义为“在掌握了第 $ X_i $ 个知识点和第 $ Y_i $ 个知识点中任意一个后，学习$H_i$ 天即可掌握另一个知识点”。<br>留给立华奏的时间所剩无几，只有 t 天，因此，她想知道自己能不能在这 t 天内学习完成所有的知识点。</p>
+<h3 id="输入描述-2"><a href="#输入描述-2" class="headerlink" title="输入描述"></a>输入描述</h3><p>本题输入量较大，请注意使用效率较高的读入方式<br>输入的第一行包含四个整数 n, m, k, t，含义见上所述。<br>接下来一行，包含 n 个整数，依次表示$T_1,T_2,⋯,T_n$<br>接下来一行，包含 k 个整数，表示立华奏已经学习过的知识点。如果 k=0，则此处为一空行。<br>接下来 m 行，每行 3 个整数 $ X_i,Y_i,H_i $，描述一种联系。</p>
+<h3 id="输出描述-2"><a href="#输出描述-2" class="headerlink" title="输出描述"></a>输出描述</h3><p>如果立华奏能够学习完所有的知识点，输出一行 Yes。否则输出 No</p>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>最小生成树<br>我们需要先制作一个点（设置为0） 然后对于直接学习的没有任何前置的就连上0到该点的边，否则就设置为0<br>然后就求最小生成树<br>但是这题很坑，很坑 卡常 首先要用快速读入，然后还需要在并查集的合并上使用并发式合并然后压缩路径</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=6e6+5;</span><br><span class="line">inline int read() &#123;</span><br><span class="line">    char ch = getchar(); int x = 0, f = 1;</span><br><span class="line">    while(ch &lt; &apos;0&apos; || ch &gt; &apos;9&apos;) &#123;</span><br><span class="line">        if(ch == &apos;-&apos;) f = -1;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125; while(&apos;0&apos; &lt;= ch &amp;&amp; ch &lt;= &apos;9&apos;) &#123;</span><br><span class="line">        x = x * 10 + ch - &apos;0&apos;;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125; return x * f;</span><br><span class="line">&#125;</span><br><span class="line">struct node&#123;</span><br><span class="line">    int u,v,w;</span><br><span class="line">&#125;num[maxn];</span><br><span class="line">int n,m;</span><br><span class="line">int ans;</span><br><span class="line">const int mm=1e6+5;</span><br><span class="line">int parent[mm];</span><br><span class="line">int Rank[mm];</span><br><span class="line">int find(int x)&#123;</span><br><span class="line">    if(parent[x]==-1) return x;</span><br><span class="line">    return find(parent[x]);</span><br><span class="line">&#125;</span><br><span class="line">void join(int x,int y)&#123;</span><br><span class="line">    x=find(x);</span><br><span class="line">    y=find(y);</span><br><span class="line">    if(x==y) return ;</span><br><span class="line">    if(Rank[x]&lt;Rank[y]) parent[x]=y;</span><br><span class="line">    else &#123;</span><br><span class="line">        parent[y]=x;</span><br><span class="line">        if(Rank[x]==Rank[y]) Rank[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int cmp(node x,node y)&#123;</span><br><span class="line">    return x.w&lt;y.w;</span><br><span class="line">&#125;</span><br><span class="line">void krusal()&#123;</span><br><span class="line">    memset(parent,-1,sizeof(parent));</span><br><span class="line">    sort(num,num+m+n,cmp);</span><br><span class="line">    //for(int i=0;i&lt;m+n;i++) cout&lt;&lt;num[i].u&lt;&lt;&apos; &apos;&lt;&lt;num[i].v&lt;&lt;&apos; &apos;&lt;&lt;num[i].w&lt;&lt;endl;</span><br><span class="line">    for(int i=0;i&lt;m+n;i++)&#123;</span><br><span class="line">        int s=find(num[i].u),t=find(num[i].v);</span><br><span class="line">        if(s!=t)&#123;</span><br><span class="line">            ans+=num[i].w;</span><br><span class="line">            join(s,t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    m=read();</span><br><span class="line">    int k=read();</span><br><span class="line">    int t=read();</span><br><span class="line">    for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        int q=read();</span><br><span class="line">        num[i-1].u=0;</span><br><span class="line">        num[i-1].v=i;</span><br><span class="line">        num[i-1].w=q;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">        int q=read();</span><br><span class="line">        num[q-1].w=0;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=n;i&lt;n+m;i++)&#123;</span><br><span class="line">        int a=read(),b=read(),c=read();</span><br><span class="line">        num[i].u=a;</span><br><span class="line">        num[i].v=b;</span><br><span class="line">        num[i].w=c;</span><br><span class="line">    &#125;</span><br><span class="line">    krusal();</span><br><span class="line">    //cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    if(ans&lt;=t) cout&lt;&lt;&quot;Yes&quot;&lt;&lt;endl;</span><br><span class="line">    else cout&lt;&lt;&quot;No&quot;&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="F题-Tachibana-Kanade-Loves-Game"><a href="#F题-Tachibana-Kanade-Loves-Game" class="headerlink" title="F题 Tachibana Kanade Loves Game"></a>F题 Tachibana Kanade Loves Game</h2><p><a href="https://ac.nowcoder.com/acm/contest/548/F" target="_blank" rel="noopener">链接</a></p>
+<h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>立华奏是一个天天打比赛的萌新。</p>
+<p>省选将至，萌新立华奏深知自己没有希望进入省队，因此开始颓废。她正在颓废一款名为《IODS 9102》的游戏。</p>
+<p>在游戏中，立华奏拥有 k 点血量，而她的对手拥有 q 点血量。当她的血量变为 0 时，游戏便结束了；同理，如果对方的血量变为 0，立华奏就获胜了。在立华奏手中，有 n 种武器，编号分别为1,2,⋯,n，每一种武器在使用后，都能让对方受到 1 点伤害，且此后不得再次使用这个武器。同时，对方拥有m−1 种反击魔咒，编号分别为 2,3,4,⋯,m（如果 m = 1，则可认为此时不具有反击魔咒）。如果立华奏在使用第 i 种武器攻击对方时，对方恰好有编号为 j 的魔咒，且$j∣i$， 那么立华奏会受到 1 点伤害（注意此时，攻击仍然是有效的，即对方的血量仍然会减少 1），同时对方也可以再次使用这个反击魔咒。</p>
+<p>由于立华奏是个萌新，因此对方保证不会主动攻击立华奏 。</p>
+<p>现在，立华奏想要知道，自己是否存在一种攻击方案，使得自己取得胜利。</p>
+<h3 id="输入描述-3"><a href="#输入描述-3" class="headerlink" title="输入描述"></a>输入描述</h3><p>输入包含多组数据。</p>
+<p>输入的第一行包含一个整数 T，表示数据组数。</p>
+<p>接下来 T 行，每行包含四个整数 k, q, n, m，描述一组数据。</p>
+<h3 id="输出描述-3"><a href="#输出描述-3" class="headerlink" title="输出描述"></a>输出描述</h3><p>输出 T 行，每行描述一组数据的解。如果本组数据中，立华奏存在必胜策略，则输出 Yes，否则输出 QAQ。</p>
+<p>你可以认为数据保证不会出现平局的情形</p>
+<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h3><p>容斥，或者直接暴力算出[2,m]之间的素数在n里面的数量，然后用n减</p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int num[]=&#123;2,3,5,7,11,13,17,19&#125;;</span><br><span class="line">    ll n,m,k,p;</span><br><span class="line">    int t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    while(t--)&#123;</span><br><span class="line">    cin&gt;&gt;k&gt;&gt;p&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    for(int i=0;num[i]&lt;=m;i++)&#123;</span><br><span class="line">        n-=n/num[i];</span><br><span class="line">    &#125;</span><br><span class="line">        if(k&amp;&amp;k+n&gt;p) cout&lt;&lt;&quot;Yes&quot;&lt;&lt;endl;</span><br><span class="line">        else cout&lt;&lt;&quot;QAQ&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/比赛/" rel="tag"># 比赛</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/05/求逆序数——树状数组/" rel="next" title="求逆序数——树状数组">
+                <i class="fa fa-chevron-left"></i> 求逆序数——树状数组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/09/codeforce-global-round-2/" rel="prev" title="codeforce global round 2">
+                codeforce global round 2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A题-Tachibana-Kanade-Loves-School"><span class="nav-number">1.</span> <span class="nav-text">A题  Tachibana Kanade Loves School</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入描述"><span class="nav-number">1.2.</span> <span class="nav-text">输入描述:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出描述"><span class="nav-number">1.3.</span> <span class="nav-text">输出描述:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.5.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B题-Tachibana-Kanade-Loves-Probability"><span class="nav-number">2.</span> <span class="nav-text">B题 Tachibana Kanade Loves Probability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入描述-1"><span class="nav-number">2.2.</span> <span class="nav-text">输入描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出描述-1"><span class="nav-number">2.3.</span> <span class="nav-text">输出描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">2.4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.5.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C题-Tachibana-Kanade-Loves-Review"><span class="nav-number">3.</span> <span class="nav-text">C题 Tachibana Kanade Loves Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入描述-2"><span class="nav-number">3.2.</span> <span class="nav-text">输入描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出描述-2"><span class="nav-number">3.3.</span> <span class="nav-text">输出描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-2"><span class="nav-number">3.4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">3.5.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F题-Tachibana-Kanade-Loves-Game"><span class="nav-number">4.</span> <span class="nav-text">F题 Tachibana Kanade Loves Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-3"><span class="nav-number">4.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入描述-3"><span class="nav-number">4.2.</span> <span class="nav-text">输入描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出描述-3"><span class="nav-number">4.3.</span> <span class="nav-text">输出描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-3"><span class="nav-number">4.4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-3"><span class="nav-number">4.5.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

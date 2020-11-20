@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="设计模式入门单例模式 工厂模式 装饰器模式 以及 代理模式">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式入门">
+<meta property="og:url" content="http://yoursite.com/2020/03/02/设计模式入门/index.html">
+<meta property="og:site_name" content="maybe96&#39;blog">
+<meta property="og:description" content="设计模式入门单例模式 工厂模式 装饰器模式 以及 代理模式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-04T07:23:41.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式入门">
+<meta name="twitter:description" content="设计模式入门单例模式 工厂模式 装饰器模式 以及 代理模式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/02/设计模式入门/">
+
+
+
+
+
+  <title>设计模式入门 | maybe96'blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">maybe96'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/02/设计模式入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maybe96">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="maybe96'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设计模式入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-02T20:36:58+08:00">
+                2020-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="设计模式入门"><a href="#设计模式入门" class="headerlink" title="设计模式入门"></a>设计模式入门</h1><p>单例模式 工厂模式 装饰器模式 以及 代理模式<br><a id="more"></a></p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>首先单例模式</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>构造器私有</li>
+<li>对外提供静态的获取实例的静态方法</li>
+<li>确保反序列换时不会重新构建对象<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><h4 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h4>线程不安全，延迟初始化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Lazy_single &#123;</span><br><span class="line">    private static Lazy_single lazySingle;</span><br><span class="line">    private Lazy_single()&#123;&#125;</span><br><span class="line">    public static Lazy_single getInstance()&#123;</span><br><span class="line">        if(lazySingle == null)&#123;</span><br><span class="line">            lazySingle = new Lazy_single();</span><br><span class="line">        &#125;</span><br><span class="line">        return lazySingle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h4><p>线程安全，一开始就初始化，容易产生垃圾<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Hungry_single &#123;</span><br><span class="line">    private static Hungry_single hungrySingle = new Hungry_single();</span><br><span class="line">    private Hungry_single()&#123;&#125;</span><br><span class="line">    public static Hungry_single getInstance()&#123;</span><br><span class="line">        return hungrySingle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="双检锁模式"><a href="#双检锁模式" class="headerlink" title="双检锁模式"></a>双检锁模式</h3><p>线程安全，延迟初始化<br>特点：</p>
+<ul>
+<li>如果直接对懒汉的获取函数直接加synchronized 会使得获取变得很缓慢，因为只有初始化的时候才需要加锁，但是你对整个获取函数都加锁。</li>
+<li><p>为啥在里面要加一个if判断，是因为如果多线程，同时去初始化，创建对象，当两个线程同时经过了第一个if判断，然后一个线程加锁，一个线程阻塞了，然后创建好了之后，另一个线程唤醒，但是会继续进行创建对象，这样就不存在这一特点(该类只能返回一个实例)</p>
+</li>
+<li><p>对于私有静态变量 进行了volatile ，是为了禁止重排序问题。<br>关于这个问题，要对new 这个 方法进行分析<br>new一个对象并不是原子性的<br>而是通过3步进行新建的<br>1.从内存空间划出一段空间 2.调用构造函数来初始化成员变量 3.将instance指向内存空间。<br>但是2,3 是可以乱序的，但是如果乱序了，在多线程中就可能会出错，因为当你一个线程instance 指向了内存空间了之后，另一个线程去获取的时候，会发现instance已经指向了一片区域，故而会导致异常的产生。（DCL问题)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Double_checkLock &#123;</span><br><span class="line">    private static volatile Double_checkLock doubleCheckLock = null;</span><br><span class="line">    private Double_checkLock()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    public static Double_checkLock getInstance()&#123;</span><br><span class="line">        if(doubleCheckLock == null)&#123;</span><br><span class="line">            synchronized (Double_checkLock.class)&#123;</span><br><span class="line">                if(doubleCheckLock == null)&#123;</span><br><span class="line">                    doubleCheckLock = new Double_checkLock();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return doubleCheckLock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>静态内部类<br>第四种方式是通过静态内部类去创建对象<br>即保证了线程安全，也延时初始化了<br>只有当调用getinstance 方法的时候 才会去初始化instance<br>保证线程安全的方法，参考<a href="https://blog.csdn.net/mnb65482/article/details/80458571" target="_blank" rel="noopener">博客</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Static_internal &#123;</span><br><span class="line">    private Static_internal()&#123;&#125;</span><br><span class="line">    private static class Instance &#123;</span><br><span class="line">        private static Static_internal internal= new Static_internal(); //静态内部类在外部类加载的时候已经在内存中准备好了，但是没有执行</span><br><span class="line">        //</span><br><span class="line">    &#125;</span><br><span class="line">    public static Static_internal getInstance()&#123;</span><br><span class="line">        return Instance.internal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>枚举</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public enum SingleTon&#123;</span><br><span class="line">  INSTANCE;</span><br><span class="line">        public void method()&#123;</span><br><span class="line">        //TODO</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p>主要是为了保证开闭原则(即对拓展开放,修改闭合)，如果要添加一个产品，每次都要对工厂类进行修改（简单工厂模式)，就违背了开闭原则，所以使用了工厂方法模式。<br>首先就是先使用两个抽象类，一个表示产品，一个表示工厂。<br>然后产品子类全部都由工厂子类生产出来即可。<br>这样如果要新建一个产品，只需要将产品继承产品抽象类，新建一个工厂继承抽象工厂类即可。在客户端只需要知道所要产品的具体工厂即可。但是每增加一个产品，就需要新建一个具体工厂类和产品类，增加了系统的复杂度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Factory &#123;</span><br><span class="line">    public abstract &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; name);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">public abstract class Product &#123;</span><br><span class="line">    public abstract void product();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">public class Product1 extends Product &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void product() &#123;</span><br><span class="line">        System.out.println(&quot;Product1 are producing&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void product_method1()&#123;</span><br><span class="line">        System.out.println(&quot;Product_method1&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Product2 extends Product &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void product() &#123;</span><br><span class="line">        System.out.println(&quot;Prduct2 are producing&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void product_method2()&#123;</span><br><span class="line">        System.out.println(&quot;product_method2&quot;);</span><br><span class="line">    &#125;//这些方法都是不能调用的了，因为多态的特性，不能使用子类特有的成员属性和子类特有的成员方法。</span><br><span class="line">&#125;</span><br><span class="line">public class ConFactory extends Factory &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public &lt;T extends Product&gt; T createProduct(Class&lt;T&gt; name) &#123;</span><br><span class="line">        Product product = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            product = (Product) Class.forName(name.getName()).getDeclaredConstructor().newInstance(); // Java9 开始 不推荐直接使用newInstance()</span><br><span class="line">            //而是使用getDeclareConstructor().newInstance()</span><br><span class="line">        &#125; catch (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return (T) product;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">	// write your code here</span><br><span class="line">        Factory factory = new ConFactory();</span><br><span class="line">        Product product1 = factory.createProduct(Product1.class);</span><br><span class="line">        product1.product();</span><br><span class="line">        Product product2 = factory.createProduct(Product2.class);</span><br><span class="line">        product2.product();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h2><p>一般我们对原有对象的功能不满意或者是想要增强，不能直接修改原有对象，违背了开闭原则。<br>有三种方法：</p>
+<ul>
+<li>继承 子类进行拓展</li>
+<li>装饰器模式 通过包装的方式进行增强</li>
+<li>代理模式 </li>
+</ul>
+<p>这里我们先开始装饰器模式<br>首先是装饰器特点</p>
+<ul>
+<li>与被装饰对象拥有相同的接口</li>
+<li>拥有一个装饰对象（组合）</li>
+<li>通过重写增强对象功能<br>比继承更加灵活，可以通过多种装饰类进行不同的组合达到想要的效果，但是不利于排错，需要逐级排查，而且增加了很多细小的对象，增加了系统的复杂度。<br>实际上 适配器模式的一种变种，不同是在适配器模式需要实现另一个接口，而装饰器模式实现该对象的接口。</li>
+</ul>
+<p>常用的场景就是io操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader in1 = new BufferedReader(new InputStreamReader(new FileInputStream(file)));//字符流</span><br><span class="line"> DataInputStream in2 = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));//字节流</span><br><span class="line">　　// DataInputStream-从数据流读取字节，并将它们装换为正确的基本类型值或字符串</span><br><span class="line">　　// BufferedInputStream-可以通过减少读写次数来提高输入和输出的速度</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class Decorator extends Sourcable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    void output() &#123;</span><br><span class="line">        System.out.println(&quot;进行操作&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Decorator1 extends Decorator &#123;</span><br><span class="line">    private Decorator decorator;</span><br><span class="line"></span><br><span class="line">    public Decorator1(Decorator decorator) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.decorator = decorator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    void output() &#123;</span><br><span class="line">        System.out.println(&quot;第一个装饰器前:&quot;);</span><br><span class="line">        decorator.output();</span><br><span class="line">        System.out.println(&quot;第一个装饰器后:&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Decorator2 extends Decorator &#123;</span><br><span class="line">    private Decorator decorator;</span><br><span class="line">    public Decorator2(Decorator decorator) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.decorator = decorator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    void output() &#123;</span><br><span class="line">        System.out.println(&quot;第二个装饰器前:&quot;);</span><br><span class="line">        decorator.output();</span><br><span class="line">        System.out.println(&quot;第二个装饰前后:&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Decorator3 extends  Decorator &#123;</span><br><span class="line">    Decorator decorator;</span><br><span class="line"></span><br><span class="line">    public Decorator3(Decorator decorator) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.decorator = decorator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    void output() &#123;</span><br><span class="line">        System.out.println(&quot;第三个装饰器前:&quot;);</span><br><span class="line">        decorator.output();</span><br><span class="line">        System.out.println(&quot;第三个装饰器后:&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/29/并发多线程-1/" rel="next" title="并发多线程(1)">
+                <i class="fa fa-chevron-left"></i> 并发多线程(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/04/Java-虚拟机/" rel="prev" title="Java 虚拟机">
+                Java 虚拟机 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">maybe96</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式入门"><span class="nav-number">1.</span> <span class="nav-text">设计模式入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">1.1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">1.1.2.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#懒汉模式"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">懒汉模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#饿汉模式"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">饿汉模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双检锁模式"><span class="nav-number">1.1.3.</span> <span class="nav-text">双检锁模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">1.2.</span> <span class="nav-text">工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法模式"><span class="nav-number">1.2.1.</span> <span class="nav-text">工厂方法模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器模式"><span class="nav-number">1.3.</span> <span class="nav-text">装饰器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理模式"><span class="nav-number">1.4.</span> <span class="nav-text">代理模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maybe96</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>
