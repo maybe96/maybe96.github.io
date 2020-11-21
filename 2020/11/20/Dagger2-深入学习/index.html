@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="对于Dagger 的深入探究依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象 &amp;lt;!—more—&amp;gt; 一. Dagger 原理首先有一个比喻很形象，Dagger 进行依赖注入相当于，@Interj 就是 的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最">
+<meta name="description" content="对于Dagger 的深入探究依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="maybe96&#39;blog">
 <meta property="og:url" content="http://yoursite.com/2020/11/20/Dagger2-深入学习/index.html">
 <meta property="og:site_name" content="maybe96&#39;blog">
-<meta property="og:description" content="对于Dagger 的深入探究依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象 &amp;lt;!—more—&amp;gt; 一. Dagger 原理首先有一个比喻很形象，Dagger 进行依赖注入相当于，@Interj 就是 的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最">
+<meta property="og:description" content="对于Dagger 的深入探究依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860417347_taKTrF.jpg">
 <meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860454410_taQI74.jpg">
 <meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860386333_taQXjK.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/03/td6V81.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/03/td6V81.png">
-<meta property="og:updated_time" content="2020-11-20T08:22:34.128Z">
+<meta property="og:updated_time" content="2020-11-21T09:22:22.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maybe96&#39;blog">
-<meta name="twitter:description" content="对于Dagger 的深入探究依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象 &amp;lt;!—more—&amp;gt; 一. Dagger 原理首先有一个比喻很形象，Dagger 进行依赖注入相当于，@Interj 就是 的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最">
+<meta name="twitter:description" content="对于Dagger 的深入探究依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象">
 <meta name="twitter:image" content="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860417347_taKTrF.jpg">
 
 
@@ -325,8 +325,8 @@
 
       
         <h1 id="对于Dagger-的深入探究"><a href="#对于Dagger-的深入探究" class="headerlink" title="对于Dagger 的深入探究"></a>对于Dagger 的深入探究</h1><p>依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。<br>它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象</p>
-<p>&lt;!—more—&gt;</p>
-<h2 id="一-Dagger-原理"><a href="#一-Dagger-原理" class="headerlink" title="一. Dagger 原理"></a>一. Dagger 原理</h2><p>首先有一个比喻很形象，Dagger 进行依赖注入相当于<strong><em>，@Interj 就是 </em></strong>的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最后@Providers 就是 药水。</p>
+<a id="more"></a>
+<h2 id="一-Dagger-原理"><a href="#一-Dagger-原理" class="headerlink" title="一. Dagger 原理"></a>一. Dagger 原理</h2><p>首先有一个比喻很形象，Dagger 进行依赖注入相当于注射药物，@Interj 就是 注射的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最后@Providers 就是 药水。</p>
 <p>@Interj 标识依赖需求方 （也可以写在注入对象的无参构造函数上，但是无法使用在接口，有参构造函数，第三方类库上面)</p>
 <p>@Providers 标识依赖提供方。</p>
 <p>@Moudle 存放@Providers 的地方，只提供依赖关系，不反应真实的依赖，它会告诉Dagger 可以从哪里找到依赖。</p>
@@ -350,7 +350,7 @@
 </ol>
 <ul>
 <li>@Scope 元注解，用来标注自定义注解的。 需要同时 标识Component和Providers 时才会生效。</li>
-<li>@Singleton &quot;全局&quot; 单例，但是其实内部就是一个使用Scope 的注解，并且 生成的java 代码也一模一样<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Scope</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RUNTIME)</span><br><span class="line">public @interface Singleton &#123;&#125;</span><br><span class="line">// 生成的java 文件中 Component 里的 部分</span><br><span class="line">this.contextProvider =</span><br><span class="line">        DoubleCheck.provider(ContextModule_ContextFactory.create(builder.contextModule));</span><br></pre></td></tr></table></figure>
+<li>@Singleton <strong>全局</strong>单例，但是其实内部就是一个使用Scope 的注解，并且 生成的java 代码也一模一样<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Scope</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RUNTIME)</span><br><span class="line">public @interface Singleton &#123;&#125;</span><br><span class="line">// 生成的java 文件中 Component 里的 部分</span><br><span class="line">this.contextProvider =</span><br><span class="line">        DoubleCheck.provider(ContextModule_ContextFactory.create(builder.contextModule));</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>根据官方文档的解释，更能理解Scope 的意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">When a binding uses a scope annotation, </span><br><span class="line">that means that the component object holds a reference to the bound object until the component object itself is garbage-collected.</span><br></pre></td></tr></table></figure></p>
