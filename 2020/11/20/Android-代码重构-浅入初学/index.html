@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。 Android 代码重构要素我们想要对一段功能代码进行重构，我">
+<meta name="description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 代码重构 浅入初学">
 <meta property="og:url" content="http://yoursite.com/2020/11/20/Android-代码重构-浅入初学/index.html">
 <meta property="og:site_name" content="maybe96&#39;blog">
-<meta property="og:description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。 Android 代码重构要素我们想要对一段功能代码进行重构，我">
+<meta property="og:description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s3.ax1x.com/2020/11/20/DQDz0f.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/03/tUqgkq.jpg">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/04/tBkMjg.png">
 <meta property="og:image" content="https://s3.ax1x.com/2020/11/21/D1gOje.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/21/dYfU2D.png">
-<meta property="og:updated_time" content="2020-11-21T09:05:33.076Z">
+<meta property="og:updated_time" content="2020-11-21T09:11:02.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 代码重构 浅入初学">
-<meta name="twitter:description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。 Android 代码重构要素我们想要对一段功能代码进行重构，我">
+<meta name="twitter:description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。">
 <meta name="twitter:image" content="https://s3.ax1x.com/2020/11/20/DQDz0f.png">
 
 
@@ -328,7 +328,8 @@
 
       
         <h1 id="Android-代码重构"><a href="#Android-代码重构" class="headerlink" title="Android 代码重构"></a>Android 代码重构</h1><pre><code>在实际开发中，我们经常会遇到所谓的&quot;屎山&quot;，我们经常写&quot;屎山&quot;,也经常在查看或者修改 的时候喷&quot;屎山&quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。
-</code></pre><h2 id="Android-代码重构要素"><a href="#Android-代码重构要素" class="headerlink" title="Android 代码重构要素"></a>Android 代码重构要素</h2><p>我们想要对一段功能代码进行重构，我们首先要掌握重构的要素是什么？这样针对性的解决重构问题，将会省时省力</p>
+</code></pre><a id="more"></a>
+<h2 id="Android-代码重构要素"><a href="#Android-代码重构要素" class="headerlink" title="Android 代码重构要素"></a>Android 代码重构要素</h2><p>我们想要对一段功能代码进行重构，我们首先要掌握重构的要素是什么？这样针对性的解决重构问题，将会省时省力</p>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>针对代码重构，优化肯定是很必要的。对于一段代码，不是说我们将他分解出去几个部分，就能降低圈复杂度，从而实现代码重构。这样有时候会事半功倍，将本来相对完整的代码，重构到支离破碎，<br>如何把握优化的方向以及优化的形式是很必要的。<br>这里我们重点提两个方向。</p>
 <h3 id="优化方向——下沉逻辑"><a href="#优化方向——下沉逻辑" class="headerlink" title="优化方向——下沉逻辑"></a>优化方向——下沉逻辑</h3><p>我们针对一个从无到有的APP 从初期架构到后期架构需要经历的过程<br>首先我们需要在设计阶段就确立好架构</p>
 <h4 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h4><h5 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h5><p>简单来说 就是将整个应用分为Model，view以及controller 三个部分</p>
