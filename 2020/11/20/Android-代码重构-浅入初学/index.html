@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/03/tUqgkq.jpg">
 <meta property="og:image" content="https://s3.ax1x.com/2020/11/21/D1gOje.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/08/21/dYfU2D.png">
-<meta property="og:updated_time" content="2020-11-21T12:49:20.942Z">
+<meta property="og:updated_time" content="2020-11-21T13:21:33.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 代码重构 浅入初学">
 <meta name="twitter:description" content="Android 代码重构在实际开发中，我们经常会遇到所谓的&amp;quot;屎山&amp;quot;，我们经常写&amp;quot;屎山&amp;quot;,也经常在查看或者修改 的时候喷&amp;quot;屎山&amp;quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。">
@@ -446,7 +446,6 @@
 <ul>
 <li>只能hook导入/导出的函数</li>
 <li>稳定性相对较好</li>
-<li>目前手q hook malloc/free，用来监控大内存申请和短时间内多次申请内存等可疑行为</li>
 <li>微信 Matrix 开源库的ELF Hook，，主要使用它来做性能监控。爱奇艺开源的的xHoo,以及Facebook 的PLT Hook，等都是封装GOT Hook。</li>
 </ul>
 </li>
@@ -475,10 +474,7 @@
 <li><p>JNIEnv劫持</p>
 <p> 通过替换JNIEnv定义的函数指针变量来实现hook jni提供的一系列接口。用于jni引用泄漏监控、jni参数错误监控、线程创建监控等等</p>
 <ul>
-<li><p>只能hook JNIEnv定义的函数</p>
-</li>
-<li><p>稳定性好，在手q上已稳定运行多年</p>
-</li>
+<li>只能hook JNIEnv定义的函数</li>
 </ul>
 </li>
 <li><p>trap hook</p>
@@ -494,8 +490,6 @@
 <li><p>只能调用导出的函数</p>
 </li>
 <li><p>只能调用已经加载到内存的函数</p>
-</li>
-<li><p>稳定性较好，作为手q的补丁底层组件已经稳定运行多个版本</p>
 </li>
 </ul>
 </li>
