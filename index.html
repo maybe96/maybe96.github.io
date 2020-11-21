@@ -319,7 +319,187 @@
       
         
           
-            
+            <h1 id="Android-代码重构"><a href="#Android-代码重构" class="headerlink" title="Android 代码重构"></a>Android 代码重构</h1><pre><code>在实际开发中，我们经常会遇到所谓的&quot;屎山&quot;，我们经常写&quot;屎山&quot;,也经常在查看或者修改 的时候喷&quot;屎山&quot;的作者. 但是在想要在短时间内去完成需求，难看的代码还是很必要的。所以在开发过后，代码重构也总是必要的。所以我们还是需要掌握一些代码重构的方法和思路。
+</code></pre><h2 id="Android-代码重构要素"><a href="#Android-代码重构要素" class="headerlink" title="Android 代码重构要素"></a>Android 代码重构要素</h2><p>我们想要对一段功能代码进行重构，我们首先要掌握重构的要素是什么？这样针对性的解决重构问题，将会省时省力</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>针对代码重构，优化肯定是很必要的。对于一段代码，不是说我们将他分解出去几个部分，就能降低圈复杂度，从而实现代码重构。这样有时候会事半功倍，将本来相对完整的代码，重构到支离破碎，<br>如何把握优化的方向以及优化的形式是很必要的。<br>这里我们重点提两个方向。</p>
+<h3 id="优化方向——下沉逻辑"><a href="#优化方向——下沉逻辑" class="headerlink" title="优化方向——下沉逻辑"></a>优化方向——下沉逻辑</h3><p>我们针对一个从无到有的APP 从初期架构到后期架构需要经历的过程<br>首先我们需要在设计阶段就确立好架构</p>
+<h4 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h4><h5 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h5><p>简单来说 就是将整个应用分为Model，view以及controller 三个部分</p>
+<p>这个架构如果是针对相对简单的APP是可以接受的，但是当业务开始膨胀了之后，大量View的逻辑也写入Activity中，导致Activity 里面代码冗余严重，严重影响可读性。<br>所以也导致了MVP的架构出现</p>
+<h5 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h5><p>将view层和Model 层的通信切断了，让persenter 代理处理view 操作model层的操作，当然Persenter 也会通过view暴露出来的接口 与view层进行通信</p>
+<h5 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h5><p>其实跟MVP架构差不多，用ViewModel 取代了 persenter ，并将View和ViewModel 的通信使用Binding 进行通信，即 View中使用 DataBinding 进行数据绑定，即避免findViewById() 操作，减少Activity 中 view相关绑定代码。<br>以及使得View 和 ViewModel 开发和测试相对更独立</p>
+<h5 id="Android-FluxJava-和-RxJava"><a href="#Android-FluxJava-和-RxJava" class="headerlink" title="Android FluxJava 和 RxJava"></a>Android FluxJava 和 RxJava</h5><p><a href="https://imgchr.com/i/DQDz0f" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/11/20/DQDz0f.png" alt="DQDz0f.png"></a><br>响应式编程<br>以后学习到了再补充</p>
+<h4 id="下沉业务-框架优化"><a href="#下沉业务-框架优化" class="headerlink" title="下沉业务 框架优化"></a>下沉业务 框架优化</h4><p>在架构确立完成后，我们就开始了APP 的 从零到一的开发过程</p>
+<p>当功能更加完善，业务逻辑逐渐复杂之后，我们还是会面临到一个问题，业务代码冗余，难懂，这时候就应该去逐步下沉业务，做到业务隔离。</p>
+<p>下沉业务也会遇到三个问题，首先是Big Common，随着业务拆解越多，底层Common也变得逻辑复杂，代码增多，这个我们肯定不可以接受，其次是多模块间相互调用，你的业务模块是否通用，是否能满足多模块调用的普适性，最后是云端调用(即Be On Cloud)，你的模块是否能在其他的大的方向被别人调用，如果可以，能否做成组件化。</p>
+<p>这里业务下沉我的建议是使用一些现成的框架去优化业务连接的操作，尽量少使用Intent.因为在显式intent的情况下，会存在直接的类依赖的问题，导致耦合非常严重；而在隐式intent情况下，则会出现规则集中式管理，导致协作变得非常困难。</p>
+<p>这里可以去学习一下 ARouter 阿里开源的 Android 路由中间件，可以使用url进行跳转，并且自动注入参数，添加拦截器和拦截顺序,提供切面编程。。。。<br>这里简单的提供一下如何实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">// 在支持ARouter的Activity上加注解（至少两级）</span><br><span class="line">@Route(path = &quot;/test/test1&quot;)</span><br><span class="line">public class TestActivity extend Activity &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">@Route(path = &quot;/test/1&quot;)</span><br><span class="line">public class YourActivity extend Activity &#123;</span><br><span class="line">    //获取数据三种方式</span><br><span class="line">    //1.通过Autowired注解表明key   &amp;  需要在onCreate中调用ARouter.getInstance().inject(this);配合使用</span><br><span class="line">    @Autowired(name = &quot;key1&quot;)</span><br><span class="line">    public long data;</span><br><span class="line">    //2.通过Autowired注解 &amp; 将key1作为属性的名称   &amp;  需要在onCreate中调用ARouter.getInstance().inject(this);配合使用</span><br><span class="line">    @Autowired()</span><br><span class="line">    public long key1;</span><br><span class="line">    //3.通过Bundle获取</span><br><span class="line">    getIntent().getExtras().getLong(&quot;key1&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//跳转操作（Intent）</span><br><span class="line">ARouter.getInstance().build(&quot;/test/1&quot;)</span><br><span class="line">            .withLong(&quot;key1&quot;, 666L)</span><br><span class="line">            .withString(&quot;key3&quot;, &quot;888&quot;)</span><br><span class="line">            .withSerializable(&quot;key4&quot;, new Test(&quot;Jack&quot;, &quot;Rose&quot;))</span><br><span class="line">            .navigation();</span><br><span class="line"></span><br><span class="line"> // 拦截器会在跳转之间执行，多个拦截器会按优先级顺序依次执行</span><br><span class="line"> @Interceptor(priority = 666, name = &quot;测试用拦截器&quot;)</span><br><span class="line"> public class TestInterceptor implements IInterceptor &#123;</span><br><span class="line">     /**</span><br><span class="line">      * The operation of this interceptor.</span><br><span class="line">      *</span><br><span class="line">      * @param postcard meta</span><br><span class="line">      * @param callback cb</span><br><span class="line">      */</span><br><span class="line">     @Override</span><br><span class="line">     public void process(Postcard postcard, InterceptorCallback callback) &#123;</span><br><span class="line">         ...</span><br><span class="line"></span><br><span class="line">         callback.onContinue(postcard);  // 处理完成，交还控制权</span><br><span class="line">         // callback.onInterrupt(new RuntimeException(&quot;我觉得有点异常&quot;));      // 觉得有问题，中断路由流程</span><br><span class="line"></span><br><span class="line">         // 以上两种至少需要调用其中一种，否则会超时跳过</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     /**</span><br><span class="line">      * Do your init work in this method, it well be call when processor has been load.</span><br><span class="line">      *</span><br><span class="line">      * @param context ctx</span><br><span class="line">      */</span><br><span class="line">     @Override</span><br><span class="line">     public void init(Context context) &#123;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="依赖注入-解耦"><a href="#依赖注入-解耦" class="headerlink" title="依赖注入 解耦"></a>依赖注入 解耦</h3><p>这个关注点很容易让人想到Spring 框架，如果Android 也有类似Spring框架的解耦框架，也能很好的重构（Spring For Android 虽然也有，但是公司里面就没用到过。。。。）</p>
+<p>这里还是给没接触过Spring的同学，讲解一下依赖注入的原理<br>    依赖注入(Dependency Injection)和控制反转(Inversion of Control)是同一个概念。具体含义是:当某个角色(可能是一个Java实例，调用者)需要另一个角色(另一个Java实例，被调用者)的协助时，在 传统的程序设计过程中，通常由调用者来创建被调用者的实例。但在Spring里，创建被调用者的工作不再由调用者来完成，因此称为控制反转;创建被调用者 实例的工作通常由Spring容器来完成，然后注入调用者，因此也称为依赖注入。<br>其实针对上面的架构设计，依赖注入其实就是MVP架构的变形优化了。<br>首先根据分层原则，将整个APP 的架构设计分为四层</p>
+<ol>
+<li>外层：事件引导层（View） 主要负责View事件上的走向，例如onClick、onTouch、onRefresh 等，将事件传递至业务逻辑层</li>
+<li>中间件：接口适配层 主要负责连接业务逻辑和框架特定代码，担任业务逻辑层和外层的通信</li>
+<li>业务逻辑层 就是跟名字意思一样，负责处理复杂业务逻辑（并且应该能独立测试，开发，保证多人协作开发的高效性）</li>
+<li>底层 Model层 ，实体层，通过接口适配层，给业务逻辑层提供实体的一些属性。。。</li>
+</ol>
+<p><strong>这样做有什么好处呢？</strong><br>很明显的是，将外层，业务逻辑层以及Model层隔离开了，通过接口适配层进行隔离，保证了多人协作开放，以及测试的高效性</p>
+<p>并且在修改的时候，也可以通过切面编程以及注入去修改代码，避免修改外层代码</p>
+<h4 id="Dagger2-框架"><a href="#Dagger2-框架" class="headerlink" title="Dagger2 框架"></a>Dagger2 框架</h4><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>首先有一个比喻很形象，Dagger 进行依赖注入相当于注射药物，@Inject 就是 注射的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最后@Providers 就是 药水。</p>
+<p>@Inject 标识依赖需求方 （也可以写在注入对象的无参构造函数上，但是无法使用在接口，有参构造函数，第三方类库上面)</p>
+<p>@Providers 标识依赖提供方。</p>
+<p>@Moudle 存放@Providers 的地方，只提供依赖关系，不反应真实的依赖，它会告诉Dagger 可以从哪里找到依赖。</p>
+<p>（Moudle里面的Porviders 可能会和 @Inject 标识的 无参构造函数冲突 这时候 会优先扫描Moudle 里面的注入方法，而不是@Inject）</p>
+<p>@Component 依赖需求方和依赖提供方进行交互的桥梁接口，</p>
+<h4 id="实例讲解用法"><a href="#实例讲解用法" class="headerlink" title="实例讲解用法"></a>实例讲解用法</h4><p><a href="https://imgchr.com/i/tUqgkq" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/03/tUqgkq.jpg" alt="tUqgkq.jpg"></a></p>
+<p>针对一个RandomUserSAPI 我们需要去使用OKhttp，Retrofit，以及Gson等<br>如果我们在OnCreate里面加载初始化应该怎么做？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends Activity &#123;</span><br><span class="line"></span><br><span class="line">OkHttpClient client = new OkHttpClient();</span><br><span class="line"></span><br><span class="line">// Enable caching for OkHttp</span><br><span class="line">int cacheSize = 10 * 1024 * 1024; // 10 MiB</span><br><span class="line">Cache cache = new Cache(getApplication().getCacheDir(), cacheSize);</span><br><span class="line">client.setCache(cache);</span><br><span class="line"></span><br><span class="line">// Used for caching authentication tokens</span><br><span class="line">SharedPreferences sharedPrefeences = PreferenceManager.getDefaultSharedPreferences(this);</span><br><span class="line"></span><br><span class="line">// Instantiate Gson</span><br><span class="line">Gson gson = new GsonBuilder().create();</span><br><span class="line">GsonConverterFactory converterFactory = GsonConverterFactory.create(Gson);</span><br><span class="line"></span><br><span class="line">// Build Retrofit</span><br><span class="line">Retrofit retrofit = new Retrofit.Builder()</span><br><span class="line">                                .baseUrl(&quot;https://api.github.com&quot;)</span><br><span class="line">                                .addConverterFactory(converterFactory)</span><br><span class="line">                                .client(client)  // custom client</span><br><span class="line">                                .build();</span><br><span class="line"></span><br><span class="line">public void onCreate(Bundle savedInstance) &#123;</span><br><span class="line">    retrofit.xxx();</span><br><span class="line">    sharedPrefeences.xxx();</span><br><span class="line">    gson.xxx()</span><br><span class="line"> &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这样写会有什么问题？</strong></p>
+<p>复杂，冗余，耦合性差</p>
+<p>那我们可以使用Dagger2 去进行依赖注入，从而解耦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//Module 是存放药水的地方</span><br><span class="line">//Provides是存放的药水</span><br><span class="line">@Module</span><br><span class="line">public class NetModule &#123;</span><br><span class="line"></span><br><span class="line">    String mBaseUrl;</span><br><span class="line"></span><br><span class="line">    // Constructor needs one parameter to instantiate.  </span><br><span class="line">    public NetModule(String baseUrl) &#123;</span><br><span class="line">        this.mBaseUrl = baseUrl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Dagger will only look for methods annotated with @Provides</span><br><span class="line">    @Provides</span><br><span class="line">    @Singleton</span><br><span class="line">    // Application reference must come from AppModule.class</span><br><span class="line">    SharedPreferences providesSharedPreferences(Application application) &#123;</span><br><span class="line">        return PreferenceManager.getDefaultSharedPreferences(application);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    @Singleton</span><br><span class="line">    Cache provideOkHttpCache(Application application) &#123; </span><br><span class="line">        int cacheSize = 10 * 1024 * 1024; // 10 MiB</span><br><span class="line">        Cache cache = new Cache(application.getCacheDir(), cacheSize);</span><br><span class="line">        return cache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   @Provides </span><br><span class="line">   @Singleton</span><br><span class="line">   Gson provideGson() &#123;  </span><br><span class="line">       GsonBuilder gsonBuilder = new GsonBuilder();</span><br><span class="line">       gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);</span><br><span class="line">       return gsonBuilder.create();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Provides</span><br><span class="line">   @Singleton</span><br><span class="line">   OkHttpClient provideOkHttpClient(Cache cache) &#123;</span><br><span class="line">      OkHttpClient client = new OkHttpClient();</span><br><span class="line">      client.setCache(cache);</span><br><span class="line">      return client;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Provides</span><br><span class="line">   @Singleton</span><br><span class="line">   Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) &#123;</span><br><span class="line">      Retrofit retrofit = new Retrofit.Builder()</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create(gson))</span><br><span class="line">                .baseUrl(mBaseUrl)</span><br><span class="line">                .client(okHttpClient)</span><br><span class="line">                .build();</span><br><span class="line">        return retrofit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//Inject 表示注入点</span><br><span class="line">public class MainActivity extends Activity &#123;</span><br><span class="line">   @Inject MyTwitterApiClient mTwitterApiClient;</span><br><span class="line">   @Inject SharedPreferences sharedPreferences;</span><br><span class="line"></span><br><span class="line">  public void onCreate(Bundle savedInstance) &#123;</span><br><span class="line">       // assign singleton instances to fields</span><br><span class="line">       InjectorClass.inject(this);</span><br><span class="line">   &#125; </span><br><span class="line"></span><br><span class="line">// Component 则是表示注射器，搭建好Inject和Module 之间的桥梁</span><br><span class="line">@Singleton</span><br><span class="line">@Component(modules=&#123;AppModule.class, NetModule.class&#125;)</span><br><span class="line">public interface NetComponent &#123;</span><br><span class="line">   void inject(MainActivity activity);</span><br><span class="line">   // void inject(MyFragment fragment);</span><br><span class="line">   // void inject(MyService service);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="真实场景下重构"><a href="#真实场景下重构" class="headerlink" title="真实场景下重构"></a>真实场景下重构</h3><p><strong>初始化注册服务逻辑</strong></p>
+<p><a href="https://imgchr.com/i/t0yq4H" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/04/t0yq4H.png" alt="t0yq4H.png"></a></p>
+<p><a href="https://imgchr.com/i/t0yHED" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/04/t0yHED.png" alt="t0yHED.png"></a></p>
+<p><strong>降低圈复杂度</strong><br><a href="https://imgchr.com/i/tBkMjg" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/04/tBkMjg.png" alt="tBkMjg.png"></a></p>
+<h2 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h2><p>在重构需求的开发中，我们不仅需要保证重构的一些圈复杂度，一些下沉业务的通用性等因素之外，更为重要的是我要确保之前开发的所有功能都必须要正常运行，不出错。</p>
+<p><strong>如何保证可靠性呢？</strong></p>
+<h3 id="自动化测试框架"><a href="#自动化测试框架" class="headerlink" title="自动化测试框架"></a>自动化测试框架</h3><h4 id="Mockito-和spy-的异同"><a href="#Mockito-和spy-的异同" class="headerlink" title="Mockito 和spy 的异同"></a>Mockito 和spy 的异同</h4><p><a href="https://imgchr.com/i/D1gOje" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/11/21/D1gOje.png" alt="D1gOje.png"></a></p>
+<h4 id="验证某个方法的调用情况"><a href="#验证某个方法的调用情况" class="headerlink" title="验证某个方法的调用情况"></a>验证某个方法的调用情况</h4><ul>
+<li>验证某个方法是否被调用        verify(…)</li>
+<li>验证某个方法调用次数        times(…)</li>
+<li>验证某个方法参数值        ArgumentCaptor</li>
+</ul>
+<h4 id="自定义某个方法的行为"><a href="#自定义某个方法的行为" class="headerlink" title="自定义某个方法的行为"></a>自定义某个方法的行为</h4><ul>
+<li>调用某个方法后返回指定值     doReturn(…)when(…)</li>
+<li>同上，且可以拿到入参         doAnswer(…)when(…)</li>
+<li>调用某个void方法后什么也不做  doNothing(…)when(…)</li>
+<li>调用某个方法后执行原方法调用     doCallRealMethod (…)when(…)</li>
+<li>调用某个方法后抛出异常         doThrow(…)when(…)</li>
+</ul>
+<h3 id="Hook组件-amp-热修复框架"><a href="#Hook组件-amp-热修复框架" class="headerlink" title="Hook组件 &amp; 热修复框架"></a>Hook组件 &amp; 热修复框架</h3><h4 id="Java-Hook"><a href="#Java-Hook" class="headerlink" title="Java Hook"></a>Java Hook</h4><p>java hook史就是一部跟art对抗的历史</p>
+<p><a href="https://imgchr.com/i/dYfU2D" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/08/21/dYfU2D.png" alt="dYfU2D.png"></a></p>
+<ol>
+<li><p>dexposed / andfix</p>
+<p> 通过将java方法修改为native方法，并将其指向hook的目标方法</p>
+<ul>
+<li><p>随着art不断升级，兼容性问题越来越多，目前已经不维护了</p>
+</li>
+<li><p>dalvik下实现简单，稳定性较高</p>
+</li>
+<li><p>变种YAHFA，会通过清空方法hotness_count_解决内联问题</p>
+<p>参考：<a href="http://rk700.github.io/2017/06/30/hook-on-android-n/" target="_blank" rel="noopener">http://rk700.github.io/2017/06/30/hook-on-android-n/</a></p>
+</li>
+</ul>
+</li>
+<li><p>epic</p>
+<p> 与后面要讲的inline hook类似，把被hook方法的前几个指令替换成跳板指令，跳到目标方法中执行，最后再执行被替换的指令</p>
+<ul>
+<li><p>实现复杂，需要保存/恢复寄存器、指令等等</p>
+</li>
+<li><p>兼容性问题多，不同cpu架构、机型、系统版本可能都有不同的问题需要处理</p>
+</li>
+<li><p>存在WeakGlobalRef泄漏问题</p>
+</li>
+<li><p>作者已不维护</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>  参考：http://weishu.me/2017/11/23/dexposed-on-art/
+</code></pre><ol>
+<li><p>JVMTI</p>
+<p>虚拟机提供的native编程接口，支持以下能力：</p>
+<ul>
+<li>方法进入/退出回调</li>
+<li>获取方法入参/出参</li>
+<li>修改方法入参</li>
+<li>修改方法出参（android r）</li>
+<li>修改类</li>
+</ul>
+<p>优劣势如下：</p>
+<ul>
+<li><p>实现起来稍复杂，需要ndk开发，并调用大量系统接口才能实现简单功能</p>
+</li>
+<li><p>对系统版本有要求</p>
+</li>
+<li><p>要求debug版本，但可以突破</p>
+</li>
+<li><p>功能强大</p>
+</li>
+<li><p>稳定性好</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code> 参考：https://git.code.oa.com/hongpingwu/cucu
+</code></pre><ol>
+<li><p>jni hook<br> java方法指针和它对应的native方法指针在虚拟机上的内存地址有固定的offset间隔，那么只要找到这个offset，加上java方法的地址就能够替换native方法所指向的地址</p>
+<ul>
+<li>只能hook java里定义的native方法</li>
+<li>稳定</li>
+</ul>
+</li>
+</ol>
+<h4 id="native-hook"><a href="#native-hook" class="headerlink" title="native hook"></a>native hook</h4><ol>
+<li><p>GOT hook<br> 通过自行解析elf文件格式，拿到got表在内存中的偏移，并根据so文件在/proc/self/maps中的内存位置确认got表的地址，最后查找目标函数got表里的入口地址并替换。导入表hook的最佳时机一般是load so的时候，可以配合jni hook，劫持System.load这个jni方法来hook目标函数。</p>
+<ul>
+<li>只能hook导入/导出的函数</li>
+<li>稳定性相对较好</li>
+<li>目前手q hook malloc/free，用来监控大内存申请和短时间内多次申请内存等可疑行为</li>
+<li>微信 Matrix 开源库的ELF Hook，，主要使用它来做性能监控。爱奇艺开源的的xHoo,以及Facebook 的PLT Hook，等都是封装GOT Hook。</li>
+</ul>
+</li>
+<li><p>inline hook<br> 可以hook绝大部分函数</p>
+<ul>
+<li><p>实现复杂、较短的函数无法hook、兼容性差在运行的流程中插入跳转指令（B、BL、BX、BLX），需要保存/恢复寄存器、指令等操作</p>
+</li>
+<li><p>在运行的流程中插入跳转指令（B、BL、BX、BLX），需要保存/恢复寄存器、指令等操作</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>  参考：https://github.com/ele7enxxh/Android-Inline-Hook
+</code></pre><ol>
+<li><p>LD_PRELOAD</p>
+<p> 特殊的环境变量，用于so加载，优先级最高。例如ASAN就能通过android 8.1开始支持的wrap shell script技术，在wrap.sh脚本中指定LD_PRELOAD环境变量加载ASAN的malloc相关库，实现对这类函数的hook。</p>
+<ul>
+<li><p>8.1以上才支持，且仅限debug版</p>
+</li>
+<li><p>系统提供支持，理论上稳定可靠，但实际上有部分厂商却没有支持，比如一加</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>JNIEnv劫持</p>
+<p> 通过替换JNIEnv定义的函数指针变量来实现hook jni提供的一系列接口。用于jni引用泄漏监控、jni参数错误监控、线程创建监控等等</p>
+<ul>
+<li><p>只能hook JNIEnv定义的函数</p>
+</li>
+<li><p>稳定性好，在手q上已稳定运行多年</p>
+</li>
+</ul>
+</li>
+<li><p>trap hook</p>
+<p> 注册sigaction，在需要hook的地方写入触发信号量指令，接收到信号的时候执行目标函数，最后回写原始指令恢复现场。一般常用的是SIGTRAP或SIGKILL。但在android上暂时没听说过哪个app运用这种技术。</p>
+<ul>
+<li>兼容性好</li>
+<li>效率低，触发信号的时候涉及到用户态/内核态切换</li>
+</ul>
+</li>
+<li><p>dlfcn</p>
+<p> android N开始对dlopen有命名空间限制，应用层无法dlopen系统so。重新造了一个dlopen、dlsym的轮子，通过分析elf文件找到函数的地址。严格上来说不太算是hook工具，类似java的反射。</p>
+<ul>
+<li><p>只能调用导出的函数</p>
+</li>
+<li><p>只能调用已经加载到内存的函数</p>
+</li>
+<li><p>稳定性较好，作为手q的补丁底层组件已经稳定运行多个版本</p>
+</li>
+</ul>
+</li>
+</ol>
+
           
         
       
@@ -386,7 +566,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/11/20/Dagger2-深入学习/" itemprop="url">Dagger2 深入学习</a></h1>
+                <a class="post-title-link" href="/2020/11/20/Dagger2-深入学习/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -437,14 +617,698 @@
 
       
         
-          <h1 id="对于Dagger-的深入探究"><a href="#对于Dagger-的深入探究" class="headerlink" title="对于Dagger 的深入探究"></a>对于Dagger 的深入探究</h1><p>依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。<br>它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/11/20/Dagger2-深入学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h1 id="对于Dagger-的深入探究"><a href="#对于Dagger-的深入探究" class="headerlink" title="对于Dagger 的深入探究"></a>对于Dagger 的深入探究</h1><p>依赖注入DI 是一个比较有趣也比较有用的一个方法去实现IOC。<br>它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象</p>
+<p>&lt;!—more—&gt;</p>
+<h2 id="一-Dagger-原理"><a href="#一-Dagger-原理" class="headerlink" title="一. Dagger 原理"></a>一. Dagger 原理</h2><p>首先有一个比喻很形象，Dagger 进行依赖注入相当于<strong><em>，@Interj 就是 </em></strong>的部位，@Component 就是 这个注射器 而 @Moudle 则是 注射瓶 用来存放药水，最后@Providers 就是 药水。</p>
+<p>@Interj 标识依赖需求方 （也可以写在注入对象的无参构造函数上，但是无法使用在接口，有参构造函数，第三方类库上面)</p>
+<p>@Providers 标识依赖提供方。</p>
+<p>@Moudle 存放@Providers 的地方，只提供依赖关系，不反应真实的依赖，它会告诉Dagger 可以从哪里找到依赖。</p>
+<p>（Moudle里面的Porviders 可能会和 @Interj 标识的 无参构造函数冲突 这时候 会优先扫描Moudle 里面的注入方法，而不是@Interj） </p>
+<p>@Component 依赖需求方和依赖提供方进行交互的桥梁接口，</p>
+<p>在进行编译的时候会生成该接口的实现类，而通过该实现类的builder方法，再需要被注入的对象的构造函数里进行一个依赖注入。</p>
+<p>其余注解 以及 解决的问题</p>
+<ol>
+<li>相同返回值的 Providers 重命名问题</li>
+</ol>
+<p>@Interj 的 对象类型与@Providers 的方法的返回参数的类型一致的情况下，就可以进行注入。</p>
+<p>但是，有一些情况下，同一个对象的注入方式有几种，对应着不同的注入对象，注入需求。<br>如果想要解决的话，只能分散在不同的Moudle 中，进行隔离。但是这样做的话，就可能将同一功能模块下的依赖进行分离，影响代码的可读性。<br>所以使用到了两个注解对返回同一对象的Providers 进行一个重命名，以便于区分。</p>
+<ul>
+<li><p>@Named 不同返回对象返回不同的id 给不同的提供依赖方不同的id，对应依赖需求方，使用相同的id，就可以进行区分。</p>
+</li>
+<li><p>@Qualfied 自定义注解 使用@Qulifier来定义自己的注解，然后通过自定义的注解去标注提供依赖的方法和依赖需求方</p>
+</li>
+</ul>
+<ol>
+<li>作用域问题</li>
+</ol>
+<ul>
+<li>@Scope 元注解，用来标注自定义注解的。 需要同时 标识Component和Providers 时才会生效。</li>
+<li>@Singleton &quot;全局&quot; 单例，但是其实内部就是一个使用Scope 的注解，并且 生成的java 代码也一模一样<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Scope</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RUNTIME)</span><br><span class="line">public @interface Singleton &#123;&#125;</span><br><span class="line">// 生成的java 文件中 Component 里的 部分</span><br><span class="line">this.contextProvider =</span><br><span class="line">        DoubleCheck.provider(ContextModule_ContextFactory.create(builder.contextModule));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据官方文档的解释，更能理解Scope 的意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">When a binding uses a scope annotation, </span><br><span class="line">that means that the component object holds a reference to the bound object until the component object itself is garbage-collected.</span><br></pre></td></tr></table></figure></p>
+<p>当Component 和 Providers 同时绑定一个scope 同一个作用域的话，其实是说明这个Component 将拿到这个注入对象的引用，直到这个Component 被 rebuild 或者销毁。<br>所以实际上 @Scope 和 @Singleton 并没有真正的控制生命周期，真正控制生命周期的一直都是@Component 所以 这两个作用域注解实际上 只起一个声明作用。</p>
+<ul>
+<li>@Reusable</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Documented</span><br><span class="line">@Beta</span><br><span class="line">@Retention(RUNTIME)</span><br><span class="line">@Scope</span><br><span class="line">public @interface Reusable &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>  与@Singleton绑定相比,@ Reusable绑定与未绑定有更多共同点：你告诉Dagger你可以创建一个全新的对象,但如果已经创建了一个方便的对象,那么Dagger可能会使用那个.相比之下,@ Singleton对象保证您将始终接收相同的实例,这可能会更加昂贵.<br>  Reusable 作用域不关心绑定的 Component，Reusable 作用域只需要标记目标类或 provide 方法，不用标记 Component<br>  当你使用 两种不同的 注解的时候，生成的代码也不相同了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//当使用Singleton的时候</span><br><span class="line">this.provideCarProvider = DoubleCheck.provider(CarMoudle_ProvideCarFactory.create());</span><br><span class="line">//当是用Reusable的时候</span><br><span class="line">this.provideCarProvider = SingleCheck.provider(CarMoudle_ProvideCarFactory.create());</span><br></pre></td></tr></table></figure></p>
+<p>这里Reusable 使用的 SingleCheck 而不是DoubleCheck，在多线程的情况下，可能生成多个实例，但是Reusable 只是保证了复用上次的实例，并没有保证实例的唯一。所以这也是一个提升性能的点吧。</p>
+<ol>
+<li>两种注入方式</li>
+</ol>
+<ul>
+<li>Lazy&lt;T&gt; 延迟注入 在使用的时候再进行注入，加快加载速度</li>
+<li>Provide&lt;T&gt; 与单例恰好相反，每次调用它的get方法的时候，都会调用@Interj构造函数创建新的实例或者是Moudle 中的 Providers 方法返回实例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MembersInjector</span><br><span class="line">//Lazy&amp;lt;T&amp;gt; 标注的时候</span><br><span class="line">public static void injectCar(Man instance, Provider&amp;lt;Car&amp;gt; carProvider) &#123;</span><br><span class="line">    instance.car = DoubleCheck.lazy(carProvider);</span><br><span class="line">  &#125;</span><br><span class="line">  //Provider&amp;lt;T&amp;gt; 标注的时候</span><br><span class="line">public static void injectCar(Man instance, Provider&amp;lt;Car&amp;gt; car) &#123;</span><br><span class="line">    instance.car = car;</span><br><span class="line">  &#125;</span><br><span class="line">  //不标注的时候</span><br><span class="line">public static void injectCar(Man instance, Provider&amp;lt;Car&amp;gt; carProvider) &#123;</span><br><span class="line">    instance.car = carProvider.get();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Dagger-注解生成代码"><a href="#Dagger-注解生成代码" class="headerlink" title="Dagger 注解生成代码"></a>Dagger 注解生成代码</h3><p>这边$Guice，Dagger，Dagger2$ 都是沿用同一套依赖注入的注解标准的，即 $JSR-330$</p>
+<p>使用了 $JavaEE.Inject$ 包下的 五个基础注解$(@Inject,@Named,@Qualifier,@Scope,@Singleton)$和一个接口$Provider$</p>
+<p>下面是三个特殊 注解 的 AbstractProcessor </p>
+<p>首先是Moudle 的 Processor</p>
+<p>首先 在 Process 中 获取到所有的Moudle<br>并在$try catch$ 之后 writeDotFile 写入 Factory文件中</p>
+<details>
+<summary>对于Moudle 的注解生成器</summary>
+
+    //首先是Proess 函数 对完整的模块进行全图分析，然后找到所有的Moudle 然后生成 Factory 
+    @Override public boolean process(Set&lt;? extends TypeElement&gt; types, RoundEnvironment env) 
+    {
+    if (!env.processingOver()) {
+      // Storing module names for later retrieval as the element instance is invalidated across
+      // passes.
+      for (Element e : env.getElementsAnnotatedWith(Module.class)) {
+        if (!(e instanceof TypeElement)) {
+          error(&quot;@Module applies to a type, &quot; + e.getSimpleName() + &quot; is a &quot; + e.getKind(), e);
+          continue;
+        }
+        delayedModuleNames.add(((TypeElement) e).getQualifiedName().toString());
+      }
+      return false;
+    }
+
+    Set&lt;Element&gt; modules = new LinkedHashSet&lt;Element&gt;();
+    for (String moduleName : delayedModuleNames) {
+      modules.add(elements().getTypeElement(moduleName));
+    }
+
+    for (Element element : modules) {
+      Map&lt;String, Object&gt; annotation = null;
+      try {
+        annotation = getAnnotation(Module.class, element);
+      } catch (CodeGenerationIncompleteException e) {
+        continue; // skip this element. An up-stream compiler error is in play.
+      }
+
+      TypeElement moduleType = (TypeElement) element;
+      if (annotation == null) {
+        error(&quot;Missing @Module annotation.&quot;, moduleType);
+        continue;
+      }
+      if (annotation.get(&quot;complete&quot;).equals(Boolean.TRUE)) {
+        Map&lt;String, Binding&lt;?&gt;&gt; bindings;
+        try {
+          bindings = processCompleteModule(moduleType, false);
+          new ProblemDetector().detectCircularDependencies(bindings.values());
+        } catch (ModuleValidationException e) {
+          error(&quot;Graph validation failed: &quot; + e.getMessage(), e.source);
+          continue;
+        } catch (InvalidBindingException e) {
+          error(&quot;Graph validation failed: &quot; + e.getMessage(), elements().getTypeElement(e.type));
+          continue;
+        } catch (RuntimeException e) {
+          if (ERROR_NAMES_TO_PROPAGATE.contains(e.getClass().getName())) {
+            throw e;
+          }
+          error(&quot;Unknown error &quot; + e.getClass().getName() + &quot; thrown by javac in graph validation: &quot;
+              + e.getMessage(), moduleType);
+          continue;
+        }
+        try {
+          writeDotFile(moduleType, bindings);
+        } catch (IOException e) {
+          StringWriter sw = new StringWriter();
+          e.printStackTrace(new PrintWriter(sw));
+          processingEnv.getMessager()
+              .printMessage(Diagnostic.Kind.WARNING,
+                  &quot;Graph visualization failed. Please report this as a bug.\n\n&quot; + sw, moduleType);
+        }
+      }
+
+      if (annotation.get(&quot;library&quot;).equals(Boolean.FALSE)) {
+        Map&lt;String, Binding&lt;?&gt;&gt; bindings = processCompleteModule(moduleType, true);
+        try {
+          new ProblemDetector().detectUnusedBinding(bindings.values());
+        } catch (IllegalStateException e) {
+          error(&quot;Graph validation failed: &quot; + e.getMessage(), moduleType);
+        }
+      }
+    }
+    return false;
+    }
+
+    void writeDotFile(TypeElement module, Map&lt;String, Binding&lt;?&gt;&gt; bindings) throws IOException {
+    JavaFileManager.Location location = StandardLocation.SOURCE_OUTPUT;
+    String path = getPackage(module).getQualifiedName().toString();
+    String file = module.getQualifiedName().toString().substring(path.length() + 1) + &quot;.dot&quot;;
+    FileObject resource = processingEnv.getFiler().createResource(location, path, file, module);
+
+    Writer writer = resource.openWriter();
+    GraphVizWriter dotWriter = new GraphVizWriter(writer);
+    new GraphVisualizer().write(bindings, dotWriter);
+    dotWriter.close();
+    }
+
+
+</details>
+接下来是 Interj 的 Processor
+
+主要Process 干的事情就是 确定Interj 的Class 正确并且匹配之后
+写入$.get()$ 方法。
+
+
+<details>
+    <summary>对于Interj 的注解生成器</summary>
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">@Override public boolean process(Set&amp;lt;? extends TypeElement&amp;gt; types, RoundEnvironment env) &#123;</span><br><span class="line">    remainingTypeNames.addAll(findInjectedClassNames(env));</span><br><span class="line">    for (Iterator&amp;lt;String&amp;gt; i = remainingTypeNames.iterator(); i.hasNext();) &#123;</span><br><span class="line">    InjectedClass injectedClass = createInjectedClass(i.next());</span><br><span class="line">    // Verify that we have access to all types to be injected on this pass.</span><br><span class="line">    boolean missingDependentClasses =</span><br><span class="line">        !allTypesExist(injectedClass.fields)</span><br><span class="line">        || (injectedClass.constructor != null &amp;amp;&amp;amp; !allTypesExist(injectedClass.constructor</span><br><span class="line">            .getParameters()))</span><br><span class="line">        || !allTypesExist(injectedClass.staticFields);</span><br><span class="line">    if (!missingDependentClasses) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">        generateInjectionsForClass(injectedClass);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">        error(&amp;quot;Code gen failed: &amp;quot; + e, injectedClass.type);</span><br><span class="line">        &#125;</span><br><span class="line">        i.remove();</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (env.processingOver() &amp;amp;&amp;amp; !remainingTypeNames.isEmpty()) &#123;</span><br><span class="line">    processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,</span><br><span class="line">        &amp;quot;Could not find injection type required by &amp;quot; + remainingTypeNames);</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void generateInjectionsForClass(InjectedClass injectedClass) throws IOException &#123;</span><br><span class="line">    if (injectedClass.constructor != null || !injectedClass.fields.isEmpty()) &#123;</span><br><span class="line">    generateInjectAdapter(injectedClass.type, injectedClass.constructor, injectedClass.fields);</span><br><span class="line">    &#125;</span><br><span class="line">    if (!injectedClass.staticFields.isEmpty()) &#123;</span><br><span class="line">    generateStaticInjection(injectedClass.type, injectedClass.staticFields);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private MethodSpec getMethod(ExecutableElement constructor, boolean disambiguateFields,</span><br><span class="line">    boolean injectMembers, ClassName injectedClassName) &#123;</span><br><span class="line">    MethodSpec.Builder result = MethodSpec.methodBuilder(&amp;quot;get&amp;quot;)</span><br><span class="line">        .addJavadoc(AdapterJavadocs.GET_METHOD, injectedClassName)</span><br><span class="line">        .addAnnotation(Override.class)</span><br><span class="line">        .returns(injectedClassName)</span><br><span class="line">        .addModifiers(PUBLIC);</span><br><span class="line"></span><br><span class="line">    result.addCode(&amp;quot;Tresult=newT(&amp;quot;, injectedClassName, injectedClassName);</span><br><span class="line">    boolean first = true;</span><br><span class="line">    for (VariableElement parameter : constructor.getParameters()) &#123;</span><br><span class="line">    if (!first) result.addCode(&amp;quot;, &amp;quot;);</span><br><span class="line">    else first = false;</span><br><span class="line">    result.addCode(&amp;quot;$N.get()&amp;quot;, parameterName(disambiguateFields, parameter));</span><br><span class="line">    &#125;</span><br><span class="line">    result.addCode(&amp;quot;);\n&amp;quot;);</span><br><span class="line">    if (injectMembers) &#123;</span><br><span class="line">    result.addStatement(&amp;quot;injectMembers(result)&amp;quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    result.addStatement(&amp;quot;return result&amp;quot;);</span><br><span class="line">    return result.build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>首先$providerMethodsByClass$ 按类索引 寻找所有 Providers 的映射<br>然后通过$generateProvidesAdapter()$ 方法 对Moudle 以及 Porviders 进行适配 生成，将对应的Moudle以及Providers 方法 的一些信息$Singleton$,$PUBLIC, STATIC, FINAL$,$Dependencies$,$Binds$写入 $result$<br>最后写入文件DaggerComponent 中。</p>
+<details>
+    <summary>对于Providers的注解生成器</summary>
+
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line">    //进行Moudle 和 Providers 的适配 生成</span><br><span class="line">    private TypeSpec generateProvidesAdapter(ClassName moduleClassName, ClassName adapterName,</span><br><span class="line">    ExecutableElement providerMethod, Map&amp;lt;ExecutableElement, ClassName&amp;gt; methodToClassName,</span><br><span class="line">    Map&amp;lt;String, AtomicInteger&amp;gt; methodNameToNextId, boolean library) &#123;</span><br><span class="line">    String methodName = providerMethod.getSimpleName().toString();</span><br><span class="line">    TypeMirror moduleType = providerMethod.getEnclosingElement().asType();</span><br><span class="line">    ClassName className = bindingClassName(</span><br><span class="line">        adapterName, providerMethod, methodToClassName, methodNameToNextId);</span><br><span class="line">    TypeName returnType = Util.injectableType(providerMethod.getReturnType());</span><br><span class="line">    List&amp;lt;? extends VariableElement&amp;gt; parameters = providerMethod.getParameters();</span><br><span class="line">    boolean dependent = !parameters.isEmpty();</span><br><span class="line"></span><br><span class="line">    TypeSpec.Builder result = TypeSpec.classBuilder(className.simpleName())</span><br><span class="line">        .addJavadoc(&amp;quot;$L&amp;quot;, bindingTypeDocs(returnType, false, false, dependent))</span><br><span class="line">        .addModifiers(PUBLIC, STATIC, FINAL)</span><br><span class="line">        .superclass(ParameterizedTypeName.get(ClassName.get(ProvidesBinding.class), returnType));</span><br><span class="line"></span><br><span class="line">    result.addField(moduleClassName, &amp;quot;module&amp;quot;, PRIVATE, FINAL);</span><br><span class="line">    for (Element parameter : parameters) &#123;</span><br><span class="line">    result.addField(bindingOf(parameter.asType()), parameterName(parameter), PRIVATE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    boolean singleton = providerMethod.getAnnotation(Singleton.class) != null;</span><br><span class="line">    String key = GeneratorKeys.get(providerMethod);</span><br><span class="line">    result.addMethod(MethodSpec.constructorBuilder()</span><br><span class="line">        .addModifiers(PUBLIC)</span><br><span class="line">        .addParameter(moduleClassName, &amp;quot;module&amp;quot;)</span><br><span class="line">        .addStatement(&amp;quot;super(S,L, S,S)&amp;quot;,</span><br><span class="line">            key,</span><br><span class="line">            (singleton ? &amp;quot;IS_SINGLETON&amp;quot; : &amp;quot;NOT_SINGLETON&amp;quot;),</span><br><span class="line">            typeToString(moduleType),</span><br><span class="line">            methodName)</span><br><span class="line">        .addStatement(&amp;quot;this.module = module&amp;quot;)</span><br><span class="line">        .addStatement(&amp;quot;setLibrary($L)&amp;quot;, library)</span><br><span class="line">        .build());</span><br><span class="line"></span><br><span class="line">    if (dependent) &#123;</span><br><span class="line">    MethodSpec.Builder attachBuilder = MethodSpec.methodBuilder(&amp;quot;attach&amp;quot;)</span><br><span class="line">        .addJavadoc(AdapterJavadocs.ATTACH_METHOD)</span><br><span class="line">        .addAnnotation(Override.class)</span><br><span class="line">        .addAnnotation(Util.UNCHECKED)</span><br><span class="line">        .addModifiers(PUBLIC)</span><br><span class="line">        .addParameter(Linker.class, &amp;quot;linker&amp;quot;);</span><br><span class="line">    for (VariableElement parameter : parameters) &#123;</span><br><span class="line">        String parameterKey = GeneratorKeys.get(parameter);</span><br><span class="line">        attachBuilder.addStatement(</span><br><span class="line">            &amp;quot;N=(T) linker.requestBinding(S,T.class, getClass().getClassLoader())&amp;quot;,</span><br><span class="line">            parameterName(parameter),</span><br><span class="line">            bindingOf(parameter.asType()),</span><br><span class="line">            parameterKey,</span><br><span class="line">            moduleClassName);</span><br><span class="line">    &#125;</span><br><span class="line">    result.addMethod(attachBuilder.build());</span><br><span class="line"></span><br><span class="line">    MethodSpec.Builder getDependenciesBuilder = MethodSpec.methodBuilder(&amp;quot;getDependencies&amp;quot;)</span><br><span class="line">        .addJavadoc(AdapterJavadocs.GET_DEPENDENCIES_METHOD)</span><br><span class="line">        .addAnnotation(Override.class)</span><br><span class="line">        .addModifiers(PUBLIC)</span><br><span class="line">        .addParameter(Util.SET_OF_BINDINGS, &amp;quot;getBindings&amp;quot;)</span><br><span class="line">        .addParameter(Util.SET_OF_BINDINGS, &amp;quot;injectMembersBindings&amp;quot;);</span><br><span class="line">    for (Element parameter : parameters) &#123;</span><br><span class="line">        getDependenciesBuilder.addStatement(&amp;quot;getBindings.add($N)&amp;quot;, parameterName(parameter));</span><br><span class="line">    &#125;</span><br><span class="line">    result.addMethod(getDependenciesBuilder.build());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    MethodSpec.Builder getBuilder = MethodSpec.methodBuilder(&amp;quot;get&amp;quot;)</span><br><span class="line">        .addJavadoc(AdapterJavadocs.GET_METHOD, returnType)</span><br><span class="line">        .addAnnotation(Override.class)</span><br><span class="line">        .addModifiers(PUBLIC)</span><br><span class="line">        .returns(returnType)</span><br><span class="line">        .addCode(&amp;quot;return module.$N(&amp;quot;, methodName);</span><br><span class="line">    boolean first = true;</span><br><span class="line">    for (Element parameter : parameters) &#123;</span><br><span class="line">    if (!first) getBuilder.addCode(&amp;quot;, &amp;quot;);</span><br><span class="line">    getBuilder.addCode(&amp;quot;$N.get()&amp;quot;, parameterName(parameter));</span><br><span class="line">    first = false;</span><br><span class="line">    &#125;</span><br><span class="line">    getBuilder.addCode(&amp;quot;);\n&amp;quot;);</span><br><span class="line">    result.addMethod(getBuilder.build());</span><br><span class="line"></span><br><span class="line">    return result.build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 按类索引 寻找所有Providers 的映射 </span><br><span class="line">private Map&amp;lt;String, List&amp;lt;ExecutableElement&amp;gt;&amp;gt; providerMethodsByClass(RoundEnvironment env) &#123;</span><br><span class="line">    Elements elementUtils = processingEnv.getElementUtils();</span><br><span class="line">    Types types = processingEnv.getTypeUtils();</span><br><span class="line"></span><br><span class="line">    Map&amp;lt;String, List&amp;lt;ExecutableElement&amp;gt;&amp;gt; result = new HashMap&amp;lt;String, List&amp;lt;ExecutableElement&amp;gt;&amp;gt;();</span><br><span class="line"></span><br><span class="line">    provides:</span><br><span class="line">    for (Element providerMethod : findProvidesMethods(env)) &#123;</span><br><span class="line">    switch (providerMethod.getEnclosingElement().getKind()) &#123;</span><br><span class="line">        case CLASS:</span><br><span class="line">        break; // valid, move along</span><br><span class="line">        default:</span><br><span class="line">        // TODO(tbroyer): pass annotation information</span><br><span class="line">        error(&amp;quot;Unexpected @Provides on &amp;quot; + elementToString(providerMethod), providerMethod);</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line">    TypeElement type = (TypeElement) providerMethod.getEnclosingElement();</span><br><span class="line">    Set&amp;lt;Modifier&amp;gt; typeModifiers = type.getModifiers();</span><br><span class="line">    if (typeModifiers.contains(PRIVATE)</span><br><span class="line">        || typeModifiers.contains(ABSTRACT)) &#123;</span><br><span class="line">        error(&amp;quot;Classes declaring @Provides methods must not be private or abstract: &amp;quot;</span><br><span class="line">                + type.getQualifiedName(), type);</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Set&amp;lt;Modifier&amp;gt; methodModifiers = providerMethod.getModifiers();</span><br><span class="line">    if (methodModifiers.contains(PRIVATE)</span><br><span class="line">        || methodModifiers.contains(ABSTRACT)</span><br><span class="line">        || methodModifiers.contains(STATIC)) &#123;</span><br><span class="line">        error(&amp;quot;@Provides methods must not be private, abstract or static: &amp;quot;</span><br><span class="line">                + type.getQualifiedName() + &amp;quot;.&amp;quot; + providerMethod, providerMethod);</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ExecutableElement providerMethodAsExecutable = (ExecutableElement) providerMethod;</span><br><span class="line">    if (!providerMethodAsExecutable.getThrownTypes().isEmpty()) &#123;</span><br><span class="line">        error(&amp;quot;@Provides methods must not have a throws clause: &amp;quot;</span><br><span class="line">            + type.getQualifiedName() + &amp;quot;.&amp;quot; + providerMethod, providerMethod);</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Invalidate return types.</span><br><span class="line">    TypeMirror returnType = types.erasure(providerMethodAsExecutable.getReturnType());</span><br><span class="line">    if (!returnType.getKind().equals(TypeKind.ERROR)) &#123;</span><br><span class="line">        // Validate if we have a type to validate (a type yet to be generated by other</span><br><span class="line">        // processors is not &amp;quot;invalid&amp;quot; in this way, so ignore).</span><br><span class="line">        for (String invalidTypeName : INVALID_RETURN_TYPES) &#123;</span><br><span class="line">        TypeElement invalidTypeElement = elementUtils.getTypeElement(invalidTypeName);</span><br><span class="line">        if (invalidTypeElement != null &amp;amp;&amp;amp; types.isSameType(returnType,</span><br><span class="line">            types.erasure(invalidTypeElement.asType()))) &#123;</span><br><span class="line">            error(String.format(&amp;quot;@Provides method must not return %s directly: %s.%s&amp;quot;,</span><br><span class="line">                invalidTypeElement, type.getQualifiedName(), providerMethod), providerMethod);</span><br><span class="line">            continue provides; // Skip to next provides method.</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&amp;lt;ExecutableElement&amp;gt; methods = result.get(type.getQualifiedName().toString());</span><br><span class="line">    if (methods == null) &#123;</span><br><span class="line">        methods = new ArrayList&amp;lt;ExecutableElement&amp;gt;();</span><br><span class="line">        result.put(type.getQualifiedName().toString(), methods);</span><br><span class="line">    &#125;</span><br><span class="line">    methods.add(providerMethodAsExecutable);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    TypeMirror objectType = elementUtils.getTypeElement(&amp;quot;java.lang.Object&amp;quot;).asType();</span><br><span class="line"></span><br><span class="line">    // Catch any stray modules without @Provides since their injectable types</span><br><span class="line">    // should still be registered and a ModuleAdapter should still be written.</span><br><span class="line">    for (Element module : env.getElementsAnnotatedWith(Module.class)) &#123;</span><br><span class="line">    if (!module.getKind().equals(ElementKind.CLASS)) &#123;</span><br><span class="line">        error(&amp;quot;Modules must be classes: &amp;quot; + elementToString(module), module);</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    TypeElement moduleType = (TypeElement) module;</span><br><span class="line"></span><br><span class="line">    // Verify that all modules do not extend from non-Object types.</span><br><span class="line">    if (!types.isSameType(moduleType.getSuperclass(), objectType)) &#123;</span><br><span class="line">        error(&amp;quot;Modules must not extend from other classes: &amp;quot; + elementToString(module), module);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String moduleName = moduleType.getQualifiedName().toString();</span><br><span class="line">    if (result.containsKey(moduleName)) continue;</span><br><span class="line">    result.put(moduleName, new ArrayList&amp;lt;ExecutableElement&amp;gt;());</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private Set&amp;lt;? extends Element&amp;gt; findProvidesMethods(RoundEnvironment env) &#123;</span><br><span class="line">    Set&amp;lt;Element&amp;gt; result = new LinkedHashSet&amp;lt;Element&amp;gt;();</span><br><span class="line">    result.addAll(env.getElementsAnnotatedWith(Provides.class));</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>经过编译以及注解处理器之后，会生成  XXMoudleFactory和Dagger XX Component 的样本代码</p>
+<h4 id="DaggerXXComponent"><a href="#DaggerXXComponent" class="headerlink" title="DaggerXXComponent"></a>DaggerXXComponent</h4><ol>
+<li><p>initialize 每次在Component 的构造函数中调用 ，调用的时候，其实就是通过 factory 进行一个 生产注入，而如果标记了Scope 的就使用$DoubleCheck.provider$ 双检锁单例模式进行一个赋值，没有标记的则直接使用Factory.create。</p>
+</li>
+<li><p>builder() new 一个内部类 ，里面包含了所有关联的Moudle 进行一个new Moudle 的 操作</p>
+</li>
+<li><p>实现Component 接口中自己定义的函数，提供一些依赖资源 的实例，方便其他 dependencies 使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">public final class DaggerRandomUserComponent implements RandomUserComponent &#123;</span><br><span class="line">  private Provider&amp;lt;Context&amp;gt; contextProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;File&amp;gt; fileProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;Cache&amp;gt; cacheProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;HttpLoggingInterceptor&amp;gt; httpLoggingInterceptorProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;OkHttpClient&amp;gt; okHttpClientProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;Gson&amp;gt; gsonProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;GsonConverterFactory&amp;gt; gsonConverterFactoryProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;Retrofit&amp;gt; retrofitProvider;</span><br><span class="line"></span><br><span class="line">  private RandomUsersModule randomUsersModule;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;OkHttp3Downloader&amp;gt; okHttp3DownloaderProvider;</span><br><span class="line"></span><br><span class="line">  private Provider&amp;lt;Picasso&amp;gt; picassoProvider;</span><br><span class="line"></span><br><span class="line">  private DaggerRandomUserComponent(Builder builder) &#123;</span><br><span class="line">    initialize(builder);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static Builder builder() &#123;</span><br><span class="line">    return new Builder();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @SuppressWarnings(&amp;quot;unchecked&amp;quot;)</span><br><span class="line">  private void initialize(final Builder builder) &#123;</span><br><span class="line">    this.contextProvider =</span><br><span class="line">        DoubleCheck.provider(ContextModule_ContextFactory.create(builder.contextModule));</span><br><span class="line">    this.fileProvider =</span><br><span class="line">        DoubleCheck.provider(</span><br><span class="line">            OkHttpClientModule_FileFactory.create(builder.okHttpClientModule, contextProvider));</span><br><span class="line">    this.cacheProvider =</span><br><span class="line">        OkHttpClientModule_CacheFactory.create(builder.okHttpClientModule, fileProvider);</span><br><span class="line">    this.httpLoggingInterceptorProvider =</span><br><span class="line">        OkHttpClientModule_HttpLoggingInterceptorFactory.create(builder.okHttpClientModule);</span><br><span class="line">    this.okHttpClientProvider =</span><br><span class="line">        OkHttpClientModule_OkHttpClientFactory.create(</span><br><span class="line">            builder.okHttpClientModule, cacheProvider, httpLoggingInterceptorProvider);</span><br><span class="line">    this.gsonProvider = RandomUsersModule_GsonFactory.create(builder.randomUsersModule);</span><br><span class="line">    this.gsonConverterFactoryProvider =</span><br><span class="line">        RandomUsersModule_GsonConverterFactoryFactory.create(</span><br><span class="line">            builder.randomUsersModule, gsonProvider);</span><br><span class="line">    this.retrofitProvider =</span><br><span class="line">        DoubleCheck.provider(</span><br><span class="line">            RandomUsersModule_RetrofitFactory.create(</span><br><span class="line">                builder.randomUsersModule,</span><br><span class="line">                okHttpClientProvider,</span><br><span class="line">                gsonConverterFactoryProvider,</span><br><span class="line">                gsonProvider));</span><br><span class="line">    this.randomUsersModule = builder.randomUsersModule;</span><br><span class="line">    this.okHttp3DownloaderProvider =</span><br><span class="line">        PicassoModule_OkHttp3DownloaderFactory.create(builder.picassoModule, okHttpClientProvider);</span><br><span class="line">    this.picassoProvider =</span><br><span class="line">        DoubleCheck.provider(</span><br><span class="line">            PicassoModule_PicassoFactory.create(</span><br><span class="line">                builder.picassoModule, contextProvider, okHttp3DownloaderProvider));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public RandomUsersApi getRandomUserService() &#123;</span><br><span class="line">    return Preconditions.checkNotNull(</span><br><span class="line">        randomUsersModule.randomUsersApi(retrofitProvider.get()),</span><br><span class="line">        &amp;quot;Cannot return null from a non-@Nullable @Provides method&amp;quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public Picasso getPicasso() &#123;</span><br><span class="line">    return picassoProvider.get();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static final class Builder &#123;</span><br><span class="line">    private ContextModule contextModule;</span><br><span class="line"></span><br><span class="line">    private OkHttpClientModule okHttpClientModule;</span><br><span class="line"></span><br><span class="line">    private RandomUsersModule randomUsersModule;</span><br><span class="line"></span><br><span class="line">    private PicassoModule picassoModule;</span><br><span class="line"></span><br><span class="line">    private Builder() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public RandomUserComponent build() &#123;</span><br><span class="line">      if (contextModule == null) &#123;</span><br><span class="line">        throw new IllegalStateException(ContextModule.class.getCanonicalName() + &amp;quot; must be set&amp;quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      if (okHttpClientModule == null) &#123;</span><br><span class="line">        this.okHttpClientModule = new OkHttpClientModule();</span><br><span class="line">      &#125;</span><br><span class="line">      if (randomUsersModule == null) &#123;</span><br><span class="line">        this.randomUsersModule = new RandomUsersModule();</span><br><span class="line">      &#125;</span><br><span class="line">      if (picassoModule == null) &#123;</span><br><span class="line">        this.picassoModule = new PicassoModule();</span><br><span class="line">      &#125;</span><br><span class="line">      return new DaggerRandomUserComponent(this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Builder randomUsersModule(RandomUsersModule randomUsersModule) &#123;</span><br><span class="line">      this.randomUsersModule = Preconditions.checkNotNull(randomUsersModule);</span><br><span class="line">      return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Builder okHttpClientModule(OkHttpClientModule okHttpClientModule) &#123;</span><br><span class="line">      this.okHttpClientModule = Preconditions.checkNotNull(okHttpClientModule);</span><br><span class="line">      return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Builder contextModule(ContextModule contextModule) &#123;</span><br><span class="line">      this.contextModule = Preconditions.checkNotNull(contextModule);</span><br><span class="line">      return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Builder picassoModule(PicassoModule picassoModule) &#123;</span><br><span class="line">      this.picassoModule = Preconditions.checkNotNull(picassoModule);</span><br><span class="line">      return this;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h4><p>一个构造函数 + get() + create() 作为一个工厂对注入对象进行创造加工</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public final class RandomUsersModule_GsonConverterFactoryFactory</span><br><span class="line">    implements Factory&amp;lt;GsonConverterFactory&amp;gt; &#123;</span><br><span class="line">  private final RandomUsersModule module;</span><br><span class="line"></span><br><span class="line">  private final Provider&amp;lt;Gson&amp;gt; gsonProvider;</span><br><span class="line"></span><br><span class="line">  public RandomUsersModule_GsonConverterFactoryFactory(</span><br><span class="line">      RandomUsersModule module, Provider&amp;lt;Gson&amp;gt; gsonProvider) &#123;</span><br><span class="line">    this.module = module;</span><br><span class="line">    this.gsonProvider = gsonProvider;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public GsonConverterFactory get() &#123;</span><br><span class="line">    return Preconditions.checkNotNull(</span><br><span class="line">        module.gsonConverterFactory(gsonProvider.get()),</span><br><span class="line">        &amp;quot;Cannot return null from a non-@Nullable @Provides method&amp;quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static Factory&amp;lt;GsonConverterFactory&amp;gt; create(</span><br><span class="line">      RandomUsersModule module, Provider&amp;lt;Gson&amp;gt; gsonProvider) &#123;</span><br><span class="line">    return new RandomUsersModule_GsonConverterFactoryFactory(module, gsonProvider);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public final class OkHttpClientModule_FileFactory implements Factory&amp;lt;File&amp;gt; &#123;</span><br><span class="line">  private final OkHttpClientModule module;</span><br><span class="line"></span><br><span class="line">  private final Provider&amp;lt;Context&amp;gt; contextProvider;</span><br><span class="line"></span><br><span class="line">  public OkHttpClientModule_FileFactory(</span><br><span class="line">      OkHttpClientModule module, Provider&amp;lt;Context&amp;gt; contextProvider) &#123;</span><br><span class="line">    this.module = module;</span><br><span class="line">    this.contextProvider = contextProvider;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public File get() &#123;</span><br><span class="line">    return Preconditions.checkNotNull(</span><br><span class="line">        module.file(contextProvider.get()),</span><br><span class="line">        &amp;quot;Cannot return null from a non-@Nullable @Provides method&amp;quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public static Factory&amp;lt;File&amp;gt; create(OkHttpClientModule module, Provider&amp;lt;Context&amp;gt; contextProvider) &#123;</span><br><span class="line">    return new OkHttpClientModule_FileFactory(module, contextProvider);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<h3 id="Dagger-的-组合-依赖-继承"><a href="#Dagger-的-组合-依赖-继承" class="headerlink" title="Dagger 的 组合 依赖 继承"></a>Dagger 的 组合 依赖 继承</h3><p>这里提到了一点就是 dagger 中 Component 的 依赖关系<br>对于一个复杂的项目来说，复杂的依赖关系是必不可少的，也是非常难以解决的问题。<br>如果对于一个Demo或者是一个小的项目来说，完全可以在程序入口处，对所需要的对象进行直接注入，方便快捷。 但是当一个项目开始变的完善，复杂，分工之后，其实如果继续在程序入口处进行一个赋值的话，会导致很大的混乱，也影响程序的可读性，并且不利于多人合作开发与测试以及后期的修改与维护。&lt;br&gt;</p>
+<p>所以这也是一个DI 依赖注入框架应该做的，但是上面所说的那些仅仅只是解决了一个依赖注入的情况，对于一个复杂的项目来说，通过依赖关系所构建的DAG（有向无环图）才是一个依赖关系的重中之重.</p>
+<p>如何描述一个DAG 也是 DI 框架所要考虑的问题。在Dagger2中<br>有三种方法可以去描述两个依赖之间的关系</p>
+<ol>
+<li>Moudle.include<br>实现的是Moudle 之间的组合关系 表示包含有 其他Moudle 的Providers ，也可以提供其他Moudle 的实例<br><a href="https://imgchr.com/i/taKTrF" target="_blank" rel="noopener"><img src="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860417347_taKTrF.jpg" alt="taKTrF.jpg"></a><br>这个就是一个RandomUsers API 的一个实例 使用的就是Moudle.include </li>
+</ol>
+<p>将其转换成Dagger 依赖形式则是<br><a href="https://imgchr.com/i/taQI74" target="_blank" rel="noopener"><img src="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860454410_taQI74.jpg" alt="taQI74.jpg"></a><br>依赖关系分别是<br>RandomUsersMoudle 需要 OkhttpCilentMoudle</p>
+<p>OkHttpClientMoudle 需要 ContextMoudle</p>
+<p>PicassoMoudule 需要 OkhttpClientModule 以及 ContextMoudle<br>(但是OkhttpClientModule 已经 include ContextMoudle 所以 可以简化成 PicassoMoudule 需要 OkhttpClientModule)</p>
+<p>所以 关系链接起来就变成了<br><a href="https://imgchr.com/i/taQXjK" target="_blank" rel="noopener"><img src="https://uploadfiles.nowcoder.com/files/20201120/9428896_1605860386333_taQXjK.jpg" alt="taQXjK.jpg"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">@Module</span><br><span class="line">public class ContextModule &#123;</span><br><span class="line"></span><br><span class="line">    Context context;</span><br><span class="line"></span><br><span class="line">    public ContextModule(Context context)&#123;</span><br><span class="line">        this.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApplicationContext</span><br><span class="line">    @RandomUserApplicationScope</span><br><span class="line">    @Provides</span><br><span class="line">    public Context context()&#123; return context.getApplicationContext(); &#125;</span><br><span class="line">&#125;</span><br><span class="line">@Module(includes = ContextModule.class)</span><br><span class="line">public class OkHttpClientModule &#123;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public OkHttpClient okHttpClient(Cache cache, HttpLoggingInterceptor httpLoggingInterceptor)&#123;</span><br><span class="line">        return new OkHttpClient()</span><br><span class="line">                .newBuilder()</span><br><span class="line">                .cache(cache)</span><br><span class="line">                .addInterceptor(httpLoggingInterceptor)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public Cache cache(File cacheFile)&#123;</span><br><span class="line">        return new Cache(cacheFile, 10 * 1000 * 1000); //10 MB</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    @RandomUserApplicationScope</span><br><span class="line">    public File file(@ApplicationContext Context context)&#123;</span><br><span class="line">        File file = new File(context.getCacheDir(), &amp;quot;HttpCache&amp;quot;);</span><br><span class="line">        file.mkdirs();</span><br><span class="line">        return file;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public HttpLoggingInterceptor httpLoggingInterceptor()&#123;</span><br><span class="line">        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void log(String message) &#123;</span><br><span class="line">                Timber.d(message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);</span><br><span class="line">        return httpLoggingInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">@Module(includes = OkHttpClientModule.class)</span><br><span class="line">public class PicassoModule &#123;</span><br><span class="line"></span><br><span class="line">    @RandomUserApplicationScope</span><br><span class="line">    @Provides</span><br><span class="line">    public Picasso picasso(@ApplicationContext Context context, OkHttp3Downloader okHttp3Downloader)&#123;</span><br><span class="line">        return new Picasso.Builder(context).</span><br><span class="line">                downloader(okHttp3Downloader).</span><br><span class="line">                build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public OkHttp3Downloader okHttp3Downloader(OkHttpClient okHttpClient)&#123;</span><br><span class="line">        return new OkHttp3Downloader(okHttpClient);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">@Module(includes = OkHttpClientModule.class)</span><br><span class="line">public class RandomUsersModule &#123;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public RandomUsersApi randomUsersApi(Retrofit retrofit)&#123;</span><br><span class="line">        return retrofit.create(RandomUsersApi.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RandomUserApplicationScope</span><br><span class="line">    @Provides</span><br><span class="line">    public Retrofit retrofit(OkHttpClient okHttpClient,</span><br><span class="line">                            GsonConverterFactory gsonConverterFactory, Gson gson)&#123;</span><br><span class="line">        return new Retrofit.Builder()</span><br><span class="line">                .client(okHttpClient)</span><br><span class="line">                .baseUrl(&amp;quot;https://randomuser.me/&amp;quot;)</span><br><span class="line">                .addConverterFactory(gsonConverterFactory)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public Gson gson()&#123;</span><br><span class="line">        GsonBuilder gsonBuilder = new GsonBuilder();</span><br><span class="line">        return gsonBuilder.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Provides</span><br><span class="line">    public GsonConverterFactory gsonConverterFactory(Gson gson)&#123;</span><br><span class="line">        return GsonConverterFactory.create(gson);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>Component.dependencies</li>
+</ol>
+<p>其实Component 作为一个桥接器接口，不仅仅是提供一个Moudle 与 Interj 之间的连接作用，作为接口，其实也可以在里面定义方法 返回 创建实例。</p>
+<p>UserComponent 和 FriendComponent 都拥有一个CarMoudule，但是 实际逻辑是UserComponent 是 Car 的拥有者，而FriendComponent 是 可以使用UserComponent 的 Car</p>
+<p>所以如果没有对两个Component 或者是CarMoudle 进行一个限制的话，其实会有问题的。</p>
+<p>比如 UserComponent 进行销毁了，那FriendComponent 能继续拥有CarMoudle 吗？</p>
+<p>显然是不能的，那实际意义是 CarMoudle 的生命周期的控制是在 UserComponent 这里的，而跟FriendComponent 没有任何关系，FriendComponent 应该通过UserComponent 对外暴露的接口进行一个调用访问。<br>    所以这里就用到了 Component.dependencies<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 两个Component 通过 依赖关系进行连接</span><br><span class="line">@ManScope</span><br><span class="line">@Component(modules = CarModule.class)</span><br><span class="line">public interface ManComponent &#123;</span><br><span class="line">    void inject(Man man);</span><br><span class="line"></span><br><span class="line">    Car car();  //必须向外提供 car 依赖实例的接口，表明 Man 可以借 car 给别人</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@FriendScope</span><br><span class="line">@Component(dependencies = ManComponent.class)</span><br><span class="line">public interface FriendComponent &#123;</span><br><span class="line">    void inject(Friend friend);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 注入方式 </span><br><span class="line">ManComponent manComponent = DaggerManComponent.builder()</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">FriendComponent friendComponent = DaggerFriendComponent.builder()</span><br><span class="line">    .manComponent(manComponent)</span><br><span class="line">    .build();</span><br><span class="line">friendComponent.inject(friend);</span><br></pre></td></tr></table></figure></p>
+<p>父Component 需要提供一个获取依赖资源的接口方法，而且对于依赖资源的生命周期Scope 应该设置的不一样 （父Component 生命周期 &gt; 子Component 生命周期）</p>
+<p>而且 子 Component 的依赖资源不能设置为Singleton </p>
+<p>因为Dagger2 中的@Singleton 的 Component 不能依赖于其他Component</p>
+<ol>
+<li>SubComponent 与 Moudle.SubComponent</li>
+</ol>
+<p>SubComponent 编译时不会生成 DaggerXXComponent，需要通过 parent Component 的获取 SubComponent.Builder 方法获取 SubComponent 实例。</p>
+<p>这里和 Dependencies 不一样的就是 Dependencies 需要显示 暴露自己想要暴露的一些 实例的接口，而 SubComponent 不一样 他直接就能继承 Parent Component 的所有依赖。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">@ManScope</span><br><span class="line">@Component(modules = CarModule.class)</span><br><span class="line">public interface ManComponent &#123;</span><br><span class="line">    void inject(Man man);   // 继承关系中不用显式地提供暴露依赖实例的接口</span><br><span class="line">&#125;</span><br><span class="line">//SubComponent 子接口 需要去 声明一个 Builder</span><br><span class="line">@SonScope</span><br><span class="line">@SubComponent(modules = BikeModule.class)</span><br><span class="line">public interface SonComponent &#123;</span><br><span class="line">    void inject(Son son);</span><br><span class="line"></span><br><span class="line">    @Subcomponent.Builder</span><br><span class="line">    interface Builder &#123; // SubComponent 必须显式地声明 Subcomponent.Builder，parent Component 需要用 Builder 来创建 SubComponent</span><br><span class="line">        SonComponent build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Parent Component 所使用的Moudle 中 才去 标记 SubComponent </span><br><span class="line">@Module(subcomponents = SonComponent.class)</span><br><span class="line">public class CarModule &#123;</span><br><span class="line">    @Provides</span><br><span class="line">    @ManScope</span><br><span class="line">    static Car provideCar() &#123;</span><br><span class="line">        return new Car();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//注入方式</span><br><span class="line">ManComponent manComponent = DaggerManComponent.builder()</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">SonComponent sonComponent = manComponent.sonComponent()</span><br><span class="line">    .build();</span><br><span class="line">sonComponent.inject(son);</span><br></pre></td></tr></table></figure></p>
+<p>而当他们 设置为了 SubComponent 之后呢，编译完成后，其实是没有DaggerSubComponent，是会变成一个内部类进行组合，生成两个内部类一个是 SubComponentBuilder 一个是 SubComponentImpl 里面和Component 一样。</p>
+<p>当然了 这里和依赖关系一样，就是 父Component 和子Component 的 Scope 不能一样</p>
+<p>(附：这里还会遇到一个问题，就是重复Moudle 的覆盖问题，即父Component 和子Component 同时去 使用同一个 Moudle 的时候 ，如果是在使用抽象工厂的时候，参数传入Moudle 的时候 会编译报错，而 如果使用 Moudle.subComponent 的时候 是运行时报错)</p>
+<ol>
+<li>另一种方式声明继承关系 及在父 Component 通过抽象工厂的定义 去声明一个继承关系<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@ManScope</span><br><span class="line">@Component(modules = CarModule.class)</span><br><span class="line">public interface ManComponent &#123;</span><br><span class="line">    void injectMan(Man man);</span><br><span class="line"></span><br><span class="line">    SonComponent sonComponent();    // 这个抽象工厂方法表明 SonComponent 继承 ManComponent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Interj-的-容器形式"><a href="#Interj-的-容器形式" class="headerlink" title="Interj 的 容器形式"></a>Interj 的 容器形式</h3><p>遇到的问题其实就是 在 实际操作的过程，我们不是只是注入单个成员变量，而是需要注入多个对象，而如果每次都要去Interj 一遍就很麻烦。<br>所以Dagger 也考虑到了这个问题，就设计了两种注解提供给我们容器注入的方式</p>
+<ol>
+<li><p>@IntoSet </p>
+<p> Providers 中使用 即可注入一个Set里面</p>
+</li>
+<li><p>@IntoMap</p>
+<p> 同样是 Providers 使用 并且使用的时候 需要时候@Intkey @StringKey 设置键值</p>
+</li>
+</ol>
+<h3 id="Binds-家族"><a href="#Binds-家族" class="headerlink" title="Binds 家族"></a>Binds 家族</h3><ol>
+<li><p>@Binds</p>
+</li>
+<li><p>@BindsOptionalOf</p>
+</li>
+<li><p>@MultiBinds</p>
+</li>
+<li><p>@BindsInstance</p>
+</li>
+</ol>
+<h3 id="Dagger-包下的常用注解"><a href="#Dagger-包下的常用注解" class="headerlink" title="Dagger 包下的常用注解"></a>Dagger 包下的常用注解</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">dagger // dagger包下大多是核心注解</span><br><span class="line">├── Binds.class // 注解@Module中的抽象方法，主要场景是@Inject注解构造函数+有继承关系的对象上</span><br><span class="line">├── BindsInstance.class // 注解@Component.Builder中的方法，用于绑定某个实例以提供数据依赖</span><br><span class="line">├── BindsOptionalOf.class // 需要结合JDK 1.8中的Optional类使用，用于某个对象可空的情景上，在kotlin中实在鸡肋</span><br><span class="line">├── Component$Builder.class // 用于自定义Component的Builder对象</span><br><span class="line">├── Component.class // dagger核心注解之一，用于定义一个桥接类，其中有modules和dependencies两个属性，分别指定依赖的数据仓库 和 依赖的其他桥接类</span><br><span class="line">├── Component$Factory.class // 与Component$Builder作用一样，dagger2.22引入，目前不常用</span><br><span class="line">├── internal // internal包中是一些辅助类，常用于dagger生成的代码中（此包中的内容有所省略，挑重点总结）</span><br><span class="line">│   ├── DoubleCheck.class // 提供了provider()和lazy()两个静态方法，分别用于实现局部单例和dagger.Lazy懒加载数据上</span><br><span class="line">│   ├── MapBuilder.class // 用于辅助@IntoMap等构建Map容器，最终生成的是一个不可修改的Map容器</span><br><span class="line">│   ├── SetBuilder.class // 用于辅助@IntoSet等构建Set容器，最终生成的是一个不可修改的Set容器</span><br><span class="line">├── Lazy.class // dagger.Lazy对象，用于dagger注入懒加载对象</span><br><span class="line">├── MapKey.class // 用于辅助Map注入的自定义Key的注解</span><br><span class="line">├── MembersInjector.class // 注入器的接口</span><br><span class="line">├── Module.class // dagger核心注解之一，用于定义一个数据仓库，其中有includes和subcomponents两个属性，分别指定对其他数据仓库的简单组合 和 对@Subcomponent桥接类的依赖</span><br><span class="line">├── multibindings // multibindings包下是一些有关与dagger的multibing特性的东西</span><br><span class="line">│   ├── ClassKey.class // 用于辅助@IntoMap，指定Map容器的Key类型</span><br><span class="line">│   ├── ElementsIntoSet.class // 用于辅助Set注入，可以将一个已有的Set注入到最终的Set中</span><br><span class="line">│   ├── IntKey.class // 用于辅助@IntoMap，指定Map容器的Key类型</span><br><span class="line">│   ├── IntoMap.class // 用于辅助@IntoMap，指定Map容器的Key类型</span><br><span class="line">│   ├── IntoSet.class // 用于辅助@IntoMap，指定Map容器的Key类型</span><br><span class="line">│   ├── LongKey.class // 用于辅助@IntoMap，指定Map容器的Key类型</span><br><span class="line">│   ├── Multibinds.class // 用于辅助Set和Map注入，适用在编译器不确定是否有注入元素时，使得可以注入空容器</span><br><span class="line">│   └── StringKey.class // 用于辅助@IntoMap，指定Map容器的Key类型</span><br><span class="line">├── Provides.class // dagger核心注解之一，注解@Module中的方法表示此方法可以提供某种类型的数据</span><br><span class="line">├── Reusable.class // dagger中对@Scope的一个特殊实现，目前处于测试阶段，相较于普通的@Scope，@Reusable不用在@Component上再次声明作用域</span><br><span class="line">├── Subcomponent$Builder.class // 用于自定义Subcomponent的Builder对象</span><br><span class="line">├── Subcomponent.class // 用于自定义一个桥接类，此桥接类不能单独使用也不会被dagger单独生成对应Daggerxxx类，需要配合@Module.subcomponent使用</span><br><span class="line">└── Subcomponent$Factory.class // 与Subcomponent$Builder作用一致</span><br><span class="line"></span><br><span class="line">参考Blog :https://blog.csdn.net/u012273376/article/details/90297137</span><br></pre></td></tr></table></figure>
+<h2 id="二-Dagger-使用场景-即-优势"><a href="#二-Dagger-使用场景-即-优势" class="headerlink" title="二. Dagger 使用场景 即 优势"></a>二. Dagger 使用场景 即 优势</h2><h3 id="1-更好的单元测试"><a href="#1-更好的单元测试" class="headerlink" title="1. 更好的单元测试"></a>1. 更好的单元测试</h3><pre><code>对于一些复杂的项目，涉及到的复杂的依赖 ，测试的时候往往不太方便
+因为在很多时候，对于一些依赖的注入要考虑顺序，考虑注入方式。。。。
+所以使用Dagger 可以更好的将接口分离，业务逻辑的 模块更加清晰。
+并且 对于测试数据的 注入，也更加方便，即 专门设置一个 测试的Component 以及 Moudle 将 测试数据与上线数据进行分离。
+</code></pre><h4 id="单独的Component-配置-Separate-component-configurations"><a href="#单独的Component-配置-Separate-component-configurations" class="headerlink" title="单独的Component 配置(Separate component configurations)"></a>单独的Component 配置(Separate component configurations)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">@Component(modules = &#123;</span><br><span class="line">  OAuthModule.class, // real auth</span><br><span class="line">  FooServiceModule.class, // real backend</span><br><span class="line">  OtherApplicationModule.class,</span><br><span class="line">  /* … */ &#125;)</span><br><span class="line">interface ProductionComponent &#123;</span><br><span class="line">  Server server();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Component(modules = &#123;</span><br><span class="line">  FakeAuthModule.class, // fake auth</span><br><span class="line">  FakeFooServiceModule.class, // fake backend</span><br><span class="line">  OtherApplicationModule.class,</span><br><span class="line">  /* … */&#125;)</span><br><span class="line">interface TestComponent extends ProductionComponent &#123;</span><br><span class="line">  FakeAuthManager fakeAuthManager();</span><br><span class="line">  FakeFooService fakeFooService();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Provides auth bindings that will not change in different auth configurations,</span><br><span class="line"> * such as the current user.</span><br><span class="line"> */</span><br><span class="line">@Module</span><br><span class="line">class AuthModule &#123;</span><br><span class="line">  @Provides static User currentUser(AuthManager authManager) &#123;</span><br><span class="line">    return authManager.currentUser();</span><br><span class="line">  &#125;</span><br><span class="line">  // Other bindings that don’t differ among AuthManager implementations.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Provides a &#123;@link AuthManager&#125; that uses OAuth. */</span><br><span class="line">@Module(includes = AuthModule.class) // Include no-alternative bindings.</span><br><span class="line">class OAuthModule &#123;</span><br><span class="line">  @Provides static AuthManager authManager(OAuthManager authManager) &#123;</span><br><span class="line">    return authManager;</span><br><span class="line">  &#125;</span><br><span class="line">  // Other bindings used only by OAuthManager.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Provides a fake &#123;@link AuthManager&#125; for testing. */</span><br><span class="line">@Module(includes = AuthModule.class) // Include no-alternative bindings.</span><br><span class="line">class FakeAuthModule &#123;</span><br><span class="line">  @Provides static AuthManager authManager(FakeAuthManager authManager) &#123;</span><br><span class="line">    return authManager;</span><br><span class="line">  &#125;</span><br><span class="line">  // Other bindings used only by FakeAuthManager.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们使用一个TestComponent 去继承 ProductionComponent<br>然后我们就可以在注入点使用$DaggerTestComponent.builder()$ 去替代 $DaggerProductionComponent.builder()$ 然后传入不同的$AuthManager $ 就可以进行一个测试模块和生产模块的切换了。</p>
+<h3 id="2-MVP-架构-Dagger-2"><a href="#2-MVP-架构-Dagger-2" class="headerlink" title="2. MVP 架构 + Dagger 2"></a>2. MVP 架构 + Dagger 2</h3><pre><code>首先MVP 架构 本来就将MVC 架构 的功能更加细化 并且使得View 和 Model 层 完全分离。
+虽然结构更加清晰，但是 也会导致一些问题
+比如 Presenter 层 的负担加重，需要同时联系 View 和 Modeel 的多个类和接口，
+所以这里就需要一个的注入框架的帮助，帮助Present 减轻 负担。
+</code></pre><h3 id="3-Dagger-2-For-Android"><a href="#3-Dagger-2-For-Android" class="headerlink" title="3. Dagger 2 For Android"></a>3. Dagger 2 For Android</h3><pre><code>对应 Android 项目来说，其实Dagger 2 框架还是有所缺点的。
+比如 
+框架所需的类和接口繁多，并且需要依靠DaggerComponent的build方法进行一个注入。
+每一个Activity 都需要对应一个 ActivityComponent
+并且重复一个Builder 的重复过程，枯燥且容易出错。
+对于每一个Activity 来说，
+他都需要明白，他所对应的Component 是谁，
+才能执行该Component的build方法，
+其实是违背最少知道原则的。
+（即 被注入的对象不应该了解到注入的细节）
+所以对于这些问题，Dagger 专门有一个 Android 的扩展库
+即 使用AndroidInjector和IntoMap做一个收集，整合派发和注入。
+即通过Intjector 将所有ActivityComponent做一个收集并存放到Map 里，
+然后当我们再使用Intjector.inject(this)的时候就可以直接派发当前对应的一个注入方式了。
+就不需要知道对应的Component并且执行对应的Builder方法了。
+</code></pre><h2 id="三-Dagger-与其他依赖注入框架的对比"><a href="#三-Dagger-与其他依赖注入框架的对比" class="headerlink" title="三. Dagger 与其他依赖注入框架的对比"></a>三. Dagger 与其他依赖注入框架的对比</h2><h3 id="Dagger-前身-———-Guice-（Android-RoboGuice）"><a href="#Dagger-前身-———-Guice-（Android-RoboGuice）" class="headerlink" title="Dagger 前身 ——— Guice （Android RoboGuice）"></a>Dagger 前身 ——— Guice （Android RoboGuice）</h3><p>RoboGuice 应该是安卓方面非常早的一个依赖注入框架了，跟spring一样，是使用反射机制进行依赖注入的，可以使用Roboblender 优化注解性能，但是如果注解写的太多的话，还是会或多或少的影响安卓性能</p>
+<p>RoboGuice 提供了视图，对象，资源，服务的注入。</p>
+<ul>
+<li>@Interview 视图注入</li>
+<li>@InterResourse 资源注入</li>
+<li>@Inter 系统服务注入(在Activity中注入震动，通知管理等系统服务) POJO对象注入</li>
+</ul>
+<p>&lt;details&gt;<br>    &lt;summary&gt;完整的系统服务注入列表&lt;/summary&gt;</p>
+<pre><code>    ## Context
+    Class: Context
+    Provider: ContextScope
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+    public class MyActivity extends RoboActivity {
+        @Inject MyComponent component;
+
+        static class MyComponent {
+        Context context;
+
+        @Inject
+        MyComponent(Context context) {
+            this.context = context;
+        }
+    }
+    Provider Example
+
+        public class MyComponent {
+            Context context;
+
+            @Inject
+            MyComponent(Provider&amp;lt;Context&amp;gt; context) {
+            this.context = context;
+            }
+        }
+    ## Application
+    Class: Application, RoboApplication, MyRoboApplication
+    Provider: Instance binding
+    Scope: Instance
+    Injection Points: Constructors, Fields, Methods
+    Strongly Typed Application Example
+
+        public class MyRoboApplication extends RoboApplication {
+        }
+
+        public class MyActivity extends RoboActivity {
+        @Inject MyComponent component;
+
+        static class MyComponent {
+            MyRoboApplication application;
+
+            @Inject
+            MyComponent(MyRoboApplication application) {
+            this.application= application;
+            }
+        }
+    Strongly Typed Provider Example
+
+        public class MyRoboApplication extends RoboApplication {
+        }
+
+        public class MyComponent {
+            MyRoboApplication application;
+
+            @Inject
+            MyComponent(Provider&amp;lt;MyRoboApplication&amp;gt; applicationProvider) {
+            this.application= applicationProvider.get();
+            }
+        }
+    Note: The guice bindings are created in such a way that you can inject any type of application class in the full application hierarchy. So any where that MyRoboApplication is being injected you can also inject RoboApplication, or just the Android Application as well.
+
+    ## Activity
+    Class: Activity
+    Provider: ActivityProvider
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public static class MyComponent {
+        Activity activity;
+
+        @Inject
+        MyComponent(Activity activity) {
+            this.activity = activity;
+        }
+        }
+    Provider Example
+
+        public class MyComponent {
+            Provider&amp;lt;Activity&amp;gt; activityProvider;
+
+            @Inject
+            MyComponent(Provider&amp;lt;Activity&amp;gt; activity) {
+            this.activityProvider = activity;
+            }
+        }
+    Note: Currently RoboGuice cannot bind an applications individual activities. There is no way to inject MyActivity out of the box like RoboGuice can do with applications.
+
+    In order to inject strongly typed activities you need to create your own binding in a custom application module and provide that module to guice when the application is configured.
+
+        public class MyModule extends AbstractAndroidModule {
+        @Override @SuppressWarnings(&amp;quot;unchecked&amp;quot;)
+        protected void configure() {
+            bind((Class)MyActivity.class)
+            .to(ActivityProvider.class)
+            .in(ContextScoped.class);
+        }
+        }
+    Shared Preferences
+    Class: SharedPreferences
+    Provider: SharedPreferencesProvider
+    Scope: Transient
+    Injection Points: Constructors, Fields, Methods
+    By default roboguice will retrieve an instance of Android SharedPreferences using the filename: &amp;quot;default&amp;quot;. This is not the default file name android uses for your shared preferences. If you would like to override the file name then you can set up a binding when RoboGuice is initialized.
+
+    Android Default Shared Preferences File Name Binding
+
+        bindConstant()
+            .annotatedWith(SharedPreferencesName.class)
+            .to(&amp;quot;com.mypackage.myapp_preferences&amp;quot;); 
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject SharedPreferences sharedPreferences;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;SharedPreferences&amp;gt; sharedPreferencesrProvider;
+        }
+    Content Resolver
+    Class: ContentResolver
+    Provider: ContentResolverProdivder
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject ContentResolver contentResolver;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;ContentResolver&amp;gt; contentResolverProvider;
+        }
+    Asset Manager
+    Class: AssetManager
+    Provider: AssetManagerProvider
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject AssetManager assetManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;AssetManager&amp;gt; assetManagerProvider;
+        }
+    Resources
+    Class: Resources
+    Provider: ResourcesProvider
+    Scope: @Singleton
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Resources resources;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;Resources&amp;gt; resources;
+        }
+    Location Manager
+    Class: LocationManager
+    Provider: SystemServiceProvider&amp;lt;LocationManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject LocationManager locationManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;LocationManager&amp;gt; locationManagerProvider;
+        }   
+    Window Manager
+    Class: WindowManager
+    Provider: SystemServiceProvider&amp;lt;WindowManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject WindowManager windowManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;WindowManager&amp;gt; windowManager;
+        }
+    Layout Inflater
+    Class: LayoutInflater
+    Provider: SystemServiceProvider&amp;lt;LayoutInflater&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject LayoutInflater layoutInflater;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;LayoutInflater&amp;gt; layoutInflaterProvider;
+        }
+    Activity Manager
+    Class: ActivityManager
+    Provider: SystemServiceProvider&amp;lt;ActivityManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject ActivityManager activityManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;ActivityManager&amp;gt; activityManager;
+        }
+    Power Manager
+    Class: PowerManager
+    Provider: SystemServiceProvider&amp;lt;PowerManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject PowerManager powerManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;PowerManager&amp;gt; powerManagerProvider;
+        }
+    Alarm Manager
+    Class: AlarmManager
+    Provider: SystemServiceProvider&amp;lt;AlarmManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject AlarmManager alarmManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;AlarmManager&amp;gt; alarmManagerProvider;
+        }
+    Notification Manager
+    Class: NotificationManager
+    Provider: SystemServiceProvider&amp;lt;NotificationManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject NotificationManager notificationManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;NotificationManager&amp;gt; notificationManagerProvider;
+        }
+    Keyguard Manager
+    Class: KeyguardManager
+    Provider: SystemServiceProvider&amp;lt;KeyguardManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject KeyguardManager keyguardManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;KeyguardManager&amp;gt; keyguardManagerProvider;
+        }
+    Search Manager
+    Class: SearchManager
+    Provider: SystemServiceProvider&amp;lt;SearchManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject SearchManager searchManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;SearchManager&amp;gt; searchManagerProvider;
+        }
+    Vibrator
+    Class: Vibrator
+    Provider: SystemServiceProvider&amp;lt;Vibrator&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Vibrator vibrator;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;Vibrator&amp;gt; vibrator;
+        }
+    Connectivity Manager
+    Class: ConnectivityManager
+    Provider: SystemServiceProvider&amp;lt;ConnectivityManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject ConnectivityManager connectivityManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;ConnectivityManager&amp;gt; connectivityManagerProvider;
+        }
+    Wifi Manager
+    Class: WifiManager
+    Provider: SystemServiceProvider&amp;lt;WifiManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject WifiManager wifiManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;WifiManager&amp;gt; wifiManagerProvider;
+        }
+    Input Method Manager
+    Class: InputMethodManager
+    Provider: SystemServiceProvider&amp;lt;InputMethodManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject InputMethodManager inputMethodManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;InputMethodManager&amp;gt; inputMethodManagerProvider;
+        }
+    Sensor Manager
+    Class: SensorManager
+    Provider: SystemServiceProvider&amp;lt;SensorManager&amp;gt;
+    Scope: @ContextScoped
+    Injection Points: Constructors, Fields, Methods
+    Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject SensorManager sensorManager;
+        }
+    Provider Example
+
+        public class MyActivity extends RoboActivity {
+        @Inject Provider&amp;lt;SensorManager&amp;gt; sensorManagerProvider;
+        }
+</code></pre><p>&lt;/details&gt;</p>
+<h3 id="Dagger-框架"><a href="#Dagger-框架" class="headerlink" title="Dagger 框架"></a>Dagger 框架</h3><pre><code>因为RoboGuide 是一种纯动态 依靠反射 的注入框架，所以性能方面肯定还是备受诟病的
+所以Google 公司就深入研发了 Dagger 框架 
+对比与 RoboGuice 框架 ，Dagger 的 从纯动态 向 半静态半动态的方向进一步发展了。
+即 对于 所有的注入 都是用 编译时 注入的方式 通过APT 进行一个代码生成。
+但是对于 比较复杂的 循环依赖，依赖嵌套等等，还是使用反射机制进行一个验证。
+
+优势： 
+1. 半静态半动态的方式 其实是对性能有了一个很大的提升 
+
+但是相对于 Dagger框架， Dagger2 对DAG 的验证判断 也变成了静态，即在编译的时候就生成了 一个完整的 DAG 依赖图 ，所以也导致了 Dagger 2 对于一些动态问题的难入手，动态修改 依赖关系。。。 Dagger 2 对于 所有 依赖变更都需要经过 重新编译。
+</code></pre><h3 id="Koin-框架"><a href="#Koin-框架" class="headerlink" title="Koin 框架"></a>Koin 框架</h3><pre><code>Kotlin 主推的 依赖注入框架 ，也是Dagger2 的升级版
+一种轻量级的 无代理，无反射，无代码生成的 依赖注入框架。
+这里使用到的是 Kotlin 语言特性的 拓展函数，即在注入的时候 ，在自身类中加入一个静态方法，对需要注入的对象进行一个依赖注入。
+</code></pre><h3 id="Kodein-框架"><a href="#Kodein-框架" class="headerlink" title="Kodein 框架"></a>Kodein 框架</h3><pre><code>与Koin相似，它是一个小型轻量级的库，可以在运行时懒惰地解决依赖关系。它也不会生成任何代码，并在后台广泛使用Kotlin内联函数作为性能优化。
+</code></pre><p>从技术上讲，Dagger使用了依赖注入（DI）模式。Koin和Kodein是服务定位符。在服务定位器模式中，有一个服务定位器类创建并存储依赖项，然后根据需要提供它们。</p>
+<p><a href="https://imgchr.com/i/td6V81" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/03/td6V81.png" alt="td6V81.png"></a></p>
+<p><a href="https://imgchr.com/i/td6V81" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/03/td6V81.png" alt="td6V81.png"></a>s</p>
+<p><a href="https://github.com/Sloy/android-dependency-injection-performance" target="_blank" rel="noopener">图片来源</a></p>
+<p>由于Dagger在编译时完成所有工作，因此它在所有设备上都具有最佳的运行时性能，但代价是编译时间更长</p>
+<p>Koin比Dagger慢，但是在使用应用程序时，设置和注入时间的差异并不是很明显。</p>
+<h4 id="对比框架-优劣"><a href="#对比框架-优劣" class="headerlink" title="对比框架 优劣"></a>对比框架 优劣</h4><ul>
+<li>Dagger2<br>优势:</li>
+</ul>
+<ol>
+<li>三种中最佳的运行时性能，编译时产生样本代码</li>
+<li>很多错误在编译过程中就能捕获</li>
+<li>遵循 $SJR - 330$ 规则</li>
+</ol>
+<p>劣势:</p>
+<ol>
+<li>产生大量样本代码</li>
+<li>框架细节多，学习成本高</li>
+<li>编译时间长</li>
+</ol>
+<ul>
+<li>Koin &amp; Kodein<br>优势:</li>
+</ul>
+<ol>
+<li>学习时间短，容易掌握</li>
+<li>不增加编译时间，以及不生成代码</li>
+<li>专门为Kotlin而建，可以使用Kotlin 的 新的语言特性</li>
+</ol>
+<p>缺点:</p>
+<ol>
+<li>在编译的时候不会抛错，所以只有等到程序崩溃之后，才能进行报错。</li>
+<li>不遵循$SJR-330$ 标准</li>
+</ol>
+
+          
         
       
     </div>
